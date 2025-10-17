@@ -1,14 +1,19 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./Home";
+import CategoryPage from "./pages/CategoryPage";
+import MusicPlayer from "./MusicPlayer";
+import "./index.css";
 
-// 👉 Registro automático del Service Worker PWA
-import { registerSW } from 'virtual:pwa-register'
-registerSW({ immediate: true })
-
-// 👉 Render principal de la app
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/categoria/:name" element={<CategoryPage />} />
+      </Routes>
+      <MusicPlayer />
+    </BrowserRouter>
   </React.StrictMode>
-)
+);
