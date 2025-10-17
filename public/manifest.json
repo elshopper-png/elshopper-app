@@ -1,0 +1,21 @@
+{
+  "name": "El Shopper de Los Olivos Digital",
+  "short_name": "El Shopper",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#25d366",
+  "description": "Guía comercial de Los Olivos con los mejores productos y servicios locales.",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

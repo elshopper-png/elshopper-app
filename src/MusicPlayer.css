@@ -1,0 +1,29 @@
+.music-player {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+.music-button {
+  background-color: #d32f2f;
+  border: none;
+  color: white;
+  border-radius: 50%;
+  padding: 18px;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.music-button.playing {
+  background-color: #2ecc71; /* Verde cuando suena */
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(46, 204, 113, 0.8);
+}
+
+.music-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(211, 47, 47, 0.6);
+}

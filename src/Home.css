@@ -1,0 +1,410 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;600;800&display=swap");
+
+:root {
+  --brand-red: #c60000;
+  --music-blue: #1e88e5; /* azul base botón música */
+  --music-on: #9e9e9e;   /* gris al activar */
+  --bg: #f4f6fa;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg);
+  color: #111;
+}
+
+.home {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== Título con fade-in 1.5s ===== */
+.fade-title {
+  animation: fadeInUp 1.5s ease both;
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(-10px) scale(0.98); }
+  60% { opacity: 1; transform: translateY(4px) scale(1.005); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+/* ===== Header ===== */
+.header {
+  text-align: center;
+  padding-top: 28px;
+  position: relative;
+}
+
+.logo {
+  width: 110px;
+  height: auto;
+  margin-bottom: 8px;
+}
+
+.title {
+  font-family: "Anton", sans-serif;
+  font-size: 2.8rem;
+  color: var(--brand-red);
+  letter-spacing: 0.5px;
+  line-height: 1.08;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.title-sub {
+  display: block;
+  font-size: 2rem;
+  line-height: 1.05;
+}
+
+.tagline {
+  margin: 10px 0 0 0;
+  font-size: 1rem;
+  color: #222;
+}
+
+/* ===== Botón musical flotante ===== */
+.music-toggle {
+  position: fixed;
+  top: 14px;
+  right: 16px;
+  width: 50px;
+  height: 50px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background: var(--music-blue);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+  z-index: 1000;
+  transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.music-toggle:hover { transform: translateY(-1px) scale(1.04); }
+.music-toggle:active { transform: scale(0.95); }
+
+/* gris cuando está reproduciendo */
+.music-toggle.playing {
+  background: var(--music-on);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+/* “vibración” breve al tocar */
+@keyframes bump {
+  0% { transform: scale(1); }
+  40% { transform: scale(0.92); }
+  100% { transform: scale(1); }
+}
+.music-toggle.bump { animation: bump 0.18s ease; }
+
+/* ===== Grid de categorías ===== */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 24px;
+  padding: 26px;
+  justify-items: center;
+}
+
+/* Botón 3D */
+.category-card {
+  position: relative;
+  width: 170px;
+  height: 130px;
+  color: #fff;
+  text-align: center;
+  padding: 30px 14px 26px;
+  border-radius: 16px;
+  font-weight: 800;
+  box-shadow: 0 7px 0 rgba(0,0,0,0.28);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.category-card:active {
+  transform: translateY(3px);
+  box-shadow: 0 4px 0 rgba(0,0,0,0.34);
+}
+
+/* Emoji/ícono a color arriba */
+.category-icon {
+  font-size: 38px;
+  margin-bottom: 8px;
+}
+
+/* Nombre en 2 líneas si hay “ & ” */
+.category-name span {
+  display: block;
+  font-size: 18px;
+  line-height: 1.05;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+}
+
+/* Contador circular blanco */
+.category-count {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: #fff;
+  color: #000;
+  font-weight: 800;
+  font-size: 13px;
+  display: grid;
+  place-items: center;
+}
+
+/* ===== CTA WhatsApp ===== */
+.footer {
+  text-align: center;
+  margin: 54px 0 80px;
+}
+
+.whatsapp-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #25d366;
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.25rem;
+  padding: 16px 42px;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 6px 0 #1da851;
+  transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+}
+
+.whatsapp-button:hover {
+  background-color: #1ebe5c;
+  transform: translateY(-2px);
+}
+
+.whatsapp-icon { font-size: 26px; }
+
+/* ===== Responsive ===== */
+@media (max-width: 640px) {
+  .logo { width: 96px; }
+  .title { font-size: 2.2rem; }
+  .title-sub { font-size: 1.6rem; }
+  .categories-grid { gap: 20px; padding: 22px; }
+  .category-card { width: 150px; height: 120px; }
+  .category-name span { font-size: 16px; }
+}
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;600;800&display=swap");
+
+:root {
+  --brand-red: #c60000;
+  --music-blue: #1e88e5; /* azul base botón música */
+  --music-on: #9e9e9e;   /* gris al activar */
+  --bg: #f4f6fa;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg);
+  color: #111;
+}
+
+.home {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== Título con fade-in 1.5s ===== */
+.fade-title {
+  animation: fadeInUp 1.5s ease both;
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(-10px) scale(0.98); }
+  60% { opacity: 1; transform: translateY(4px) scale(1.005); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+/* ===== Header ===== */
+.header {
+  text-align: center;
+  padding-top: 28px;
+  position: relative;
+}
+
+.logo {
+  width: 110px;
+  height: auto;
+  margin-bottom: 8px;
+}
+
+.title {
+  font-family: "Anton", sans-serif;
+  font-size: 2.8rem;
+  color: var(--brand-red);
+  letter-spacing: 0.5px;
+  line-height: 1.08;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.title-sub {
+  display: block;
+  font-size: 2rem;
+  line-height: 1.05;
+}
+
+.tagline {
+  margin: 10px 0 0 0;
+  font-size: 1rem;
+  color: #222;
+}
+
+/* ===== Botón musical flotante ===== */
+.music-toggle {
+  position: fixed;
+  top: 14px;
+  right: 16px;
+  width: 50px;
+  height: 50px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background: var(--music-blue);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+  z-index: 1000;
+  transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.music-toggle:hover { transform: translateY(-1px) scale(1.04); }
+.music-toggle:active { transform: scale(0.95); }
+
+/* gris cuando está reproduciendo */
+.music-toggle.playing {
+  background: var(--music-on);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+/* “vibración” breve al tocar */
+@keyframes bump {
+  0% { transform: scale(1); }
+  40% { transform: scale(0.92); }
+  100% { transform: scale(1); }
+}
+.music-toggle.bump { animation: bump 0.18s ease; }
+
+/* ===== Grid de categorías ===== */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 24px;
+  padding: 26px;
+  justify-items: center;
+}
+
+/* Botón 3D */
+.category-card {
+  position: relative;
+  width: 170px;
+  height: 130px;
+  color: #fff;
+  text-align: center;
+  padding: 30px 14px 26px;
+  border-radius: 16px;
+  font-weight: 800;
+  box-shadow: 0 7px 0 rgba(0,0,0,0.28);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.category-card:active {
+  transform: translateY(3px);
+  box-shadow: 0 4px 0 rgba(0,0,0,0.34);
+}
+
+/* Emoji/ícono a color arriba */
+.category-icon {
+  font-size: 38px;
+  margin-bottom: 8px;
+}
+
+/* Nombre en 2 líneas si hay “ & ” */
+.category-name span {
+  display: block;
+  font-size: 18px;
+  line-height: 1.05;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+}
+
+/* Contador circular blanco */
+.category-count {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: #fff;
+  color: #000;
+  font-weight: 800;
+  font-size: 13px;
+  display: grid;
+  place-items: center;
+}
+
+/* ===== CTA WhatsApp ===== */
+.footer {
+  text-align: center;
+  margin: 54px 0 80px;
+}
+
+.whatsapp-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #25d366;
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.25rem;
+  padding: 16px 42px;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 6px 0 #1da851;
+  transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+}
+
+.whatsapp-button:hover {
+  background-color: #1ebe5c;
+  transform: translateY(-2px);
+}
+
+.whatsapp-icon { font-size: 26px; }
+
+/* ===== Responsive ===== */
+@media (max-width: 640px) {
+  .logo { width: 96px; }
+  .title { font-size: 2.2rem; }
+  .title-sub { font-size: 1.6rem; }
+  .categories-grid { gap: 20px; padding: 22px; }
+  .category-card { width: 150px; height: 120px; }
+  .category-name span { font-size: 16px; }
+}
