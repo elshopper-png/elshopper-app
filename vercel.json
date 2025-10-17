@@ -1,8 +1,30 @@
 {
   "version": 2,
-  "public": true,
+  "builds": [
+    { "src": "vite.config.js", "use": "@vercel/static-build", "config": { "distDir": "dist" } }
+  ],
   "routes": [
     { "src": "/apple-touch-icon.png", "dest": "/apple-touch-icon.png" },
+    { "src": "/favicon.png", "dest": "/favicon.png" },
+    { "src": "/pwa-192x192.png", "dest": "/pwa-192x192.png" },
+    { "src": "/pwa-512x512.png", "dest": "/pwa-512x512.png" },
+    { "src": "/pwa-512x512-maskable.png", "dest": "/pwa-512x512-maskable.png" },
+    { "src": "/manifest.webmanifest", "dest": "/manifest.webmanifest" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
+}
+{
+  "version": 2,
+  "builds": [
+    { "src": "vite.config.js", "use": "@vercel/static-build", "config": { "distDir": "dist" } }
+  ],
+  "routes": [
+    { "src": "/apple-touch-icon.png", "dest": "/apple-touch-icon.png" },
+    { "src": "/favicon.png", "dest": "/favicon.png" },
+    { "src": "/pwa-192x192.png", "dest": "/pwa-192x192.png" },
+    { "src": "/pwa-512x512.png", "dest": "/pwa-512x512.png" },
+    { "src": "/pwa-512x512-maskable.png", "dest": "/pwa-512x512-maskable.png" },
+    { "src": "/manifest.webmanifest", "dest": "/manifest.webmanifest" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
