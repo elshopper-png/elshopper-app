@@ -2,19 +2,17 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
-// Configuración completa para El Shopper PWA con autoactualización
 export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: 'autoUpdate', // Actualiza automáticamente en segundo plano
-      includeAssets: ['favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
+      registerType: 'autoUpdate',
       manifest: {
         name: 'El Shopper Los Olivos',
         short_name: 'El Shopper',
-        description: 'Directorio comercial digital de Los Olivos con los mejores productos y servicios.',
-        theme_color: '#1E40AF',
-        background_color: '#FFFFFF',
+        description: 'Directorio comercial digital de Los Olivos con los mejores servicios.',
+        theme_color: '#ffffff',
+        background_color: '#ffffff',
         display: 'standalone',
         orientation: 'portrait',
         start_url: '/',
@@ -36,52 +34,8 @@ export default defineConfig({
             purpose: 'maskable'
           }
         ]
-      },
-      workbox: {
-        cleanupOutdatedCaches: true,
-        clientsClaim: true,
-        skipWaiting: true, // Activa el nuevo service worker automáticamente
-        runtimeCaching: [
-          {
-            urlPattern: /^https:\/\/.*\.(?:js|css|html|png|jpg|jpeg|svg|gif|woff2)$/,
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'static-assets',
-              expiration: {
-                maxEntries: 100,
-                maxAgeSeconds: 60 * 60 * 24 * 30 // 30 días
-              }
-            }
-          },
-          {
-            urlPattern: /^https:\/\/.*\/api\/.*$/i,
-            handler: 'NetworkFirst',
-            options: {
-              cacheName: 'api-cache',
-              networkTimeoutSeconds: 10,
-              expiration: {
-                maxEntries: 50,
-                maxAgeSeconds: 60 * 60 * 24 * 7 // 7 días
-              },
-              cacheableResponse: {
-                statuses: [0, 200]
-              }
-            }
-          }
-        ]
-      },
-      devOptions: {
-        enabled: true,
-        type: 'module'
       }
     })
-  ],
-  server: {
-    host: true,
-    port: 5173
-  },
-  build: {
-    outDir: 'dist',
-    sourcemap: false
-  }
+  ]
 })
+
