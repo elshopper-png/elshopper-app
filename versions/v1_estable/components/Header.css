@@ -1,0 +1,36 @@
+.header {
+  background-color: #ffffff;
+  text-align: center;
+  padding: 25px 10px 15px;
+  color: #b30000;
+}
+
+.header__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header__logo {
+  width: 110px;
+  height: 110px;
+  margin-bottom: 10px;
+}
+
+.header__title {
+  font-family: "Arial Black", sans-serif;
+  font-weight: 900;
+  font-size: 1.6rem;
+  line-height: 1.2;
+  color: #b30000;
+  margin: 0;
+}
+
+.header__tagline {
+  font-family: "Arial Black", sans-serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: #444;
+  margin-top: 8px;
+  line-height: 1.4;
+}

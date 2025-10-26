@@ -1,38 +1,22 @@
 {
-  "name": "El Shopper de Los Olivos Digital",
+  "name": "El Shopper Digital – Los Olivos",
   "short_name": "El Shopper",
-  "description": "Directorio comercial digital de Los Olivos con los mejores productos y servicios a un clic de distancia.",
+  "description": "Directorio digital de comercios y servicios en Los Olivos.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#b30000",
-  "theme_color": "#b30000",
-  "orientation": "portrait-primary",
-  "id": "/",
-  "scope": "/",
+  "background_color": "#ffffff",
+  "theme_color": "#b00000",
+  "orientation": "portrait",
   "icons": [
     {
-      "src": "/pwa-192x192.png",
+      "src": "/icons/elshopper-192.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
+      "type": "image/png"
     },
     {
-      "src": "/pwa-512x512.png",
+      "src": "/icons/elshopper-512.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/pwa-512x512-maskable.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "/apple-touch-icon.png",
-      "sizes": "180x180",
-      "type": "image/png",
-      "purpose": "any"
+      "type": "image/png"
     }
   ]
 }

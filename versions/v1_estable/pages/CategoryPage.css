@@ -1,0 +1,33 @@
+.category-page {
+  width: 100%;
+  min-height: 100vh;
+  background: #fff;
+  padding: 12px 16px 60px;
+  box-sizing: border-box;
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.back-btn {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.category-title {
+  color: #d32f2f;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.ad-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

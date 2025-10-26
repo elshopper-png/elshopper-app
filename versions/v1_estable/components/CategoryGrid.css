@@ -1,0 +1,74 @@
+/* =========================================================
+   CategoryGrid.css — Omega-5 Auditado
+   Grid 2 columnas, “press” suave, sin flechas, sin footer
+   ========================================================= */
+
+.catgrid__wrap {
+  width: min(980px, 92vw);
+  margin: 12px auto 0 auto;
+}
+
+.catgrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px 16px;
+}
+
+.catgrid__card {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 130px;
+  border-radius: 18px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.20);
+  transition: transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
+  /* evitar que el texto herede colores raros */
+  color: #111;
+}
+
+.catgrid__card:active {
+  transform: translateY(2px) scale(0.99);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.18);
+  filter: brightness(0.98);
+}
+
+.catgrid__counter {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #fff;
+  color: #000;
+  font-weight: 800;
+  font-size: 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.2);
+}
+
+.catgrid__emoji {
+  font-size: 44px; /* +40% aprox */
+  line-height: 1;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 2px 1px rgba(0,0,0,.2));
+}
+
+.catgrid__name {
+  text-align: center;
+  font-weight: 800; /* bold */
+  color: #111;
+  font-size: 18px; /* +40% aprox */
+  line-height: 1.15;
+  padding: 0 10px;
+}
+
+/* Responsive pequeño */
+@media (max-width: 380px) {
+  .catgrid__name { font-size: 17px; }
+  .catgrid__emoji { font-size: 40px; }
+}

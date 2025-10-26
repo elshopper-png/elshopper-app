@@ -1,0 +1,15 @@
+export const categories = [
+  { name: "Belleza & SPA", emoji: "💅", color: "#f72585" },
+  { name: "Gastronomía & Snacks", emoji: "🍔", color: "#ff6b35" },
+  { name: "Servicios Profesionales", emoji: "💼", color: "#495057" },
+  { name: "Educación & Cursos", emoji: "🎓", color: "#007bff" },
+  { name: "Fitness & Deportes", emoji: "🏋️‍♀️", color: "#ff5722" },
+  { name: "Hogar & Servicios", emoji: "🏠", color: "#ffd60a" },
+  { name: "Construcción & Ferretería", emoji: "📦", color: "#5b3924" },
+  { name: "Informática & Reparación", emoji: "💻", color: "#00b4d8" },
+  { name: "Marketing & Imprenta", emoji: "🖨️", color: "#5a4fcf" },
+  { name: "Moda & Joyería", emoji: "💍", color: "#9b5de5" },
+  { name: "Muebles & Decoraciones", emoji: "🪑", color: "#d98324" },
+  { name: "Salud Integral", emoji: "🩺", color: "#00916e" },
+  { name: "Automotriz & Talleres", emoji: "🚗", color: "#ff1b1c" },
+];

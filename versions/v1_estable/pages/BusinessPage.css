@@ -1,0 +1,42 @@
+.business-page {
+  padding: 20px;
+  text-align: center;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #e60023;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.icon-links a {
+  margin: 10px;
+  font-size: 1.8rem;
+  text-decoration: none;
+}
+
+.carousel {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  margin: 15px 0;
+}
+
+.carousel-img {
+  width: 60%;
+  border-radius: 12px;
+  transition: transform 0.3s;
+}
+
+.carousel-img:hover {
+  transform: scale(1.1);
+}
+
+.video-carousel video {
+  width: 60%;
+  border-radius: 12px;
+  margin-top: 10px;
+}

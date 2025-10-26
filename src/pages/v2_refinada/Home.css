@@ -1,0 +1,58 @@
+/* 🎨 Estilos refinados – Portada Omega-5 */
+
+.home-container {
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  background-color: #ffffff;
+  color: #000000;
+  padding-bottom: 20px;
+}
+
+.home-logo {
+  width: 110px;
+  margin: 0 auto 8px;
+}
+
+.home-title,
+.home-subtitle {
+  font-weight: 800;
+  color: #000;
+  margin: 0;
+  line-height: 1.05; /* 🔹 interlineado compacto */
+}
+
+.home-description {
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 10px auto 22px;
+  max-width: 340px;
+}
+
+/* WhatsApp más cerca del grid */
+.cta-wrapper {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.whatsapp-cta {
+  width: 60%;
+  max-width: 240px;
+}
+
+/* Footer único y separado */
+.footer {
+  margin-top: 50px;
+  font-size: 13px;
+  color: #444;
+}
+
+/* Flecha de retorno en tarjetas */
+.category-card::after {
+  content: "↩️";
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
+  font-size: 20px;
+  opacity: 0.7;
+}

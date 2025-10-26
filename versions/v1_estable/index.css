@@ -1,0 +1,132 @@
+:root {
+  --radius: 20px;
+  --shadow: 0 10px 20px rgba(0,0,0,.15);
+  --shadow-soft: 0 6px 14px rgba(0,0,0,.12);
+}
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  background: #fff;
+  color: #111;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.page { padding: 22px 16px 40px; max-width: 980px; margin: 0 auto; }
+
+/* Botón musical flotante */
+.music-fab {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  border: 0;
+  background: #e9f5ff;
+  box-shadow: var(--shadow-soft);
+  font-size: 20px;
+  cursor: pointer;
+}
+.music-fab.on { filter: saturate(1.3); box-shadow: 0 0 0 3px rgba(0,128,255,.12), var(--shadow-soft); }
+
+/* Encabezado centrado */
+.hero { text-align: center; margin: 8px 0 20px; }
+.logo { width: 110px; height: 110px; margin: 0 auto 8px; }
+.logo img, .logo-fallback {
+  width: 100%; height: 100%;
+  border-radius: 999px;
+  display: block;
+}
+.logo-fallback { display:flex; align-items:center; justify-content:center; font-size:56px; background:#fff0f0; }
+
+.title {
+  margin: 10px 0 6px;
+  font-weight: 800;
+  letter-spacing: .5px;
+  line-height: 1.1;
+  color: #b30017; /* rojo del título */
+  font-size: 26px;
+}
+.subtitle {
+  margin: 0 0 10px;
+  color: #444;
+  font-style: italic;
+  font-size: 16px;
+}
+
+/* Rejilla */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+/* Tarjeta categoría */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 140px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: #fff;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.card:active { transform: translateY(1px); }
+
+.badge {
+  position: absolute;
+  top: 8px; left: 8px;
+  background: #fff;
+  color: #333;
+  width: 26px; height: 26px;
+  border-radius: 999px;
+  display:flex; align-items:center; justify-content:center;
+  font-weight: 700;
+  font-size: 13px;
+  box-shadow: var(--shadow-soft);
+}
+
+.emoji { font-size: 38px; margin-bottom: 10px; }
+.card-title {
+  text-align: center;
+  font-weight: 800;
+  line-height: 1.15;
+  font-size: 18px;
+  padding: 0 10px 6px;
+  text-wrap: balance;
+}
+
+/* WhatsApp como última tarjeta a ancho completo */
+.card.whatsapp {
+  grid-column: 1 / -1;
+  background: #25D366;
+  min-height: 72px;
+}
+.whats-inner {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 12px;
+}
+.whats-emoji { font-size: 28px; }
+.whats-text {
+  font-weight: 800;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+/* Desktop */
+@media (min-width: 900px) {
+  .title { font-size: 36px; }
+  .subtitle { font-size: 18px; }
+  .grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .card { min-height: 160px; }
+}

@@ -1,0 +1,42 @@
+/* ============================================================
+   CategoryGrid.css — móvil 2×N, cuadrados con márgenes laterales
+   ============================================================ */
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 20px 10px; /* pequeños márgenes laterales */
+}
+
+.category-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 14px;
+  aspect-ratio: 1 / 1;      /* siempre cuadrado */
+  position: relative;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(0,0,0,.25);
+  transition: transform .15s ease;
+}
+
+.category-card:active { transform: scale(.97); }
+
+.category-emoji { font-size: 1.9rem; margin-bottom: 6px; }
+.category-name  { font-size: 0.9rem; text-align: center; line-height: 1.2; }
+
+.category-counter {
+  position: absolute;
+  top: 7px; left: 7px;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: #fff; color: #000;
+  font-size: 0.75rem; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 1px 2px rgba(0,0,0,.2);
+}
