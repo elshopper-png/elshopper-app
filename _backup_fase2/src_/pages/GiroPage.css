@@ -1,0 +1,51 @@
+.giro-page {
+  text-align: center;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.giro-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #000;
+}
+
+.tarjetas-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding: 10px;
+}
+
+.tarjeta {
+  border-radius: 20px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
+  padding: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tarjeta:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+}
+
+.banner {
+  width: 100%;
+  border-radius: 16px;
+}
+
+.nombre {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-top: 10px;
+  color: #000;
+}
+
+.descripcion {
+  font-size: 0.95rem;
+  color: #111;
+  margin-top: 8px;
+  line-height: 1.3;
+}

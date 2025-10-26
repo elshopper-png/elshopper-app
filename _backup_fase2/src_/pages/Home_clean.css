@@ -1,0 +1,105 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  user-select: none;
+  padding-bottom: 90px;
+}
+
+.header {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.logo {
+  width: 95px;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #c20000;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #c20000;
+  margin: 0;
+}
+
+.slogan {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: #333;
+  margin-top: 8px;
+  line-height: 1.4rem;
+}
+
+/* ==== TARJETAS ==== */
+.category-card {
+  border-radius: 18px;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  padding: 18px;
+  transition: all 0.2s ease;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2),
+              -3px -3px 6px rgba(255, 255, 255, 0.6);
+}
+
+.category-card:active {
+  transform: scale(0.97);
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.25),
+              inset -2px -2px 5px rgba(255, 255, 255, 0.5);
+}
+
+/* ==== BOTÓN WHATSAPP ==== */
+.whatsapp-section {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.whatsapp-section button {
+  background-color: #25d366;
+  color: white;
+  font-weight: 700;
+  border: none;
+  border-radius: 35px;
+  padding: 12px 28px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.whatsapp-section button:hover {
+  background-color: #1ebe5d;
+}
+
+.whatsapp-section button:active {
+  transform: scale(0.95);
+}
+
+/* ==== RESPONSIVE ==== */
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.5rem;
+  }
+  .subtitle {
+    font-size: 1rem;
+  }
+  .slogan {
+    font-size: 0.9rem;
+  }
+  .logo {
+    width: 80px;
+  }
+}
