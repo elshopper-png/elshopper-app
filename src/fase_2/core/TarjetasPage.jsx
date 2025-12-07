@@ -1,33 +1,38 @@
 // ============================================================
-// 🧩 TarjetasPage.jsx — Versión estable CRA + ATLASH O25
+// 🧩 TarjetasPage.jsx — Versión estable CRA + ATLASH O25 (ESLint Safe)
 // ============================================================
 
 import React, { useMemo } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import CATEGORIES from "../../data/categories.json";
 import TARJETAS_DATA from "../../data/tarjetas.json";
 
-
 import "../styles/tarjetas.css";
 
 export default function TarjetasPage() {
-  const { slug } = useParams();
+  const location = useLocation();
   const navigate = useNavigate();
 
-  // 📌 Datos del giro (color, nombre, etc.)
-  const categoria = useMemo(() => {
-    return CATEGORIES.find((c) => c.slug === slug);
-  }, [slug]);
+  // 🟦 1) Recuperamos el giro desde state
+  const giroSlug = location.state?.giro || null;
 
+  // 🟦 2) Hooks SIEMPRE deben ir antes de cualquier return
+  const categoria = useMemo(() => {
+    if (!giroSlug) return null;
+    return CATEGORIES.find((c) => c.slug === giroSlug);
+  }, [giroSlug]);
+
+  const tarjetas = useMemo(() => {
+    if (!giroSlug) return [];
+    const entry = TARJETAS_DATA.find((g) => g.giroSlug === giroSlug);
+    return entry?.tarjetas || [];
+  }, [giroSlug]);
+
+  // Color de fondo
   const colorTapiz = categoria?.color || "#0fbad1";
 
-  // 📌 Tarjetas del giro seleccionado
-  const tarjetas = useMemo(() => {
-    const entry = TARJETAS_DATA.find((g) => g.giroSlug === slug);
-    return entry?.tarjetas || [];
-  }, [slug]);
-
+  // 🟥 3) Return principal SIEMPRE al final
   return (
     <div className="tarjetas-wrapper" style={{ backgroundColor: colorTapiz }}>
       
@@ -50,22 +55,31 @@ export default function TarjetasPage() {
 
       {/* === LISTA DE TARJETAS === */}
       <main className="tarjetas-grid">
-        {tarjetas.map((t, i) => (
-          <article
-            key={`${t.slug}-${i}`}
-            className="tarjeta-item pressable"
-            onClick={() => navigate(`/atlash/${t.slug}`)}  // ✔ VIGA 3 limpia O25
-          >
-            <img
-              className="tarjeta-img"
-              src={t.imagen}
-              alt={t.nombre}
-              loading="lazy"
-            />
-          </article>
-        ))}
+        
+        {/* Si no hay giro seleccionado */}
+        {!giroSlug && (
+          <div className="sin-tarjetas">No hay tarjetas para este giro.</div>
+        )}
 
-        {tarjetas.length === 0 && (
+        {/* Mostrar tarjetas si existen */}
+        {giroSlug &&
+          tarjetas.map((t, i) => (
+            <article
+              key={`${t.slug}-${i}`}
+              className="tarjeta-item pressable"
+              onClick={() => navigate(`/atlash/${t.slug}`)}
+            >
+              <img
+                className="tarjeta-img"
+                src={t.imagen}
+                alt={t.nombre}
+                loading="lazy"
+              />
+            </article>
+          ))}
+
+        {/* Si hay giro pero no hay tarjetas */}
+        {giroSlug && tarjetas.length === 0 && (
           <div className="sin-tarjetas">No hay tarjetas para este giro aún.</div>
         )}
       </main>

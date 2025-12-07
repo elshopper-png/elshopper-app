@@ -1,68 +1,85 @@
-// public/service-worker.js
 // ============================================================
-// 🛡 Service Worker O25 — El Shopper Digital (modo simple)
-// - Registra SW solo en producción
-// - Cachea lo básico para que Lighthouse marque PWA
-// - No interfiere con peticiones externas ni ATLASH
+// 🛡 Service Worker OMEGA-5 — El Shopper Digital
+// ------------------------------------------------------------
+// - NO cachea index.html (evita pantalla blanca por HTML viejo)
+// - Cachea solo assets estáticos de /static/*
+// - Network-first para SPA
+// - No interfiere con ATLASH ni recursos externos
+// - Fallback seguro para navegación offline
 // ============================================================
 
-const CACHE_NAME = "elshopper-o25-v1";
+const CACHE_VERSION = "o25-v3";
+const STATIC_CACHE = `static-${CACHE_VERSION}`;
 
-const URLS_TO_CACHE = [
-  "/",
-  "/index.html",
-  "/manifest.json"
+// 🔥 Cache mínimo permitido — NO incluir index.html
+const ASSETS_TO_PRECACHE = [
+  "/manifest.json",
+  "/icons/icon-192.png",
+  "/icons/icon-512.png",
 ];
 
-// Instalación: precache básico
+// ------------------------------------------------------------
+// INSTALL
+// ------------------------------------------------------------
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(URLS_TO_CACHE))
+    caches.open(STATIC_CACHE).then((cache) => cache.addAll(ASSETS_TO_PRECACHE))
   );
   self.skipWaiting();
 });
 
-// Activación: limpiar caches viejos
+// ------------------------------------------------------------
+// ACTIVATE — limpia SW viejo
+// ------------------------------------------------------------
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
       Promise.all(
-        keys.map((key) => {
-          if (key !== CACHE_NAME) {
-            return caches.delete(key);
-          }
-          return null;
-        })
+        keys
+          .filter((key) => key !== STATIC_CACHE)
+          .map((oldKey) => caches.delete(oldKey))
       )
     )
   );
+
   self.clients.claim();
 });
 
-// Fetch: sólo GET y sólo mismo origen
+// ------------------------------------------------------------
+// FETCH — Network First seguro para SPA
+// ------------------------------------------------------------
 self.addEventListener("fetch", (event) => {
-  const { request } = event;
+  const req = event.request;
 
-  // Sólo GET
-  if (request.method !== "GET") return;
+  // No manejar POST/PUT/etc.
+  if (req.method !== "GET") return;
 
-  const url = new URL(request.url);
+  const url = new URL(req.url);
 
-  // No tocar recursos de otros orígenes (ej: iframes externos, APIs, etc.)
+  // No interceptar recursos externos (ATLASH/Vercel CDN/API)
   if (url.origin !== self.location.origin) return;
 
   event.respondWith(
-    caches.match(request).then((cached) => {
-      if (cached) return cached;
-
-      // Network-first simple
-      return fetch(request).catch(() => {
-        // Si falla, devolver index.html (útil para SPA)
-        if (request.mode === "navigate") {
-          return caches.match("/index.html");
+    fetch(req)
+      .then((res) => {
+        // Cache solo para assets estables
+        if (res.ok && req.url.includes("/static/")) {
+          caches.open(STATIC_CACHE).then((cache) =>
+            cache.put(req, res.clone())
+          );
         }
-        return new Response("Offline", { status: 503, statusText: "Offline" });
-      });
-    })
+        return res;
+      })
+      .catch(() => {
+        // Si falla red → buscar en cache
+        return caches.match(req).then((cached) => {
+          // Si es navegación → devolver index fresco si existe
+          if (req.mode === "navigate") {
+            return caches.match("/index.html");
+          }
+
+          return cached || new Response("Offline", { status: 503 });
+        });
+      })
   );
 });

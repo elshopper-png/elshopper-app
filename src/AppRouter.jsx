@@ -1,5 +1,5 @@
 // ============================================================
-// 🚀 AppRouter.jsx — Puente de Madera O25 (Versión correcta)
+// 🚀 AppRouter — CRA Fase 1 y 2 + Banner PWA (Omega-5)
 // ============================================================
 
 import { Routes, Route } from "react-router-dom";
@@ -8,22 +8,24 @@ import HomeBase from "./core/HomeBase.jsx";
 import TarjetasPage from "./fase_2/core/TarjetasPage.jsx";
 import AtlashVisor from "./AtlashVisor.jsx";
 
+// 🔥 Banner PWA (Android)
+import PWABanner from "./components/PWABanner";
+// 🔥 Banner instruccional para iOS
+import PWABannerIOS from "./components/PWABannerIOS";
+
 export default function AppRouter() {
   return (
-    <Routes>
+    <>
+      {/* Banner nativo de instalación */}
+      <PWABanner />
+      <PWABannerIOS />
 
-      {/* Portada */}
-      <Route path="/" element={<HomeBase />} />
-
-      {/* Tarjetas por giro */}
-      <Route path="/giros/:slug" element={<TarjetasPage />} />
-
-      {/* ATLASH externo */}
-      <Route path="/atlash/:slug" element={<AtlashVisor />} />
-
-      {/* Fallback */}
-      <Route path="*" element={<HomeBase />} />
-
-    </Routes>
+      {/* Rutas principales */}
+      <Routes>
+        <Route path="/" element={<HomeBase />} />
+        <Route path="/tarjetas" element={<TarjetasPage />} />
+        <Route path="/atlash/:slug" element={<AtlashVisor />} />
+      </Routes>
+    </>
   );
 }

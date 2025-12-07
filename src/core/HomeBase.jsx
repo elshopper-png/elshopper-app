@@ -41,9 +41,10 @@ export default function HomeBase() {
         {CATEGORIES.map((cat) => (
           <Link
             key={cat.slug}
-            to={`/giros/${cat.slug}`}
-            className="category-button"
-            style={{ backgroundColor: cat.color }}
+            to="/tarjetas"
+  state={{ giro: cat.slug }}
+  className="category-button"
+  style={{ backgroundColor: cat.color }}
           >
             {/* 🟦 CONTÓMETRO REAL O25 */}
             {conteo[cat.slug] > 0 && (

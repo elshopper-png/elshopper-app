@@ -15,7 +15,6 @@ window.addEventListener("message", (event) => {
   window.history.back();
 });
 
-
 // ============================================================
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -31,7 +30,7 @@ root.render(
 // ============================================================
 if ("serviceWorker" in navigator && process.env.NODE_ENV === "production") {
   window.addEventListener("load", () => {
-    const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
+    const swUrl = `/service-worker.js`; // 🔥 RUTA CORRECTA PARA VERCEL
 
     navigator.serviceWorker
       .register(swUrl)
