@@ -1,15 +1,14 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import React, { useEffect } from "react";
 
 export default function AtlashVisor() {
-  const { slug } = useParams();
+  const { slug, giroSlug } = useParams();
+  const navigate = useNavigate();
 
   // 🔇 APAGAR MÚSICA AL ENTRAR A ATLASH
   useEffect(() => {
-    // Pausar inmediatamente al entrar
     if (window.globalMusic) window.globalMusic.pause();
 
-    // Restaurar cuando el usuario regrese
     return () => {
       if (window.globalMusic && window.musicState === "on") {
         window.globalMusic.play().catch(() => {});
@@ -17,11 +16,21 @@ export default function AtlashVisor() {
     };
   }, []);
 
-  // Detecta IP del host real
-  const host = window.location.hostname;
+  // 🎧 LISTENER UNIVERSAL O25 — PUENTE DE MADERA ✔️
+  useEffect(() => {
+    const handler = (event) => {
+      if (event.data === "O25_VOLVER") {
+        // 🔙 Regresar a las tarjetas del giro correspondiente
+        navigate(`/tarjetas/${giroSlug}`);
+      }
+    };
 
-  // Ruta universal CRA ↔ ATLASH
-  const atlashURL = `http://${host}:5173/${slug}`;
+    window.addEventListener("message", handler);
+    return () => window.removeEventListener("message", handler);
+  }, [navigate, giroSlug]);
+
+  // RUTA CORRECTA UNIVERSAL (local y producción)
+  const atlashURL = `/atlash/${slug}`;
 
   return (
     <iframe
