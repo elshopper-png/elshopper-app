@@ -1,0 +1,19 @@
+{
+  "giro": "Hogar & Servicios",
+  "tarjetas": [
+    {
+      "nombre": "Gas Caserito",
+      "descripcion": "Gas económico ¡al toque!",
+      "imagen": "/fase_2/tarjetas/hogar-servicios/card.png",
+      "slug": "gas-caserito",
+      "whatsapp": ""
+    },
+    {
+      "nombre": "Gasfitería Los Olivos",
+      "descripcion": "Atención inmediata y trabajos garantizados.",
+      "imagen": "/fase_2/tarjetas/hogar-servicios/card1.png",
+      "slug": "gasfiteria-los-olivos",
+      "whatsapp": ""
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "giro": "Construcción & Acabados",
+  "tarjetas": [
+    {
+      "nombre": "Elevarq Arquitectura e Inmobiliaria",
+      "descripcion": "Arquitectura personalizada, supervisión, ampliaciones y diseño eficiente.",
+      "imagen": "/fase_2/tarjetas/construccion-acabados/card.png",
+      "slug": "elevarq",
+      "whatsapp": "51967324909"
+    }
+  ]
+}

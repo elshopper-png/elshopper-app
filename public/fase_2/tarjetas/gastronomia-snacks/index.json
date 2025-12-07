@@ -1,0 +1,12 @@
+{
+  "giro": "Gastronomía & Snacks",
+  "tarjetas": [
+    {
+      "nombre": "Antojitos Norteños",
+      "descripcion": "Comida criolla, menú diario y delivery a Los Olivos.",
+      "imagen": "/fase_2/tarjetas/gastronomia-snacks/card.png",
+      "slug": "antojitos-nortenos",
+      "whatsapp": ""
+    }
+  ]
+}

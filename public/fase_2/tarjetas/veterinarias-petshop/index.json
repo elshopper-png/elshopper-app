@@ -1,0 +1,12 @@
+{
+  "giro": "Veterinarias & Pet Shop",
+  "tarjetas": [
+    {
+      "nombre": "PetCare Los Olivos",
+      "descripcion": "Atención veterinaria y accesorios para tus mascotas.",
+      "imagen": "/fase_2/tarjetas/veterinarias-petshop/card.png",
+      "slug": "petcare-los-olivos",
+      "whatsapp": ""
+    }
+  ]
+}

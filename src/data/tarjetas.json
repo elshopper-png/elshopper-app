@@ -1,0 +1,246 @@
+[
+  {
+    "giroSlug": "belleza-spa",
+    "giro": "Belleza & SPA",
+    "tarjetas": [
+      {
+        "nombre": "Centro de Medicina Regenerativa y Estética Integral",
+        "descripcion": "Dra. María del Socorro Burga Dios — Médico Cirujano Especialista en Medicina Regenerativa y Estética Integral.",
+        "imagen": "/fase_2/tarjetas/belleza-spa/card.png",
+        "slug": "burga",
+        "whatsapp": "51991405449"
+      }
+    ]
+  },
+
+  {
+    "giroSlug": "gastronomia-snacks",
+    "giro": "Gastronomía & Snacks",
+    "tarjetas": [
+      {
+        "nombre": "El Rancho Restaurante",
+        "descripcion": "Caldo de gallina, pescados fritos y platos criollos.",
+        "imagen": "/fase_2/tarjetas/gastronomia-snacks/card.png",
+        "slug": "el-rancho",
+        "whatsapp": ""
+      }
+    ]
+  },
+
+  {
+    "giroSlug": "servicios-profesionales",
+  "giro": "Servicios Profesionales",
+  "tarjetas": [
+    {
+      "nombre": "Estudio Contable Ríos",
+      "descripcion": "Servicios contables profesionales: declaraciones, asesoría tributaria y gestión financiera empresarial.",
+      "imagen": "/fase_2/tarjetas/servicios-profesionales/card.png",
+      "slug": "rios",
+      "whatsapp": ""
+      }
+    ]
+  },
+
+  {
+  "giroSlug": "educacion",
+  "giro": "Educación",
+  "tarjetas": [
+    {
+      "nombre": "Colegio Santa María de la Providencia",
+      "descripcion": "Formación integral con valores, excelencia académica y compromiso familiar.",
+      "imagen": "/fase_2/tarjetas/educacion/card.png",
+      "slug": "providencia",
+      "whatsapp": ""
+    }
+  ]
+  },
+
+  {
+  "giroSlug": "fitness-deportes",
+  "giro": "Fitness & Deportes",
+  "tarjetas": [
+    {
+      "nombre": "Cooperativa Mercurio",
+      "descripcion": "Academias deportivas, alquiler de canchas y eventos — Los Olivos.",
+      "imagen": "/fase_2/tarjetas/fitness-deportes/card.png",
+      "slug": "mercurio",
+      "whatsapp": ""
+      }
+    ]
+  },
+
+  {
+    "giroSlug": "hogar-servicios",
+    "giro": "Hogar & Servicios",
+    "tarjetas": [
+      {
+        "nombre": "Caserito Regalón — Gas a Domicilio",
+        "descripcion": "Gas económico en oferta y delivery sin costo para tu hogar.",
+        "imagen": "/fase_2/tarjetas/hogar-servicios/card.png",
+        "slug": "caserito",
+        "whatsapp": ""
+      },
+      {
+        "nombre": "Gasfitería Los Olivos",
+  "descripcion": "Técnico Dionisio Rodríguez Vargas — Gasfitería y ferretería en Los Olivos.",
+  "imagen": "/fase_2/tarjetas/hogar-servicios/card1.png",
+  "slug": "dionisio2",
+  "whatsapp": ""
+      }
+    ]
+  },
+
+  {
+    "giroSlug": "construccion-ferreteria",
+    "giro": "Construcción & Ferretería",
+    "tarjetas": [
+      {
+        "nombre": "Ferretería San Martín",
+        "descripcion": "Materiales, herramientas y asesoría técnica para tus proyectos.",
+        "imagen": "/fase_2/tarjetas/construccion-ferreteria/card.png",
+        "slug": "ferreteria-san-martin",
+        "whatsapp": ""
+      }
+    ]
+  },
+
+  {
+    "giroSlug": "informatica-reparacion",
+  "giro": "Informática & Reparación",
+  "tarjetas": [
+    {
+      "nombre": "Alfredo — Técnico en Computación",
+      "descripcion": "Reparación, mantenimiento y soporte de computadoras y laptops.",
+      "imagen": "/fase_2/tarjetas/informatica-reparacion/card.png",
+      "slug": "alfredo",
+      "whatsapp": "51972077437"
+      }
+    ]
+  },
+
+  {
+    "giroSlug": "marketing-imprenta",
+    "giro": "Marketing & Imprenta",
+    "tarjetas": [
+      {
+        "nombre": "El Shopper de Los Olivos",
+        "descripcion": "Publicidad gráfica y digital con resultados comprobados.",
+        "imagen": "/fase_2/tarjetas/marketing-imprenta/card.png",
+        "slug": "imprenta",
+        "whatsapp": ""
+      }
+    ]
+  },
+
+  {
+    "giroSlug": "moda-joyeria",
+  "giro": "Moda & Joyería",
+  "tarjetas": [
+    {
+      "nombre": "Kuya Jewelry",
+      "descripcion": "Joyas en plata 950 hechas a mano, inspiradas en la identidad peruana.",
+      "imagen": "/fase_2/tarjetas/moda-joyeria/card.png",
+      "slug": "kuya",
+      "whatsapp": "51923049845"
+      }
+    ]
+  },
+
+  {
+    "giroSlug": "muebles-decoraciones",
+  "giro": "Muebles & Decoraciones",
+  "tarjetas": [
+    {
+      "nombre": "Muebles Conforta",
+      "descripcion": "Diseños modernos, comodidad y elegancia para tu hogar.",
+      "imagen": "/fase_2/tarjetas/muebles-decoraciones/card.png",
+      "slug": "conforta",
+      "whatsapp": ""
+      }
+    ]
+  },
+
+  {
+    "giroSlug": "salud-integral",
+    "giro": "Salud Integral",
+    "tarjetas": [
+      {
+        "nombre": "Dr. Saúl Garrido",
+        "descripcion": "Médico del Pueblo — Atención médica integral y de confianza.",
+        "imagen": "/fase_2/tarjetas/salud-integral/card.png",
+        "slug": "saul-garrido",
+        "whatsapp": "51999286969"
+      }
+    ]
+  },
+
+  {
+     "giroSlug": "servicio-tecnico",
+  "giro": "Servicio Técnico",
+  "tarjetas": [
+    {
+      "nombre": "Técnico Zegarra",
+      "descripcion": "Reparación de lavadoras, refrigeradoras, microondas, cocinas, TVs y equipos de audio. Servicio garantizado.",
+      "imagen": "/fase_2/tarjetas/servicio-tecnico/card.png",
+      "slug": "zegarra",
+      "whatsapp": ""
+      }
+    ]
+  },
+
+  {
+    "giroSlug": "inmobiliarias",
+  "giro": "Inmobiliarias",
+  "tarjetas": [
+    {
+      "nombre": "Vendo Casa – Servicios Inmobiliarios",
+      "descripcion": "Venta y asesoría inmobiliaria profesional.",
+      "imagen": "/fase_2/tarjetas/inmobiliarias/card.png",
+      "slug": "vendo-casa",
+      "whatsapp": "51928636701"
+      }
+    ]
+  },
+
+  {
+    "giroSlug": "veterinarias-petshop",
+  "giro": "Veterinarias & Pet Shop",
+  "tarjetas": [
+    {
+      "nombre": "Zona Mascota",
+      "descripcion": "Cuidado integral para tu mascota: dermatología, cirugía, laboratorio, ecografías y más.",
+      "imagen": "/fase_2/tarjetas/veterinarias-petshop/card.png",
+      "slug": "mascota",
+      "whatsapp": ""
+      }
+    ]
+  },
+
+  {
+    "giroSlug": "fiestas-eventos",
+    "giro": "Fiestas & Eventos",
+    "tarjetas": [
+      {
+        "nombre": "Decoraciones San Francisco",
+        "descripcion": "Cortinas, tapicería y ambientación profesional para eventos.",
+        "imagen": "/fase_2/tarjetas/fiestas-eventos/card.png",
+        "slug": "decoraciones-san-francisco",
+        "whatsapp": ""
+      }
+    ]
+  },
+
+  {
+    "giroSlug": "construccion-acabados",
+    "giro": "Construcción & Acabados",
+    "tarjetas": [
+      {
+        "nombre": "Elevarq Arquitectura e Inmobiliaria",
+        "descripcion": "Arquitectura personalizada, supervisión, ampliaciones y diseño eficiente.",
+        "imagen": "/fase_2/tarjetas/construccion-acabados/card.png",
+        "slug": "elevarq",
+        "whatsapp": ""
+      }
+    ]
+  }
+]

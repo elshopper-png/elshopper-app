@@ -1,0 +1,12 @@
+{
+  "giro": "Marketing & Imprenta",
+  "tarjetas": [
+    {
+      "nombre": "El Shopper Digital",
+      "descripcion": "Publicidad gráfica y digital para negocios locales.",
+      "imagen": "/fase_2/tarjetas/marketing-imprenta/card.png",
+      "slug": "el-shopper-digital",
+      "whatsapp": ""
+    }
+  ]
+}

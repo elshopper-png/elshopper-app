@@ -1,0 +1,12 @@
+{
+  "giro": "Informática & Reparación",
+  "tarjetas": [
+    {
+      "nombre": "TecniCompu Service",
+      "descripcion": "Reparación y mantenimiento de computadoras y laptops.",
+"imagen": "./fase_2/tarjetas/informatica-reparacion/card.png"
+      "slug": "tecnicompu-service",
+      "whatsapp": ""
+    }
+  ]
+}

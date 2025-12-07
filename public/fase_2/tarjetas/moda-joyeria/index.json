@@ -1,0 +1,12 @@
+{
+  "giro": "Moda & Joyería",
+  "tarjetas": [
+    {
+      "nombre": "Kuya Silver Perú",
+      "descripcion": "Joyería artesanal en plata 950 inspirada en el arte peruano.",
+      "imagen": "/fase_2/tarjetas/moda-joyeria/card.png",
+      "slug": "kuya-silver-peru",
+      "whatsapp": ""
+    }
+  ]
+}

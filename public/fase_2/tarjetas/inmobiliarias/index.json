@@ -1,0 +1,12 @@
+{
+  "giro": "Inmobiliarias",
+  "tarjetas": [
+    {
+      "nombre": "Edificio El Parque",
+      "descripcion": "Departamentos de estreno frente a parque con entrega inmediata.",
+      "imagen": "/fase_2/tarjetas/inmobiliarias/card.png",
+      "slug": "edificio-el-parque",
+      "whatsapp": ""
+    }
+  ]
+}

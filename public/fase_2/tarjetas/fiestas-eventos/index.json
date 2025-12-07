@@ -1,0 +1,12 @@
+{
+  "giro": "Fiestas & Eventos",
+  "tarjetas": [
+    {
+      "nombre": "Eventos Glamour",
+      "descripcion": "Decoración, sonido y catering para toda ocasión.",
+      "imagen": "/fase_2/tarjetas/fiestas-eventos/card.png",
+      "slug": "eventos-glamour",
+      "whatsapp": ""
+    }
+  ]
+}

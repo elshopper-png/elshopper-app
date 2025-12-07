@@ -1,0 +1,12 @@
+{
+  "giro": "Fitness & Deportes",
+  "tarjetas": [
+    {
+      "nombre": "Gym Online Vic Oli",
+      "descripcion": "Entrenamientos HIFT, Funcional, Musculación y GAP.",
+      "imagen": "/fase_2/tarjetas/fitness-deportes/card.png",
+      "slug": "gym-vic-oli",
+      "whatsapp": ""
+    }
+  ]
+}

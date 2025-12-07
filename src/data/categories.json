@@ -1,0 +1,18 @@
+[
+  { "nombre": "Belleza & SPA", "emoji": "💅", "color": "#FF006E", "slug": "belleza-spa" },
+  { "nombre": "Construcción & Acabados", "emoji": "🏗️", "color": "#7A3E1D", "slug": "construccion-acabados" },
+  { "nombre": "Educación", "emoji": "🎓", "color": "#00B4D8", "slug": "educacion" },
+  { "nombre": "Fiestas & Eventos", "emoji": "🎉", "color": "#FF70A6", "slug": "fiestas-eventos" },
+  { "nombre": "Fitness & Deportes", "emoji": "💪", "color": "#F77F00", "slug": "fitness-deportes" },
+  { "nombre": "Gastronomía & Snacks", "emoji": "🍔", "color": "#FFB703", "slug": "gastronomia-snacks" },
+  { "nombre": "Hogar & Servicios", "emoji": "🏡", "color": "#0096C7", "slug": "hogar-servicios" },
+  { "nombre": "Informática & Reparación", "emoji": "💻", "color": "#219EBC", "slug": "informatica-reparacion" },
+  { "nombre": "Inmobiliarias", "emoji": "🏢", "color": "#6D597A", "slug": "inmobiliarias" },
+  { "nombre": "Marketing & Imprenta", "emoji": "📢", "color": "#8338EC", "slug": "marketing-imprenta" },
+  { "nombre": "Moda & Joyería", "emoji": "👗", "color": "#FF006E", "slug": "moda-joyeria" },
+  { "nombre": "Muebles & Decoraciones", "emoji": "🛋️", "color": "#9B5DE5", "slug": "muebles-decoraciones" },
+  { "nombre": "Salud Integral", "emoji": "⚕️", "color": "#7209B7", "slug": "salud-integral" },
+  { "nombre": "Servicio Técnico", "emoji": "🛠️", "color": "#4361EE", "slug": "servicio-tecnico" },
+  { "nombre": "Servicios Profesionales", "emoji": "👔", "color": "#3A86FF", "slug": "servicios-profesionales" },
+  { "nombre": "Veterinarias & Pet Shop", "emoji": "🐾", "color": "#F3722C", "slug": "veterinarias-petshop" }
+]

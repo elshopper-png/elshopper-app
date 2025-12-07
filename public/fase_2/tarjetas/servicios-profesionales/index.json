@@ -1,0 +1,12 @@
+{
+  "giro": "Servicios Profesionales",
+  "tarjetas": [
+    {
+      "nombre": "Estudio Jurídico Vargas",
+      "descripcion": "Defensa civil, familiar y constitucional. Asesoría de tesis.",
+      "imagen": "/fase_2/tarjetas/servicios-profesionales/card.png",
+      "slug": "estudio-juridico-vargas",
+      "whatsapp": ""
+    }
+  ]
+}

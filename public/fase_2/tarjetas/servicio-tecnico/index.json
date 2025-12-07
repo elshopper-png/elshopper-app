@@ -1,0 +1,12 @@
+{
+  "giro": "Servicio Técnico",
+  "tarjetas": [
+    {
+      "nombre": "TecniFix Los Olivos",
+      "descripcion": "Reparación de electrodomésticos y equipos electrónicos.",
+      "imagen": "/fase_2/tarjetas/servicio-tecnico/card.png",
+      "slug": "tecnifix-los-olivos",
+      "whatsapp": ""
+    }
+  ]
+}

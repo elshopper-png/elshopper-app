@@ -1,0 +1,12 @@
+{
+  "giro": "NOMBRE_DEL_GIRO",
+  "tarjetas": [
+    {
+      "nombre": "Nombre del Anunciante",
+      "descripcion": "Descripción breve (máx. 80 caracteres)",
+      "imagen": "/tarjetas/nombre-del-giro/card.png",
+      "slug": "slug-anunciante",
+      "whatsapp": "51993490886"
+    }
+  ]
+}

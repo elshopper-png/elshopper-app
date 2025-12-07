@@ -1,0 +1,12 @@
+{
+  "giro": "Educación",
+  "tarjetas": [
+    {
+      "nombre": "Colegio Santa Rosa de Quives School",
+      "descripcion": "Educación de calidad con talleres, asesoría y admisión 2025.",
+      "imagen": "/fase_2/tarjetas/educacion/card.png",
+      "slug": "santa-rosa-quives",
+      "whatsapp": ""
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "giro": "Salud Integral",
+  "tarjetas": [
+    {
+      "nombre": "Clínica del Norte",
+      "descripcion": "Análisis clínicos y consultas médicas a precios sociales.",
+      "imagen": "/fase_2/tarjetas/salud-integral/card.png",
+      "slug": "clinica-del-norte",
+      "whatsapp": ""
+    }
+  ]
+}

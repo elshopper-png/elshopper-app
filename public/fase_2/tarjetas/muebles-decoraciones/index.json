@@ -1,0 +1,12 @@
+{
+  "giro": "Muebles & Decoraciones",
+  "tarjetas": [
+    {
+      "nombre": "Muebles Conforta",
+      "descripcion": "Sofás, sillas y muebles a medida con finos acabados.",
+      "imagen": "/fase_2/tarjetas/muebles-decoraciones/card.png",
+      "slug": "muebles-conforta",
+      "whatsapp": ""
+    }
+  ]
+}

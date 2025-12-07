@@ -1,0 +1,12 @@
+{
+  "giro": "Construcción & Ferretería",
+  "tarjetas": [
+    {
+      "nombre": "Ferretería El Obrero",
+      "descripcion": "Materiales de construcción, pinturas y herramientas de calidad.",
+      "imagen": "/fase_2/tarjetas/construccion-ferreteria/card.png",
+      "slug": "ferreteria-el-obrero",
+      "whatsapp": ""
+    }
+  ]
+}

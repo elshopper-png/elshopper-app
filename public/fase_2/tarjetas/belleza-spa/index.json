@@ -1,0 +1,12 @@
+{
+  "giro": "Belleza & SPA",
+  "tarjetas": [
+    {
+      "nombre": "Spa & Belleza Marisol",
+      "descripcion": "Tratamientos faciales, masajes y manicure profesional.",
+      "imagen": "/fase_2/tarjetas/belleza-spa/card.png",
+      "slug": "belleza-spa",
+      "whatsapp": "51993490886"
+    }
+  ]
+}

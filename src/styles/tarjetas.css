@@ -1,0 +1,152 @@
+/* ============================================================
+   🎨 tarjetas.css — Fase 2 Estética Refinada (Omega-6 CRA)
+   ============================================================ */
+
+.tarjetas-container {
+  background-color: #000;
+  color: #fff;
+  min-height: 100vh;
+  padding: 0 1%; /* ✅ 1% de borde lateral */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 🔙 Cabecera con flecha y texto */
+.tarjetas-header-refinada {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 1rem 0.5rem 1rem 0;
+  background: linear-gradient(90deg, #111, #222);
+}
+
+.back-btn {
+  background: #fff;
+  color: #000;
+  font-size: 1.8rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  margin-right: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.back-btn:hover {
+  background: #ffd700;
+  transform: scale(1.1);
+}
+
+.header-text {
+  line-height: 1.1;
+  font-size: 0.95rem;
+  color: #fff;
+  text-align: left;
+}
+
+/* 🖼️ Tarjetas */
+.tarjetas-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.tarjeta-box {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tarjeta-box:active {
+  transform: scale(0.97); /* 💥 efecto hundible */
+  box-shadow: 0 3px 10px rgba(255, 215, 0, 0.5);
+}
+
+.tarjeta-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+  user-select: none;
+}
+/* ============================================================
+   🔧 FIX O25 — Ajuste crítico para evitar corte en móvil
+   ============================================================ */
+
+/* Contenedor REAL usado en JSX */
+.tarjetas-wrapper {
+  min-height: 100vh !important;
+  height: auto !important;
+  overflow-y: auto !important;
+  padding: 0 1%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cabecera REAL usada en JSX */
+.tarjetas-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 1rem 0.5rem 1rem 0;
+}
+
+/* Grid REAL usado en JSX */
+.tarjetas-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  margin-top: 0.5rem;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+/* Tarjeta REAL usada en JSX */
+.tarjeta-item {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+/* Imagen REAL usada en JSX */
+.tarjeta-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+}
+
+html, body, #root {
+  height: auto !important;
+  min-height: 100vh !important;
+  overflow-y: auto !important;
+}
+.tarjetas-grid,
+.tarjeta-item {
+  position: relative !important;
+  z-index: 5 !important;
+}
+
+header,
+.tarjetas-header {
+  position: relative;
+  z-index: 10;
+}
+
+/* ANULA cualquier overlay fantasma */
+* {
+  pointer-events: auto !important;
+}
