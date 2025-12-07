@@ -1,11 +1,10 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import React, { useEffect } from "react";
 
 export default function AtlashVisor() {
-  const { slug, giroSlug } = useParams();
-  const navigate = useNavigate();
+  const { slug } = useParams();
 
-  // 🔇 APAGAR MÚSICA AL ENTRAR A ATLASH
+  // Pausar música
   useEffect(() => {
     if (window.globalMusic) window.globalMusic.pause();
 
@@ -16,21 +15,13 @@ export default function AtlashVisor() {
     };
   }, []);
 
-  // 🎧 LISTENER UNIVERSAL O25 — PUENTE DE MADERA ✔️
-  useEffect(() => {
-    const handler = (event) => {
-      if (event.data === "O25_VOLVER") {
-        // 🔙 Regresar a las tarjetas del giro correspondiente
-        navigate(`/tarjetas/${giroSlug}`);
-      }
-    };
+  // Detectar si estamos en producción
+  const isProd = window.location.hostname.includes("vercel.app");
 
-    window.addEventListener("message", handler);
-    return () => window.removeEventListener("message", handler);
-  }, [navigate, giroSlug]);
-
-  // RUTA CORRECTA UNIVERSAL (local y producción)
-  const atlashURL = `/atlash/${slug}`;
+  // URL correcta del visor externo
+  const atlashURL = isProd
+    ? `https://atlash-o25.vercel.app/${slug}`  // Producción
+    : `http://localhost:5173/${slug}`;          // Local
 
   return (
     <iframe
