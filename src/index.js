@@ -11,10 +11,10 @@ import "./styles/tarjetas.css";
 // 🧩 Listener Universal O25_VOLVER — Puente de Madera OMEGA-25
 // ============================================================
 window.addEventListener("message", (event) => {
-  if (event.data === "O25_VOLVER") {
-    window.history.back();
-  }
+  if (!event.data || event.data.type !== "O25_VOLVER") return;
+  window.history.back();
 });
+
 
 // ============================================================
 
