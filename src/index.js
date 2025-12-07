@@ -4,18 +4,16 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./AppRouter.jsx";
 
-// Estilos generales (Fase 1 y Fase 2 intactos)
 import "./styles/base.css";
 import "./styles/tarjetas.css";
 
 // ============================================================
-// 🧩 Listener Universal O25_VOLVER — Puente Facebook OMEGA-25
+// 🧩 Listener Universal O25_VOLVER — Puente de Madera OMEGA-25
 // ============================================================
 window.addEventListener("message", (event) => {
-  if (!event.data || event.data.type !== "O25_VOLVER") return;
-
-  // Puente de madera: volver sin inteligencia
-  window.history.back();
+  if (event.data === "O25_VOLVER") {
+    window.history.back();
+  }
 });
 
 // ============================================================
@@ -23,15 +21,13 @@ window.addEventListener("message", (event) => {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <AppRouter />
-    </BrowserRouter>
-  </React.StrictMode>
+  <BrowserRouter>
+    <AppRouter />
+  </BrowserRouter>
 );
 
 // ============================================================
-// 🧩 Registro del Service Worker O25 (solo en producción)
+// 🧩 Registro del Service Worker O25 solo en producción
 // ============================================================
 if ("serviceWorker" in navigator && process.env.NODE_ENV === "production") {
   window.addEventListener("load", () => {
