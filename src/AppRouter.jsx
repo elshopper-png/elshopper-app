@@ -11,14 +11,13 @@ import AtlashVisor from "./AtlashVisor.jsx";
 // 🔥 Banner PWA (Android)
 import PWABanner from "./components/PWABanner";
 // 🔥 Banner instruccional para iOS
-import PWABannerIOS from "./components/PWABannerIOS";
 
 export default function AppRouter() {
   return (
     <>
       {/* Banner nativo de instalación */}
       <PWABanner />
-      <PWABannerIOS />
+     
 
       {/* Rutas principales */}
       <Routes>

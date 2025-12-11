@@ -29,14 +29,14 @@
 
   {
     "giroSlug": "servicios-profesionales",
-  "giro": "Servicios Profesionales",
-  "tarjetas": [
-    {
-      "nombre": "Estudio Contable Ríos",
-      "descripcion": "Servicios contables profesionales: declaraciones, asesoría tributaria y gestión financiera empresarial.",
-      "imagen": "/fase_2/tarjetas/servicios-profesionales/card.png",
-      "slug": "rios",
-      "whatsapp": ""
+    "giro": "Servicios Profesionales",
+    "tarjetas": [
+      {
+        "nombre": "Estudio Contable Ríos",
+        "descripcion": "Servicios contables profesionales: declaraciones, asesoría tributaria y gestión financiera empresarial.",
+        "imagen": "/fase_2/tarjetas/servicios-profesionales/card.png",
+        "slug": "rios",
+        "whatsapp": ""
       }
     ]
   },
@@ -51,20 +51,42 @@
       "imagen": "/fase_2/tarjetas/educacion/card.png",
       "slug": "providencia",
       "whatsapp": ""
+    },
+    {
+      "nombre": "Colegio Martín Adán",
+      "descripcion": "Inicial – Primaria – Secundaria",
+      "imagen": "/fase_2/tarjetas/educacion/card1.png",
+      "slug": "martin-adan",
+      "whatsapp": ""
+    },
+    {
+      "nombre": "Kinderking College",
+      "descripcion": "Inicial – Primaria con formación integral y académica.",
+      "imagen": "/fase_2/tarjetas/educacion/card2.png",
+      "slug": "kinderking",
+      "whatsapp": "51962340652"
+    },
+    {
+      "nombre": "Colegio Skole Paidea",
+      "descripcion": "Inicial – Primaria – Secundaria",
+      "imagen": "/fase_2/tarjetas/educacion/card3.png",
+      "slug": "skole",
+      "whatsapp": "51902650338"
     }
   ]
-  },
+},
+
 
   {
-  "giroSlug": "fitness-deportes",
-  "giro": "Fitness & Deportes",
-  "tarjetas": [
-    {
-      "nombre": "Cooperativa Mercurio",
-      "descripcion": "Academias deportivas, alquiler de canchas y eventos — Los Olivos.",
-      "imagen": "/fase_2/tarjetas/fitness-deportes/card.png",
-      "slug": "mercurio",
-      "whatsapp": ""
+    "giroSlug": "fitness-deportes",
+    "giro": "Fitness & Deportes",
+    "tarjetas": [
+      {
+        "nombre": "Cooperativa Mercurio",
+        "descripcion": "Academias deportivas, alquiler de canchas y eventos — Los Olivos.",
+        "imagen": "/fase_2/tarjetas/fitness-deportes/card.png",
+        "slug": "mercurio",
+        "whatsapp": ""
       }
     ]
   },
@@ -82,10 +104,24 @@
       },
       {
         "nombre": "Gasfitería Los Olivos",
-  "descripcion": "Técnico Dionisio Rodríguez Vargas — Gasfitería y ferretería en Los Olivos.",
-  "imagen": "/fase_2/tarjetas/hogar-servicios/card1.png",
-  "slug": "dionisio2",
-  "whatsapp": ""
+        "descripcion": "Técnico Dionisio Rodríguez Vargas — Gasfitería y ferretería en Los Olivos.",
+        "imagen": "/fase_2/tarjetas/hogar-servicios/card1.png",
+        "slug": "dionisio2",
+        "whatsapp": ""
+      },
+      {
+        "nombre": "Good Service — Agencia de Empleos",
+        "descripcion": "Servicios de empleos para hogar y empresas.",
+        "imagen": "/fase_2/tarjetas/hogar-servicios/card2.png",
+        "slug": "good-service",
+        "whatsapp": "51995545197"
+      },
+      {
+        "nombre": "Clave 4 — Servicio de Transporte",
+        "descripcion": "Transporte rápido, seguro y confiable para personas y empresas.",
+        "imagen": "/fase_2/tarjetas/hogar-servicios/card3.png",
+        "slug": "clave4",
+        "whatsapp": "51998910173"
       }
     ]
   },
@@ -106,14 +142,14 @@
 
   {
     "giroSlug": "informatica-reparacion",
-  "giro": "Informática & Reparación",
-  "tarjetas": [
-    {
-      "nombre": "Alfredo — Técnico en Computación",
-      "descripcion": "Reparación, mantenimiento y soporte de computadoras y laptops.",
-      "imagen": "/fase_2/tarjetas/informatica-reparacion/card.png",
-      "slug": "alfredo",
-      "whatsapp": "51972077437"
+    "giro": "Informática & Reparación",
+    "tarjetas": [
+      {
+        "nombre": "Alfredo — Técnico en Computación",
+        "descripcion": "Reparación, mantenimiento y soporte de computadoras y laptops.",
+        "imagen": "/fase_2/tarjetas/informatica-reparacion/card.png",
+        "slug": "alfredo",
+        "whatsapp": "51972077437"
       }
     ]
   },
@@ -134,20 +170,20 @@
 
   {
     "giroSlug": "moda-joyeria",
-  "giro": "Moda & Joyería",
-  "tarjetas": [
-    {
-      "nombre": "Kuya Jewelry",
-      "descripcion": "Joyas en plata 950 hechas a mano, inspiradas en la identidad peruana.",
-      "imagen": "/fase_2/tarjetas/moda-joyeria/card.png",
-      "slug": "kuya",
-      "whatsapp": "51923049845"
+    "giro": "Moda & Joyería",
+    "tarjetas": [
+      {
+        "nombre": "Kuya Jewelry",
+        "descripcion": "Joyas en plata 950 hechas a mano, inspiradas en la identidad peruana.",
+        "imagen": "/fase_2/tarjetas/moda-joyeria/card.png",
+        "slug": "kuya",
+        "whatsapp": "51923049845"
       }
     ]
   },
 
   {
-    "giroSlug": "muebles-decoraciones",
+  "giroSlug": "muebles-decoraciones",
   "giro": "Muebles & Decoraciones",
   "tarjetas": [
     {
@@ -156,9 +192,16 @@
       "imagen": "/fase_2/tarjetas/muebles-decoraciones/card.png",
       "slug": "conforta",
       "whatsapp": ""
-      }
-    ]
-  },
+    },
+    {
+      "nombre": "Decoraciones San Francisco",
+      "descripcion": "Cortinas, tapicería y ambientación profesional para hogares y oficinas.",
+      "imagen": "/fase_2/tarjetas/muebles-decoraciones/card1.png",
+      "slug": "san-francisco",
+      "whatsapp": "51998511716"
+    }
+  ]
+},
 
   {
     "giroSlug": "salud-integral",
@@ -166,16 +209,23 @@
     "tarjetas": [
       {
         "nombre": "Dr. Saúl Garrido",
-        "descripcion": "Médico del Pueblo — Atención médica integral y de confianza.",
+        "descripcion": "Médico del Pueblo – Atención médica integral y de confianza.",
         "imagen": "/fase_2/tarjetas/salud-integral/card.png",
         "slug": "saul-garrido",
-        "whatsapp": "51999286969"
+        "whatsapp": "519992806969"
+      },
+      {
+        "nombre": "Clínica del Norte",
+        "descripcion": "Atención médica general, análisis clínicos y urgencias.",
+        "imagen": "/fase_2/tarjetas/salud-integral/card1.png",
+        "slug": "clinica-del-norte",
+        "whatsapp": "51975594501"
       }
     ]
   },
 
   {
-     "giroSlug": "servicio-tecnico",
+  "giroSlug": "servicio-tecnico",
   "giro": "Servicio Técnico",
   "tarjetas": [
     {
@@ -184,34 +234,48 @@
       "imagen": "/fase_2/tarjetas/servicio-tecnico/card.png",
       "slug": "zegarra",
       "whatsapp": ""
-      }
-    ]
-  },
+    },
+    {
+      "nombre": "Técnico Caipo – Cocinas & Electrodomésticos",
+      "descripcion": "Reparación de cocinas, hornos, campanas extractoras y electrodomésticos del hogar.",
+      "imagen": "/fase_2/tarjetas/servicio-tecnico/card1.png",
+      "slug": "cocinas",
+      "whatsapp": "51993982439"
+    }
+  ]
+},
 
   {
     "giroSlug": "inmobiliarias",
-  "giro": "Inmobiliarias",
-  "tarjetas": [
-    {
-      "nombre": "Vendo Casa – Servicios Inmobiliarios",
-      "descripcion": "Venta y asesoría inmobiliaria profesional.",
-      "imagen": "/fase_2/tarjetas/inmobiliarias/card.png",
-      "slug": "vendo-casa",
-      "whatsapp": "51928636701"
+    "giro": "Inmobiliarias",
+    "tarjetas": [
+      {
+        "nombre": "Vendo Casa – Servicios Inmobiliarios",
+        "descripcion": "Venta y asesoría inmobiliaria profesional.",
+        "imagen": "/fase_2/tarjetas/inmobiliarias/card.png",
+        "slug": "vendo-casa",
+        "whatsapp": "51928636701"
+      },
+      {
+        "nombre": "Servicios Inmobiliarios Sandoval",
+        "descripcion": "Asesoría y servicios inmobiliarios profesionales.",
+        "imagen": "/fase_2/tarjetas/inmobiliarias/card1.png",
+        "slug": "sandoval",
+        "whatsapp": "51995760074"
       }
     ]
   },
 
   {
     "giroSlug": "veterinarias-petshop",
-  "giro": "Veterinarias & Pet Shop",
-  "tarjetas": [
-    {
-      "nombre": "Zona Mascota",
-      "descripcion": "Cuidado integral para tu mascota: dermatología, cirugía, laboratorio, ecografías y más.",
-      "imagen": "/fase_2/tarjetas/veterinarias-petshop/card.png",
-      "slug": "mascota",
-      "whatsapp": ""
+    "giro": "Veterinarias & Pet Shop",
+    "tarjetas": [
+      {
+        "nombre": "Zona Mascota",
+        "descripcion": "Cuidado integral para tu mascota: dermatología, cirugía, laboratorio, ecografías y más.",
+        "imagen": "/fase_2/tarjetas/veterinarias-petshop/card.png",
+        "slug": "mascota",
+        "whatsapp": ""
       }
     ]
   },

@@ -1,4 +1,11 @@
-// src/index.js
+// ============================================================
+// 🏁 INDEX.JS — Versión estable OMEGA-25
+// ------------------------------------------------------------
+// - SIN Service Worker (previene pantalla blanca en móviles)
+// - Listener O25_VOLVER funcionando
+// - Compatible con CRA y con Vercel
+// ============================================================
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
@@ -8,7 +15,7 @@ import "./styles/base.css";
 import "./styles/tarjetas.css";
 
 // ============================================================
-// 🧩 Listener Universal O25_VOLVER — Puente de Madera OMEGA-25
+// 🔙 Listener Universal — Puente de Madera OMEGA-25
 // ============================================================
 window.addEventListener("message", (event) => {
   if (!event.data || event.data.type !== "O25_VOLVER") return;
@@ -16,7 +23,24 @@ window.addEventListener("message", (event) => {
 });
 
 // ============================================================
+// 🚫 DESACTIVACIÓN TOTAL DEL SERVICE WORKER (100% seguro)
+// ------------------------------------------------------------
+// * Evita pantalla blanca en Android
+// * Evita SW viejo de CRA
+// * Evita SW duplicados en Vercel
+// ============================================================
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.getRegistrations().then((regs) => {
+    regs.forEach((reg) => reg.unregister());
+  });
+  navigator.serviceWorker.ready.then((reg) => {
+    reg.unregister();
+  }).catch(() => {});
+}
 
+// ============================================================
+// 🚀 Render principal de React
+// ============================================================
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
@@ -24,21 +48,3 @@ root.render(
     <AppRouter />
   </BrowserRouter>
 );
-
-// ============================================================
-// 🧩 Registro del Service Worker O25 solo en producción
-// ============================================================
-if ("serviceWorker" in navigator && process.env.NODE_ENV === "production") {
-  window.addEventListener("load", () => {
-    const swUrl = `/service-worker.js`; // 🔥 RUTA CORRECTA PARA VERCEL
-
-    navigator.serviceWorker
-      .register(swUrl)
-      .then((registration) => {
-        console.log("✅ Service Worker registrado:", registration.scope);
-      })
-      .catch((error) => {
-        console.log("❌ Error al registrar el Service Worker:", error);
-      });
-  });
-}

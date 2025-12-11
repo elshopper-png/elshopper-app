@@ -11,8 +11,12 @@ export function contarAnunciantesPorGiro() {
     const giro = item.giroSlug;
     if (!giro) return;
 
+    const totalTarjetas = Array.isArray(item.tarjetas)
+      ? item.tarjetas.length
+      : 0;
+
     if (!conteo[giro]) conteo[giro] = 0;
-    conteo[giro]++;
+    conteo[giro] += totalTarjetas;   // ✅ sumamos la cantidad de tarjetas
   });
 
   return conteo;

@@ -28,7 +28,7 @@ export default function AtlashVisor() {
       src={atlashURL}
       title={`Aviso ${slug}`}
       allow="clipboard-write *; fullscreen *"
-      sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+      sandbox="allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
       style={{
         width: "100%",
         height: "100vh",
