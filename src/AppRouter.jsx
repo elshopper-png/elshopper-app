@@ -16,15 +16,20 @@ export default function AppRouter() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<HomeBase />} />
+        {/* ⭐ SHARE PREMIUM — fuera del iframe */}
+        <Route path="/share/:slug" element={<SharePage />} />
 
+        {/* 🗂 Tarjetas por giro */}
         <Route path="/tarjetas/:giroSlug" element={<TarjetasPage />} />
 
         {/* 🔥 Visor ATLASH (iframe) */}
         <Route path="/atlash/:slug" element={<AtlashVisor />} />
 
-        {/* ⭐ SHARE PREMIUM — fuera del iframe */}
-        <Route path="/share/:slug" element={<SharePage />} />
+        {/* 🏠 Portada */}
+        <Route path="/" element={<HomeBase />} />
+
+        {/* 🚫 Ruta no encontrada (opcional, pero recomendada) */}
+        {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
 
       {/* Banner PWA global */}
