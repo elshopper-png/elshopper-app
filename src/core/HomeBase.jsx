@@ -1,5 +1,5 @@
 // ============================================================
-// 🏠 HomeBase.jsx — Portada Omega-7.9 CRA Safe (Rutas corregidas O25)
+// 🏠 HomeBase.jsx — Portada Omega-7.9 CRA Safe (FIX RUTAS)
 // ============================================================
 
 import React from "react";
@@ -12,14 +12,11 @@ import { contarAnunciantesPorGiro } from "../utils/contometro";
 
 import MusicToggle from "../components/MusicToggle";
 
-
 export default function HomeBase() {
   const version = process.env.REACT_APP_VERSION || "F1-Stable-Omega-7.9";
 
   // 👉 Obtenemos los conteos reales desde tarjetas.json
   const conteo = contarAnunciantesPorGiro();
-
-  
 
   return (
     <div className="home">
@@ -41,10 +38,9 @@ export default function HomeBase() {
         {CATEGORIES.map((cat) => (
           <Link
             key={cat.slug}
-            to="/tarjetas"
-  state={{ giro: cat.slug }}
-  className="category-button"
-  style={{ backgroundColor: cat.color }}
+            to={`/tarjetas/${cat.slug}`}
+            className="category-button"
+            style={{ backgroundColor: cat.color }}
           >
             {/* 🟦 CONTÓMETRO REAL O25 */}
             {conteo[cat.slug] > 0 && (
