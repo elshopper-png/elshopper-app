@@ -1,9 +1,9 @@
 // ============================================================
-// 🧩 TarjetasPage.jsx — Versión estable CRA + ATLASH O25 (ESLint Safe)
+// 🧩 TarjetasPage.jsx — Versión estable CRA + ATLASH O25 (URL SAFE)
 // ============================================================
 
 import React, { useMemo } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import CATEGORIES from "../../data/categories.json";
 import TARJETAS_DATA from "../../data/tarjetas.json";
@@ -11,18 +11,16 @@ import TARJETAS_DATA from "../../data/tarjetas.json";
 import "../styles/tarjetas.css";
 
 export default function TarjetasPage() {
-  const location = useLocation();
   const navigate = useNavigate();
+  const { giroSlug } = useParams(); // ✅ CLAVE: viene de la URL
 
-  // 🟦 1) Recuperamos el giro desde state
-  const giroSlug = location.state?.giro || null;
-
-  // 🟦 2) Hooks SIEMPRE deben ir antes de cualquier return
+  // 🟦 Categoría actual
   const categoria = useMemo(() => {
     if (!giroSlug) return null;
     return CATEGORIES.find((c) => c.slug === giroSlug);
   }, [giroSlug]);
 
+  // 🟦 Tarjetas del giro
   const tarjetas = useMemo(() => {
     if (!giroSlug) return [];
     const entry = TARJETAS_DATA.find((g) => g.giroSlug === giroSlug);
@@ -32,7 +30,6 @@ export default function TarjetasPage() {
   // Color de fondo
   const colorTapiz = categoria?.color || "#0fbad1";
 
-  // 🟥 3) Return principal SIEMPRE al final
   return (
     <div className="tarjetas-wrapper" style={{ backgroundColor: colorTapiz }}>
       
@@ -56,12 +53,12 @@ export default function TarjetasPage() {
       {/* === LISTA DE TARJETAS === */}
       <main className="tarjetas-grid">
         
-        {/* Si no hay giro seleccionado */}
+        {/* Sin slug (caso extremo) */}
         {!giroSlug && (
           <div className="sin-tarjetas">No hay tarjetas para este giro.</div>
         )}
 
-        {/* Mostrar tarjetas si existen */}
+        {/* Tarjetas */}
         {giroSlug &&
           tarjetas.map((t, i) => (
             <article
@@ -78,9 +75,11 @@ export default function TarjetasPage() {
             </article>
           ))}
 
-        {/* Si hay giro pero no hay tarjetas */}
+        {/* Giro válido pero sin tarjetas */}
         {giroSlug && tarjetas.length === 0 && (
-          <div className="sin-tarjetas">No hay tarjetas para este giro aún.</div>
+          <div className="sin-tarjetas">
+            No hay tarjetas para este giro aún.
+          </div>
         )}
       </main>
     </div>
