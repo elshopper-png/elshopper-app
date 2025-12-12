@@ -72,59 +72,80 @@
       "imagen": "/fase_2/tarjetas/educacion/card3.png",
       "slug": "skole",
       "whatsapp": "51902650338"
+    },
+    {
+      "nombre": "Colegio Santa Rosa de Quives",
+      "descripcion": "Inicial – Primaria – Secundaria · Formación académica integral.",
+      "imagen": "/fase_2/tarjetas/educacion/card4.png",
+      "slug": "quives",
+      "whatsapp": "51922689937"
     }
   ]
 },
 
 
   {
-    "giroSlug": "fitness-deportes",
-    "giro": "Fitness & Deportes",
-    "tarjetas": [
-      {
-        "nombre": "Cooperativa Mercurio",
-        "descripcion": "Academias deportivas, alquiler de canchas y eventos — Los Olivos.",
-        "imagen": "/fase_2/tarjetas/fitness-deportes/card.png",
-        "slug": "mercurio",
-        "whatsapp": ""
-      }
-    ]
-  },
+  "giroSlug": "fitness-deportes",
+  "giro": "Fitness & Deportes",
+  "tarjetas": [
+    {
+      "nombre": "Cooperativa Mercurio",
+      "descripcion": "Academias deportivas, alquiler de canchas y eventos — Los Olivos.",
+      "imagen": "/fase_2/tarjetas/fitness-deportes/card.png",
+      "slug": "mercurio",
+      "whatsapp": ""
+    },
+    {
+      "nombre": "apupal",
+      "descripcion": "Cursos y talleres deportivos para niños y jóvenes.",
+      "imagen": "/fase_2/tarjetas/fitness-deportes/card1.png",
+      "slug": "apupal",
+      "whatsapp": "51949918460"
+    }
+  ]
+},
 
   {
-    "giroSlug": "hogar-servicios",
-    "giro": "Hogar & Servicios",
-    "tarjetas": [
-      {
-        "nombre": "Caserito Regalón — Gas a Domicilio",
-        "descripcion": "Gas económico en oferta y delivery sin costo para tu hogar.",
-        "imagen": "/fase_2/tarjetas/hogar-servicios/card.png",
-        "slug": "caserito",
-        "whatsapp": ""
-      },
-      {
-        "nombre": "Gasfitería Los Olivos",
-        "descripcion": "Técnico Dionisio Rodríguez Vargas — Gasfitería y ferretería en Los Olivos.",
-        "imagen": "/fase_2/tarjetas/hogar-servicios/card1.png",
-        "slug": "dionisio2",
-        "whatsapp": ""
-      },
-      {
-        "nombre": "Good Service — Agencia de Empleos",
-        "descripcion": "Servicios de empleos para hogar y empresas.",
-        "imagen": "/fase_2/tarjetas/hogar-servicios/card2.png",
-        "slug": "good-service",
-        "whatsapp": "51995545197"
-      },
-      {
-        "nombre": "Clave 4 — Servicio de Transporte",
-        "descripcion": "Transporte rápido, seguro y confiable para personas y empresas.",
-        "imagen": "/fase_2/tarjetas/hogar-servicios/card3.png",
-        "slug": "clave4",
-        "whatsapp": "51998910173"
-      }
-    ]
-  },
+  "giroSlug": "hogar-servicios",
+  "giro": "Hogar & Servicios",
+  "tarjetas": [
+    {
+      "nombre": "Caserito Regalón — Gas a Domicilio",
+      "descripcion": "Gas económico en oferta y delivery sin costo para tu hogar.",
+      "imagen": "/fase_2/tarjetas/hogar-servicios/card.png",
+      "slug": "caserito",
+      "whatsapp": ""
+    },
+    {
+      "nombre": "Gasfitería Los Olivos",
+      "descripcion": "Técnico Dionisio Rodríguez Vargas — Gasfitería y ferretería en Los Olivos.",
+      "imagen": "/fase_2/tarjetas/hogar-servicios/card1.png",
+      "slug": "dionisio2",
+      "whatsapp": ""
+    },
+    {
+      "nombre": "Good Service — Agencia de Empleos",
+      "descripcion": "Servicios de empleos para hogar y empresas.",
+      "imagen": "/fase_2/tarjetas/hogar-servicios/card2.png",
+      "slug": "good-service",
+      "whatsapp": "51995545197"
+    },
+    {
+      "nombre": "Clave 4 — Servicio de Transporte",
+      "descripcion": "Transporte rápido, seguro y confiable para personas y empresas.",
+      "imagen": "/fase_2/tarjetas/hogar-servicios/card3.png",
+      "slug": "clave4",
+      "whatsapp": "51998910173"
+    },
+    {
+      "nombre": "Electricista Huanca",
+      "descripcion": "Instalaciones y reparaciones eléctricas para hogares y negocios.",
+      "imagen": "/fase_2/tarjetas/hogar-servicios/card4.png",
+      "slug": "huanca",
+      "whatsapp": "51937501645"
+    }
+  ]
+},
 
   {
     "giroSlug": "construccion-ferreteria",
