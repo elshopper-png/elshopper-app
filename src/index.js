@@ -1,9 +1,10 @@
 // ============================================================
-// 🏁 INDEX.JS — Versión estable OMEGA-25
+// 🏁 INDEX.JS — OMEGA-25 ESTABLE
 // ------------------------------------------------------------
-// - SIN Service Worker (previene pantalla blanca en móviles)
-// - Listener O25_VOLVER funcionando
-// - Compatible con CRA y con Vercel
+// - Service Worker desactivado SOLO en desarrollo
+// - Producción intacta (PWA lista para reactivarse)
+// - Listener O25_VOLVER activo
+// - Compatible con CRA + Vercel
 // ============================================================
 
 import React from "react";
@@ -23,19 +24,21 @@ window.addEventListener("message", (event) => {
 });
 
 // ============================================================
-// 🚫 DESACTIVACIÓN TOTAL DEL SERVICE WORKER (100% seguro)
+// 🚫 Service Worker DESACTIVADO SOLO EN DESARROLLO
 // ------------------------------------------------------------
-// * Evita pantalla blanca en Android
-// * Evita SW viejo de CRA
-// * Evita SW duplicados en Vercel
+// - Evita pantallas blancas en localhost
+// - No afecta producción
+// - Permite reactivar PWA cuando toque
 // ============================================================
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.getRegistrations().then((regs) => {
-    regs.forEach((reg) => reg.unregister());
+if (
+  process.env.NODE_ENV !== "production" &&
+  "serviceWorker" in navigator
+) {
+  navigator.serviceWorker.getRegistrations().then((registrations) => {
+    registrations.forEach((registration) => {
+      registration.unregister();
+    });
   });
-  navigator.serviceWorker.ready.then((reg) => {
-    reg.unregister();
-  }).catch(() => {});
 }
 
 // ============================================================
