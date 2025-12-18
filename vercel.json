@@ -1,9 +1,5 @@
 {
   "rewrites": [
-    { "source": "/enlace/:slug*", "destination": "/" },
-    { "source": "/tarjetas/:slug*", "destination": "/" },
-    { "source": "/atlash/:slug*", "destination": "/" },
-    { "source": "/(.*)", "destination": "/" }
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
-
