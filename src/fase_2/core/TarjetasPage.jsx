@@ -1,5 +1,5 @@
 // ============================================================
-// 🧩 TarjetasPage.jsx — Versión estable CRA + ATLASH O25 (URL SAFE)
+// 🧩 TarjetasPage.jsx — CRA + ATLASH O25 (URL SAFE / PRODUCCIÓN)
 // ============================================================
 
 import React, { useMemo } from "react";
@@ -12,28 +12,37 @@ import "../styles/tarjetas.css";
 
 export default function TarjetasPage() {
   const navigate = useNavigate();
-  const { giroSlug } = useParams(); // ✅ CLAVE: viene de la URL
+  const { giroSlug } = useParams(); // ✅ viene SIEMPRE desde la URL
 
+  // ============================================================
   // 🟦 Categoría actual
+  // ============================================================
   const categoria = useMemo(() => {
     if (!giroSlug) return null;
-    return CATEGORIES.find((c) => c.slug === giroSlug);
+    return CATEGORIES.find((c) => c.slug === giroSlug) || null;
   }, [giroSlug]);
 
+  // ============================================================
   // 🟦 Tarjetas del giro
+  // ============================================================
   const tarjetas = useMemo(() => {
     if (!giroSlug) return [];
     const entry = TARJETAS_DATA.find((g) => g.giroSlug === giroSlug);
     return entry?.tarjetas || [];
   }, [giroSlug]);
 
-  // Color de fondo
+  // ============================================================
+  // 🎨 Color de fondo seguro
+  // ============================================================
   const colorTapiz = categoria?.color || "#0fbad1";
 
+  // ============================================================
+  // 🟥 RENDER
+  // ============================================================
   return (
     <div className="tarjetas-wrapper" style={{ backgroundColor: colorTapiz }}>
       
-      {/* === CABECERA === */}
+      {/* ================= CABECERA ================= */}
       <header className="tarjetas-header">
         <button
           className="back-btn"
@@ -50,16 +59,18 @@ export default function TarjetasPage() {
         </div>
       </header>
 
-      {/* === LISTA DE TARJETAS === */}
+      {/* ================= LISTA ================= */}
       <main className="tarjetas-grid">
-        
-        {/* Sin slug (caso extremo) */}
-        {!giroSlug && (
-          <div className="sin-tarjetas">No hay tarjetas para este giro.</div>
+
+        {/* Giro inválido */}
+        {!categoria && (
+          <div className="sin-tarjetas">
+            Este giro no existe.
+          </div>
         )}
 
         {/* Tarjetas */}
-        {giroSlug &&
+        {categoria &&
           tarjetas.map((t, i) => (
             <article
               key={`${t.slug}-${i}`}
@@ -75,8 +86,8 @@ export default function TarjetasPage() {
             </article>
           ))}
 
-        {/* Giro válido pero sin tarjetas */}
-        {giroSlug && tarjetas.length === 0 && (
+        {/* Giro válido sin tarjetas */}
+        {categoria && tarjetas.length === 0 && (
           <div className="sin-tarjetas">
             No hay tarjetas para este giro aún.
           </div>

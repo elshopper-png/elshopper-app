@@ -1,16 +1,27 @@
 // ============================================================
-// 🔗 EnlacePage.jsx — Enlace Oficial del Anunciante
-// Modelo Franciscano • Independiente • Reversible
+// 🔗 EnlacePage.jsx — Enlace Premium Compartible (O25 FINAL)
 // ============================================================
 
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import TARJETAS_DATA from "../data/tarjetas.json";
 
 export default function EnlacePage() {
   const { slug } = useParams();
+  const navigate = useNavigate();
 
-  const APP_URL = "https://elshopper-pwa.vercel.app";
-  const iframeSrc = `/atlash/${slug}`;
+  // Buscar tarjeta por slug
+  const tarjeta = TARJETAS_DATA
+    .flatMap((g) => g.tarjetas)
+    .find((t) => t.slug === slug);
+
+  if (!tarjeta) {
+    return (
+      <div style={{ padding: "40px", textAlign: "center" }}>
+        Aviso no encontrado.
+      </div>
+    );
+  }
 
   return (
     <div
@@ -18,62 +29,54 @@ export default function EnlacePage() {
         maxWidth: "480px",
         margin: "0 auto",
         padding: "16px",
-        fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
         textAlign: "center",
       }}
     >
-      {/* 🧠 Texto intimista */}
-      <h2 style={{ marginBottom: "12px" }}>
-        Mi anuncio en El Shopper Digital:
-      </h2>
-
-      {/* 📦 Aviso vivo (iframe ATLASH) */}
-      <div
+      {/* 🖼️ AVISO */}
+      <img
+        src={tarjeta.imagen}
+        alt={tarjeta.nombre}
         style={{
-          position: "relative",
           width: "100%",
-          paddingTop: "221.875%", // 14.2 / 6.4 * 100
-          overflow: "hidden",
+          height: "auto",
           borderRadius: "12px",
-          marginBottom: "20px",
         }}
-      >
-        <iframe
-          src={iframeSrc}
-          title={`Aviso ${slug}`}
+      />
+
+      {/* 🔴 CTA DESCARGA */}
+      <div style={{ marginTop: "28px" }}>
+        <button
+          onClick={() => navigate("/")}
           style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
+            backgroundColor: "#e6007e",
+            color: "#fff",
             border: "none",
+            borderRadius: "28px",
+            padding: "14px 22px",
+            fontSize: "16px",
+            fontWeight: "600",
+            cursor: "pointer",
+            width: "100%",
           }}
-          scrolling="no"
-        />
+        >
+          Descarga El Shopper Digital
+          <div style={{ fontSize: "13px", fontWeight: "400", marginTop: "4px" }}>
+            Más negocios y servicios en Los Olivos
+          </div>
+        </button>
       </div>
 
-      {/* 📲 CTA */}
-      <a
-        href={APP_URL}
+      {/* ℹ️ NOTA IPHONE */}
+      <p
         style={{
-          display: "inline-block",
-          backgroundColor: "#e6007e",
-          color: "#ffffff",
-          padding: "14px 20px",
-          borderRadius: "30px",
-          textDecoration: "none",
-          fontWeight: "600",
-          marginBottom: "12px",
+          marginTop: "14px",
+          fontSize: "12px",
+          color: "#555",
+          lineHeight: "1.4",
         }}
       >
-        Descarga El Shopper Digital
-      </a>
-
-      {/* 🍎 Nota iPhone */}
-      <p style={{ fontSize: "13px", color: "#555", marginTop: "8px" }}>
-        En iPhone puedes guardarla desde Safari como acceso directo en tu pantalla
-        de inicio o usarla como web.
+        En iPhone puedes guardarla desde Safari como acceso directo en tu
+        pantalla de inicio o usarla como web.
       </p>
     </div>
   );
