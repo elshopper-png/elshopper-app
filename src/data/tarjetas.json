@@ -79,6 +79,13 @@
       "imagen": "/fase_2/tarjetas/educacion/card4.png",
       "slug": "quives",
       "whatsapp": "51922689937"
+    },
+    {
+      "nombre": "Edutec Kids",
+      "descripcion": "Estimulación temprana, inicial y acompañamiento educativo integral.",
+      "imagen": "/fase_2/tarjetas/educacion/card5.png",
+      "slug": "edutec",
+      "whatsapp": "51972523264"
     }
   ]
 },
