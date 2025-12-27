@@ -150,6 +150,13 @@
       "imagen": "/fase_2/tarjetas/hogar-servicios/card4.png",
       "slug": "huanca",
       "whatsapp": "51937501645"
+    },
+    {
+      "nombre": "Rinconcito Esotérico",
+      "descripcion": "Productos y servicios esotéricos para armonía, protección y bienestar.",
+      "imagen": "/fase_2/tarjetas/hogar-servicios/card5.png",
+      "slug": "esoterico",
+      "whatsapp": "51993912631"
     }
   ]
 },
