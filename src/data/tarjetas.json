@@ -239,26 +239,32 @@
 },
 
   {
-    "giroSlug": "salud-integral",
-    "giro": "Salud Integral",
-    "tarjetas": [
-      {
-        "nombre": "Dr. Saúl Garrido",
-        "descripcion": "Médico del Pueblo – Atención médica integral y de confianza.",
-        "imagen": "/fase_2/tarjetas/salud-integral/card.png",
-        "slug": "saul-garrido",
-        "whatsapp": "519992806969"
-      },
-      {
-        "nombre": "Clínica del Norte",
-        "descripcion": "Atención médica general, análisis clínicos y urgencias.",
-        "imagen": "/fase_2/tarjetas/salud-integral/card1.png",
-        "slug": "clinica-del-norte",
-        "whatsapp": "51975594501"
-      }
-    ]
-  },
-
+  "giroSlug": "salud-integral",
+  "giro": "Salud Integral",
+  "tarjetas": [
+    {
+      "nombre": "Dr. Saúl Garrido",
+      "descripcion": "Médico del Pueblo – Atención médica integral y de confianza.",
+      "imagen": "/fase_2/tarjetas/salud-integral/card.png",
+      "slug": "saul-garrido",
+      "whatsapp": "519992806969"
+    },
+    {
+      "nombre": "Clínica del Norte",
+      "descripcion": "Atención médica general, análisis clínicos y urgencias.",
+      "imagen": "/fase_2/tarjetas/salud-integral/card1.png",
+      "slug": "clinica-del-norte",
+      "whatsapp": "51975594501"
+    },
+    {
+      "nombre": "Renova",
+      "descripcion": "Productos de bienestar y salud para mejorar tu calidad de vida.",
+      "imagen": "/fase_2/tarjetas/salud-integral/card.png",
+      "slug": "renova",
+      "whatsapp": "51993490886"
+    }
+  ]
+},
   {
   "giroSlug": "servicio-tecnico",
   "giro": "Servicio Técnico",
