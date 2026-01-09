@@ -94,9 +94,11 @@ export default function HomeBase() {
 
       {/* ⚙️ Footer */}
       <footer className="home-footer">
-        © 2025 El Shopper Digital — Derechos reservados
+        © 2026 El Shopper Digital — Derechos reservados
         <br />
         Versión: {version}
+        <br />
+        520 · 741 · 318798 · 715400 · 426
       </footer>
     </div>
   );
