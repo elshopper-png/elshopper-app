@@ -66,7 +66,7 @@ export default function HomeBase() {
       >
         <a
           href={`https://wa.me/51993490886?text=${encodeURIComponent(
-            "Hola, deseo publicar mi aviso en el Shopper Digital, necesito información, gracias 📲"
+            "Hola, deseo publicar en el Shopper Digital, ¿me pueden brindar más información? Gracias"
           )}`}
           target="_blank"
           rel="noopener noreferrer"

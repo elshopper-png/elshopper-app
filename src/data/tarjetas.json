@@ -86,6 +86,13 @@
       "imagen": "/fase_2/tarjetas/educacion/card5.png",
       "slug": "edutec",
       "whatsapp": "51972523264"
+    },
+    {
+      "nombre": "Colegio Bertrand Russell",
+      "descripcion": "Inicial – Primaria · Educación integral y formación en valores.",
+      "imagen": "/fase_2/tarjetas/educacion/card6.png",
+      "slug": "bertrand",
+      "whatsapp": "51985695988"
     }
   ]
 },
