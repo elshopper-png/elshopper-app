@@ -27,7 +27,7 @@ export default function HomeBase() {
         <img src="/portada/logo.png" alt="El Shopper Logo" />
         <h1>EL SHOPPER DIGITAL</h1>
         <p className="lema">
-          En Los Olivos tenemos los <br />
+          En Lima Norte tenemos los <br />
           <strong>mejores productos y servicios...</strong> <br />
           <strong>¡a un CLIC de distancia!</strong>
         </p>

@@ -69,7 +69,7 @@ export default function EnlacePage() {
               marginTop: "4px",
             }}
           >
-            Más negocios y servicios en Los Olivos
+            Más negocios y servicios en Lima Norte
           </div>
         </button>
 
@@ -81,8 +81,7 @@ export default function EnlacePage() {
             lineHeight: "1.4",
           }}
         >
-          En iPhone puedes guardarla desde Safari como acceso directo en tu
-          pantalla de inicio o usarla como web.
+          En iPhone puedes guardarlo como Favorito y tenerlo siempre a la mano
         </p>
       </div>
     </div>

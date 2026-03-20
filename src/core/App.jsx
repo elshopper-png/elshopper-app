@@ -1,35 +1,40 @@
-// src/App.jsx — versión correcta O25
+// src/App.jsx — O25 FINAL (apaga música al salir desde Portada o Tarjetas)
 import React, { useEffect } from "react";
 import AppRouter from "./AppRouter";
 
 export default function App() {
   useEffect(() => {
     const pauseMusicOnly = () => {
-      // Solo PAUSA. No toques window.musicState (para que al volver se reanude)
       const m = window.globalMusic || window.__O25_MUSIC__;
       if (m && !m.paused) {
         try { m.pause(); } catch (e) {}
       }
     };
 
-    const onVisibilityChange = () => {
-      // Cuando la app queda en background
+    const handleVisibility = () => {
+      // cuando pasa a background (cambiar app / home / lock / etc.)
       if (document.hidden) pauseMusicOnly();
     };
 
-    // ✅ visibilitychange va en DOCUMENT
-    document.addEventListener("visibilitychange", onVisibilityChange);
-
-    // ✅ estos cubren salida/cambio de app en móviles y desktop
+    // ✅ listeners base (desktop + mobile)
+    document.addEventListener("visibilitychange", handleVisibility);
     window.addEventListener("pagehide", pauseMusicOnly);
     window.addEventListener("blur", pauseMusicOnly);
-    window.addEventListener("beforeunload", pauseMusicOnly);
+
+    // ✅ page lifecycle (PWA/móviles)
+    document.addEventListener("freeze", pauseMusicOnly);
+
+    // ✅ watchdog: cubre casos donde NO llega el evento (muy común en PWA)
+    const watchdog = setInterval(() => {
+      if (document.hidden) pauseMusicOnly();
+    }, 600);
 
     return () => {
-      document.removeEventListener("visibilitychange", onVisibilityChange);
+      document.removeEventListener("visibilitychange", handleVisibility);
       window.removeEventListener("pagehide", pauseMusicOnly);
       window.removeEventListener("blur", pauseMusicOnly);
-      window.removeEventListener("beforeunload", pauseMusicOnly);
+      document.removeEventListener("freeze", pauseMusicOnly);
+      clearInterval(watchdog);
     };
   }, []);
 
