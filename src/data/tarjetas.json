@@ -310,7 +310,14 @@
         "imagen": "/fase_2/tarjetas/inmobiliarias/card1.png",
         "slug": "sandoval",
         "whatsapp": "51995760074"
-      }
+      },
+      {
+  "nombre": "Independiza",
+  "descripcion": "Servicios inmobiliarios y asesoría especializada.",
+  "imagen": "/fase_2/tarjetas/inmobiliarias/card2.png",
+  "slug": "independiza",
+  "whatsapp": "51932525664"
+}
     ]
   },
 
