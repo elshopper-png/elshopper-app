@@ -1,19 +1,31 @@
 // ============================================================
-// 🏁 INDEX.JS — OMEGA-25 ESTABLE
-// ------------------------------------------------------------
-// - Service Worker desactivado SOLO en desarrollo
-// - Producción intacta (PWA lista para reactivarse)
-// - Listener O25_VOLVER activo
-// - Compatible con CRA + Vercel
+// 🏁 INDEX.JS — OMEGA-25 ESTABLE + GA4
 // ============================================================
 
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
+import ReactGA from "react-ga4";
 import AppRouter from "./AppRouter.jsx";
 
 import "./styles/base.css";
 import "./styles/tarjetas.css";
+
+// ============================================================
+// 📊 Google Analytics 4 — El Shopper Digital
+// ============================================================
+ReactGA.initialize("G-JBVY7WQM1J");
+
+// ============================================================
+// 📲 Tracking instalación PWA
+// ============================================================
+window.addEventListener("appinstalled", () => {
+  ReactGA.event({
+    category: "PWA",
+    action: "Installed",
+    label: "El Shopper Digital",
+  });
+});
 
 // ============================================================
 // 🔙 Listener Universal — Puente de Madera OMEGA-25
@@ -25,10 +37,6 @@ window.addEventListener("message", (event) => {
 
 // ============================================================
 // 🚫 Service Worker DESACTIVADO SOLO EN DESARROLLO
-// ------------------------------------------------------------
-// - Evita pantallas blancas en localhost
-// - No afecta producción
-// - Permite reactivar PWA cuando toque
 // ============================================================
 if (
   process.env.NODE_ENV !== "production" &&

@@ -1,8 +1,10 @@
 // ============================================================
-// 🚀 AppRouter — CRA CORE ESTABLE (MARKETING + ATLASH)
+// 🚀 AppRouter — CRA CORE ESTABLE + GA4
 // ============================================================
 
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import ReactGA from "react-ga4";
 
 import HomeBase from "./core/HomeBase.jsx";
 import TarjetasPage from "./fase_2/core/TarjetasPage.jsx";
@@ -11,9 +13,33 @@ import EnlacePage from "./core/EnlacePage.jsx";
 
 import PWABanner from "./components/PWABanner";
 
+// ============================================================
+// 📊 Tracker automático de rutas GA4
+// ============================================================
+function AnalyticsTracker() {
+  const location = useLocation();
+
+  useEffect(() => {
+    ReactGA.send({
+      hitType: "pageview",
+      page: location.pathname + location.search,
+    });
+
+    console.log("📊 GA4 PageView:", location.pathname);
+  }, [location]);
+
+  return null;
+}
+
+// ============================================================
+// 🚀 Router principal
+// ============================================================
 export default function AppRouter() {
   return (
     <>
+      {/* 📊 Tracker global */}
+      <AnalyticsTracker />
+
       <Routes>
         {/* 🏠 Portada */}
         <Route path="/" element={<HomeBase />} />
