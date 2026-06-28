@@ -27,19 +27,26 @@
     ]
   },
 
-  {
-    "giroSlug": "servicios-profesionales",
-    "giro": "Servicios Profesionales",
-    "tarjetas": [
-      {
-        "nombre": "Estudio Contable Ríos",
-        "descripcion": "Servicios contables profesionales: declaraciones, asesoría tributaria y gestión financiera empresarial.",
-        "imagen": "/fase_2/tarjetas/servicios-profesionales/card.png",
-        "slug": "rios",
-        "whatsapp": ""
-      }
-    ]
-  },
+ {
+  "giroSlug": "servicios-profesionales",
+  "giro": "Servicios Profesionales",
+  "tarjetas": [
+    {
+      "nombre": "Estudio Contable Ríos",
+      "descripcion": "Servicios contables profesionales: declaraciones, asesoría tributaria y gestión financiera empresarial.",
+      "imagen": "/fase_2/tarjetas/servicios-profesionales/card.png",
+      "slug": "rios",
+      "whatsapp": ""
+    },
+    {
+      "nombre": "Estudio Jurídico Julio García Molina & Asociados",
+      "descripcion": "Especialistas en procesos judiciales: civil, penal, laboral, familiar, comercial, administrativo, tributario y más.",
+      "imagen": "/fase_2/tarjetas/servicios-profesionales/card1.png",
+      "slug": "abogado_garcia",
+      "whatsapp": "51968389428"
+    }
+  ]
+},
 
   {
   "giroSlug": "educacion",
