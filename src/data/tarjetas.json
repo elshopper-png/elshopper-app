@@ -263,6 +263,14 @@
       "slug": "saul-garrido",
       "whatsapp": "519992806969"
     },
+
+    {
+  "nombre": "Fisioterapia Aarón",
+  "descripcion": "Fisioterapia y rehabilitación a domicilio. Recuperación física, masoterapia, reflexología podal y rehabilitación postoperatoria.",
+  "imagen": "/fase_2/tarjetas/salud-integral/card3.png",
+  "slug": "fisioterapia_aaron",
+  "whatsapp": "51978499984"
+},
     {
       "nombre": "Clínica del Norte",
       "descripcion": "Atención médica general, análisis clínicos y urgencias.",
