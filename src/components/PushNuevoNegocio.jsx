@@ -11,7 +11,7 @@ import {
 const PRIMERA_APERTURA = "SHOPPER_PUSH_PRIMERA_APERTURA";
 const POSPUESTO_HASTA = "SHOPPER_PUSH_POSPUESTO_HASTA";
 const ACEPTADO = "SHOPPER_PUSH_ACEPTADO";
-const PRUEBA_LOCAL = "SHOPPER_PUSH_PRUEBA_LOCAL_V1";
+const PRUEBA_LOCAL = "SHOPPER_PUSH_PRUEBA_LOCAL_V2";
 
 const UN_DIA = 24 * 60 * 60 * 1000;
 const SIETE_DIAS = 7 * 24 * 60 * 60 * 1000;
@@ -38,12 +38,17 @@ export default function PushNuevoNegocio() {
     if (localStorage.getItem(PRUEBA_LOCAL) === "1") return;
 
     const resultado =
-      await probarNotificacionLocalShopper();
+  await probarNotificacionLocalShopper();
 
-    console.log(
-      "🧪 Resultado prueba local Push:",
-      resultado
-    );
+alert(
+  "Prueba Push local: " +
+  JSON.stringify(resultado)
+);
+
+console.log(
+  "🧪 Resultado prueba local Push:",
+  resultado
+);
 
     if (resultado.ok) {
       localStorage.setItem(PRUEBA_LOCAL, "1");
