@@ -37,26 +37,41 @@ window.addEventListener("message", (event) => {
 
 // ============================================================
 // 🛡 SERVICE WORKER — OMEGA-25
+// Actualización automática en producción
 // ============================================================
-if ("serviceWorker" in navigator) {
 
+if ("serviceWorker" in navigator) {
   if (process.env.NODE_ENV === "production") {
 
-    window.addEventListener("load", () => {
-      navigator.serviceWorker
-        .register("/service-worker.js")
-        .then((registration) => {
-          console.log(
-            "Service Worker registrado correctamente:",
-            registration.scope
+    window.addEventListener("load", async () => {
+      try {
+        const registration =
+          await navigator.serviceWorker.register(
+            "/service-worker.js",
+            {
+              updateViaCache: "none"
+            }
           );
-        })
-        .catch((error) => {
-          console.error(
-            "Error al registrar Service Worker:",
-            error
-          );
-        });
+
+        console.log(
+          "Service Worker registrado correctamente:",
+          registration.scope
+        );
+
+        // 🔄 Comprobar automáticamente si existe
+        // una versión nueva del Service Worker.
+        await registration.update();
+
+        console.log(
+          "Service Worker comprobado/actualizado."
+        );
+
+      } catch (error) {
+        console.error(
+          "Error registrando o actualizando Service Worker:",
+          error
+        );
+      }
     });
 
   } else {
