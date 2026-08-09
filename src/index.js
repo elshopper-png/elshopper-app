@@ -36,17 +36,40 @@ window.addEventListener("message", (event) => {
 });
 
 // ============================================================
-// 🚫 Service Worker DESACTIVADO SOLO EN DESARROLLO
+// 🛡 SERVICE WORKER — OMEGA-25
 // ============================================================
-if (
-  process.env.NODE_ENV !== "production" &&
-  "serviceWorker" in navigator
-) {
-  navigator.serviceWorker.getRegistrations().then((registrations) => {
-    registrations.forEach((registration) => {
-      registration.unregister();
+if ("serviceWorker" in navigator) {
+
+  if (process.env.NODE_ENV === "production") {
+
+    window.addEventListener("load", () => {
+      navigator.serviceWorker
+        .register("/service-worker.js")
+        .then((registration) => {
+          console.log(
+            "Service Worker registrado correctamente:",
+            registration.scope
+          );
+        })
+        .catch((error) => {
+          console.error(
+            "Error al registrar Service Worker:",
+            error
+          );
+        });
     });
-  });
+
+  } else {
+
+    navigator.serviceWorker
+      .getRegistrations()
+      .then((registrations) => {
+        registrations.forEach((registration) => {
+          registration.unregister();
+        });
+      });
+
+  }
 }
 
 // ============================================================
