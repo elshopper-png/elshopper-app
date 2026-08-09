@@ -243,3 +243,52 @@ export async function suscribirPushShopper() {
     };
   }
 }
+
+// ============================================================
+// 🧪 PRUEBA LOCAL TEMPORAL DE NOTIFICACIÓN
+// ============================================================
+
+export async function probarNotificacionLocalShopper() {
+  try {
+    if (!("serviceWorker" in navigator)) {
+      return { ok: false, motivo: "sin-service-worker" };
+    }
+
+    if (!("Notification" in window)) {
+      return { ok: false, motivo: "sin-notificaciones" };
+    }
+
+    if (Notification.permission !== "granted") {
+      return { ok: false, motivo: "permiso-no-concedido" };
+    }
+
+    const registration =
+      await navigator.serviceWorker.ready;
+
+    await registration.showNotification(
+      "El Shopper Digital",
+      {
+        body: "Prueba local de notificaciones Shopper.",
+        icon: "/icons/pwa/192.png",
+        badge: "/icons/pwa/app-icon-96.png",
+        data: {
+          url: "/"
+        }
+      }
+    );
+
+    return { ok: true };
+
+  } catch (error) {
+    console.error(
+      "Error en prueba local Shopper:",
+      error
+    );
+
+    return {
+      ok: false,
+      motivo: "error",
+      error
+    };
+  }
+}

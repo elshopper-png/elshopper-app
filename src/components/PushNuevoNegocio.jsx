@@ -3,11 +3,15 @@
 // ============================================================
 
 import React, { useEffect, useState } from "react";
-import { suscribirPushShopper } from "../utils/pushShopper";
+import {
+  suscribirPushShopper,
+  probarNotificacionLocalShopper
+} from "../utils/pushShopper";
 
 const PRIMERA_APERTURA = "SHOPPER_PUSH_PRIMERA_APERTURA";
 const POSPUESTO_HASTA = "SHOPPER_PUSH_POSPUESTO_HASTA";
 const ACEPTADO = "SHOPPER_PUSH_ACEPTADO";
+const PRUEBA_LOCAL = "SHOPPER_PUSH_PRUEBA_LOCAL_V1";
 
 const UN_DIA = 24 * 60 * 60 * 1000;
 const SIETE_DIAS = 7 * 24 * 60 * 60 * 1000;
@@ -22,6 +26,32 @@ function estaInstalada() {
 export default function PushNuevoNegocio() {
   const [visible, setVisible] = useState(false);
   const [procesando, setProcesando] = useState(false);
+  useEffect(() => {
+  const probar = async () => {
+    if (!estaInstalada()) return;
+
+    if (!("Notification" in window)) return;
+    if (!("serviceWorker" in navigator)) return;
+
+    if (Notification.permission !== "granted") return;
+
+    if (localStorage.getItem(PRUEBA_LOCAL) === "1") return;
+
+    const resultado =
+      await probarNotificacionLocalShopper();
+
+    console.log(
+      "🧪 Resultado prueba local Push:",
+      resultado
+    );
+
+    if (resultado.ok) {
+      localStorage.setItem(PRUEBA_LOCAL, "1");
+    }
+  };
+
+  probar();
+}, []);
 
   useEffect(() => {
     if (!estaInstalada()) return;
