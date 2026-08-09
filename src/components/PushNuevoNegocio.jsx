@@ -27,6 +27,18 @@ export default function PushNuevoNegocio() {
   const [visible, setVisible] = useState(false);
   const [procesando, setProcesando] = useState(false);
   useEffect(() => {
+  alert(
+    "DIAG SAMSUNG\n" +
+    "standalone: " + estaInstalada() + "\n" +
+    "notification: " +
+      (("Notification" in window) ? Notification.permission : "sin API") + "\n" +
+    "serviceWorker: " + ("serviceWorker" in navigator) + "\n" +
+    "pushManager: " + ("PushManager" in window) + "\n" +
+    "aceptado: " + localStorage.getItem(ACEPTADO)
+  );
+}, []);
+
+  useEffect(() => {
   const probar = async () => {
     if (!estaInstalada()) return;
 
