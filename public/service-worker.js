@@ -83,3 +83,83 @@ self.addEventListener("fetch", (event) => {
       })
   );
 });
+
+
+// ============================================================
+// 🔔 PUSH — Nuevos anunciantes Shopper Digital
+// ============================================================
+
+self.addEventListener("push", (event) => {
+  let data = {};
+
+  try {
+    data = event.data ? event.data.json() : {};
+  } catch (error) {
+    console.warn("Push recibido sin JSON válido:", error);
+  }
+
+  const titulo =
+    data.titulo ||
+    "El Shopper Digital";
+
+  const opciones = {
+    body:
+      data.mensaje ||
+      "Un nuevo negocio se incorporó a El Shopper Digital.",
+
+    icon: "/icons/pwa/192.png",
+
+    badge: "/icons/pwa/app-icon-96.png",
+
+    data: {
+      url: data.url || "/"
+    }
+  };
+
+  event.waitUntil(
+    self.registration.showNotification(
+      titulo,
+      opciones
+    )
+  );
+});
+
+
+// ============================================================
+// 👆 CLICK EN NOTIFICACIÓN
+// ============================================================
+
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+
+  const destino =
+    event.notification?.data?.url || "/";
+
+  event.waitUntil(
+    self.clients
+      .matchAll({
+        type: "window",
+        includeUncontrolled: true
+      })
+      .then((clientes) => {
+        for (const cliente of clientes) {
+          if (
+            "focus" in cliente &&
+            cliente.url.startsWith(self.location.origin)
+          ) {
+            if ("navigate" in cliente) {
+              cliente.navigate(destino);
+            }
+
+            return cliente.focus();
+          }
+        }
+
+        if (self.clients.openWindow) {
+          return self.clients.openWindow(destino);
+        }
+
+        return null;
+      })
+  );
+});

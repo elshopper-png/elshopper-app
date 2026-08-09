@@ -12,6 +12,7 @@ import AtlashVisor from "./AtlashVisor.jsx";
 import EnlacePage from "./core/EnlacePage.jsx";
 
 import PWABanner from "./components/PWABanner";
+import PushNuevoNegocio from "./components/PushNuevoNegocio";
 
 // ============================================================
 // 📊 Tracker automático de rutas GA4
@@ -56,6 +57,9 @@ export default function AppRouter() {
 
       {/* 📲 Banner PWA global */}
       <PWABanner />
+
+      {/* 🔔 Aviso de nuevos anunciantes */}
+<PushNuevoNegocio />
     </>
   );
 }
