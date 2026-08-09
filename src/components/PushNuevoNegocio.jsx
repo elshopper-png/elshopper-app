@@ -9,7 +9,7 @@ const PRIMERA_APERTURA = "SHOPPER_PUSH_PRIMERA_APERTURA";
 const POSPUESTO_HASTA = "SHOPPER_PUSH_POSPUESTO_HASTA";
 const ACEPTADO = "SHOPPER_PUSH_ACEPTADO";
 
-const UN_DIA = 0;
+const UN_DIA = 24 * 60 * 60 * 1000;
 const SIETE_DIAS = 7 * 24 * 60 * 60 * 1000;
 
 function estaInstalada() {
