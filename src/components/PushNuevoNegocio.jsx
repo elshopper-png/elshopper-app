@@ -120,6 +120,23 @@ useEffect(() => {
 
   useEffect(() => {
     if (!estaInstalada()) return;
+    // ==========================================================
+// 🧪 MODO LABORATORIO
+// Permite probar el consentimiento sin esperar 24 horas.
+// Solo funciona con ?pruebaPush=1
+// ==========================================================
+
+const parametros =
+  new URLSearchParams(
+    window.location.search
+  );
+
+if (
+  parametros.get("pruebaPush") === "1"
+) {
+  setVisible(true);
+  return;
+}
 
     if (
       !("Notification" in window)
