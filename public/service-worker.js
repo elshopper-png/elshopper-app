@@ -238,46 +238,43 @@ self.addEventListener("push", (event) => {
 // 📡 CONSULTAR DIAGNÓSTICO DESDE CRA
 // ============================================================
 
-self.addEventListener(
-  "message",
-  (event) => {
-    if (
-      !event.data ||
-      event.data.type !==
-        "SHOPPER_PEDIR_DIAGNOSTICO_PUSH"
-    ) {
-      return;
-    }
-
-    event.waitUntil(
-      caches
-        .open(
-          "shopper-push-diagnostico"
-        )
-        .then((cache) =>
-          cache.match(
-            "/__shopper_push_diag__"
-          )
-        )
-        .then(async (respuesta) => {
-          const diagnostico =
-            respuesta
-              ? await respuesta.json()
-              : {
-                  recibido: false
-                };
-
-          if (event.source) {
-            event.source.postMessage({
-              type:
-                "SHOPPER_DIAGNOSTICO_PUSH",
-              diagnostico
-            });
-          }
-        })
-    );
+self.addEventListener("message", (event) => {
+  if (
+    !event.data ||
+    event.data.type !== "SHOPPER_PEDIR_DIAGNOSTICO_PUSH"
+  ) {
+    return;
   }
-);
+
+  event.waitUntil(
+    caches
+      .open("shopper-push-diagnostico")
+      .then((cache) =>
+        cache.match("/__shopper_push_diag__")
+      )
+      .then(async (respuesta) => {
+        const diagnostico = respuesta
+          ? await respuesta.json()
+          : { recibido: false };
+
+        const mensaje = {
+          type: "SHOPPER_DIAGNOSTICO_PUSH",
+          diagnostico
+        };
+
+        // Respuesta directa por MessageChannel
+        if (event.ports && event.ports[0]) {
+          event.ports[0].postMessage(mensaje);
+          return;
+        }
+
+        // Fallback
+        if (event.source) {
+          event.source.postMessage(mensaje);
+        }
+      })
+  );
+});
 
 
 // ============================================================

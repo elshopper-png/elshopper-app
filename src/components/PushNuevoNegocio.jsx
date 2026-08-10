@@ -88,45 +88,41 @@ console.log(
     );
 
     useEffect(() => {
-  const recibirDiagnostico = (event) => {
-    if (
-      !event.data ||
-      event.data.type !== "SHOPPER_DIAGNOSTICO_PUSH"
-    ) {
+  const consultarCajaNegra = async () => {
+    if (!("serviceWorker" in navigator)) return;
+
+    const registration =
+      await navigator.serviceWorker.ready;
+
+    if (!registration.active) {
+      alert("CAJA NEGRA PUSH\nService Worker no activo");
       return;
     }
 
-    alert(
-      "CAJA NEGRA PUSH\n" +
-      JSON.stringify(
-        event.data.diagnostico
-      )
+    const canal = new MessageChannel();
+
+    canal.port1.onmessage = (event) => {
+      alert(
+        "CAJA NEGRA PUSH\n" +
+        JSON.stringify(
+          event.data?.diagnostico || {
+            recibido: false
+          }
+        )
+      );
+    };
+
+    registration.active.postMessage(
+      {
+        type: "SHOPPER_PEDIR_DIAGNOSTICO_PUSH"
+      },
+      [canal.port2]
     );
   };
 
-  navigator.serviceWorker?.addEventListener(
-    "message",
-    recibirDiagnostico
-  );
-
-  navigator.serviceWorker?.ready.then(
-    (registration) => {
-      if (registration.active) {
-        registration.active.postMessage({
-          type:
-            "SHOPPER_PEDIR_DIAGNOSTICO_PUSH"
-        });
-      }
-    }
-  );
-
-  return () => {
-    navigator.serviceWorker?.removeEventListener(
-      "message",
-      recibirDiagnostico
-    );
-  };
+  consultarCajaNegra();
 }, []);
+
 
     // Primera apertura de la App instalada:
     // guardamos la fecha y no mostramos nada.
