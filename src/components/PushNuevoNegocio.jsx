@@ -6,7 +6,8 @@
 import React, { useEffect, useState } from "react";
 import {
   suscribirPushShopper,
-  sincronizarPushShopper
+  sincronizarPushShopper,
+  renovarPushShopperPrueba
 } from "../utils/pushShopper";
 
 const PRIMERA_APERTURA =
@@ -81,6 +82,35 @@ useEffect(() => {
   };
 
   sincronizar();
+}, []);
+
+// ==========================================================
+// 🧪 RENOVACIÓN CONTROLADA — SOLO CON URL DE LABORATORIO
+// ==========================================================
+
+useEffect(() => {
+  const ejecutarPrueba = async () => {
+    const parametros =
+      new URLSearchParams(
+        window.location.search
+      );
+
+    if (
+      parametros.get("renovarPush") !== "1"
+    ) {
+      return;
+    }
+
+    const resultado =
+      await renovarPushShopperPrueba();
+
+    alert(
+      "RENOVACIÓN PUSH\n" +
+      JSON.stringify(resultado)
+    );
+  };
+
+  ejecutarPrueba();
 }, []);
 
 

@@ -440,3 +440,101 @@ export async function sincronizarPushShopper() {
     };
   }
 }
+
+// ============================================================
+// 🧪 RENOVACIÓN CONTROLADA DE SUSCRIPCIÓN PUSH
+// SOLO PARA PRUEBA DE LABORATORIO
+// ============================================================
+
+export async function renovarPushShopperPrueba() {
+  try {
+    if (!("serviceWorker" in navigator)) {
+      return {
+        ok: false,
+        motivo: "sin-service-worker"
+      };
+    }
+
+    if (!("PushManager" in window)) {
+      return {
+        ok: false,
+        motivo: "sin-push-manager"
+      };
+    }
+
+    if (!("Notification" in window)) {
+      return {
+        ok: false,
+        motivo: "sin-notificaciones"
+      };
+    }
+
+    if (Notification.permission !== "granted") {
+      return {
+        ok: false,
+        motivo: "permiso-no-concedido"
+      };
+    }
+
+    const registration =
+      await navigator.serviceWorker.ready;
+
+    const anterior =
+      await registration.pushManager.getSubscription();
+
+    // --------------------------------------------------------
+    // Cancelar únicamente la suscripción del dispositivo
+    // donde ejecutemos esta prueba.
+    // --------------------------------------------------------
+
+    if (anterior) {
+      const cancelada =
+        await anterior.unsubscribe();
+
+      if (!cancelada) {
+        return {
+          ok: false,
+          motivo: "no-se-pudo-cancelar"
+        };
+      }
+    }
+
+    // --------------------------------------------------------
+    // Crear una suscripción completamente nueva
+    // con nuestra MISMA VAPID pública.
+    // --------------------------------------------------------
+
+    const nueva =
+      await registration.pushManager.subscribe({
+        userVisibleOnly: true,
+
+        applicationServerKey:
+          urlBase64ToUint8Array(
+            VAPID_PUBLIC_KEY
+          )
+      });
+
+    // --------------------------------------------------------
+    // Guardarla en Supabase.
+    // --------------------------------------------------------
+
+    await guardarSuscripcion(nueva);
+
+    return {
+      ok: true,
+      renovada: true
+    };
+
+  } catch (error) {
+    console.error(
+      "Error renovando Push de prueba:",
+      error
+    );
+
+    return {
+      ok: false,
+      motivo: "error",
+      error
+    };
+  }
+}
