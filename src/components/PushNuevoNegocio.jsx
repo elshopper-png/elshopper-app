@@ -1,14 +1,15 @@
 // ============================================================
 // 🔔 PushNuevoNegocio.jsx — Invitación Push Shopper Digital
-// PRODUCCIÓN LIMPIA
+// PRODUCCIÓN + MODO LABORATORIO LIMPIO
 // ============================================================
 
 import React, { useEffect, useState } from "react";
+
 import {
   suscribirPushShopper,
-  sincronizarPushShopper,
-  renovarPushShopperPrueba
+  sincronizarPushShopper
 } from "../utils/pushShopper";
+
 
 const PRIMERA_APERTURA =
   "SHOPPER_PUSH_PRIMERA_APERTURA";
@@ -18,6 +19,7 @@ const POSPUESTO_HASTA =
 
 const ACEPTADO =
   "SHOPPER_PUSH_ACEPTADO";
+
 
 const UN_DIA =
   24 * 60 * 60 * 1000;
@@ -45,110 +47,109 @@ function estaInstalada() {
 // ============================================================
 
 export default function PushNuevoNegocio() {
+
   const [visible, setVisible] =
     useState(false);
 
   const [procesando, setProcesando] =
     useState(false);
 
-    // ==========================================================
-// 🔄 SINCRONIZACIÓN SILENCIOSA UNIVERSAL
-// ==========================================================
 
-useEffect(() => {
-  const sincronizar = async () => {
-    if (!estaInstalada()) return;
+  // ==========================================================
+  // 🔄 SINCRONIZACIÓN SILENCIOSA UNIVERSAL
+  // ==========================================================
 
-    if (
-      !("Notification" in window)
-    ) {
-      return;
-    }
+  useEffect(() => {
 
-    if (
-      Notification.permission !==
-      "granted"
-    ) {
-      return;
-    }
+    const sincronizar = async () => {
 
-    const resultado =
-      await sincronizarPushShopper();
+      if (!estaInstalada()) return;
 
-    console.log(
-      "🔄 Sincronización Push:",
-      resultado
-    );
-  };
+      if (
+        !("Notification" in window)
+      ) {
+        return;
+      }
 
-  sincronizar();
-}, []);
+      if (
+        Notification.permission !==
+        "granted"
+      ) {
+        return;
+      }
 
-// ==========================================================
-// 🧪 RENOVACIÓN CONTROLADA — SOLO CON URL DE LABORATORIO
-// ==========================================================
+      const resultado =
+        await sincronizarPushShopper();
 
-useEffect(() => {
-  const ejecutarPrueba = async () => {
+      console.log(
+        "🔄 Sincronización Push:",
+        resultado
+      );
+    };
+
+    sincronizar();
+
+  }, []);
+
+
+  // ==========================================================
+  // 🔔 INVITACIÓN PUSH
+  // Producción: después de 24 horas.
+  // Laboratorio: ?pruebaPush=1 muestra la misma invitación.
+  // ==========================================================
+
+  useEffect(() => {
+
+    // --------------------------------------------------------
+    // MODO LABORATORIO
+    // --------------------------------------------------------
+
     const parametros =
       new URLSearchParams(
         window.location.search
       );
 
     if (
-      parametros.get("renovarPush") !== "1"
+      parametros.get("pruebaPush") === "1"
     ) {
+
+      // Comprobar capacidades mínimas antes de mostrar.
+      if (
+        !("Notification" in window)
+      ) {
+        return;
+      }
+
+      if (
+        !("serviceWorker" in navigator)
+      ) {
+        return;
+      }
+
+      if (
+        !("PushManager" in window)
+      ) {
+        return;
+      }
+
+      setVisible(true);
       return;
     }
 
-    const resultado =
-      await renovarPushShopperPrueba();
 
-    alert(
-      "RENOVACIÓN PUSH\n" +
-      JSON.stringify(resultado)
-    );
-  };
+    // --------------------------------------------------------
+    // PRODUCCIÓN NORMAL
+    // --------------------------------------------------------
 
-  ejecutarPrueba();
-}, []);
+    if (!estaInstalada()) return;
 
-
-  // ==========================================================
-  // 🔔 LÓGICA REAL DE INVITACIÓN — 24 HORAS
-  // ==========================================================
-
-  useEffect(() => {
-  // ========================================================
-  // 🧪 MODO LABORATORIO
-  // Funciona también desde navegador normal.
-  // Solo se activa expresamente con ?pruebaPush=1
-  // ========================================================
-
-  const parametros =
-    new URLSearchParams(
-      window.location.search
-    );
-
-  if (
-    parametros.get("pruebaPush") === "1"
-  ) {
-    setVisible(true);
-    return;
-  }
-
-  // ========================================================
-  // PRODUCCIÓN NORMAL
-  // Aquí sí exigimos PWA instalada.
-  // ========================================================
-
-  if (!estaInstalada()) return;
 
     if (
       !("Notification" in window)
     ) {
       return;
     }
+
 
     if (
       !("serviceWorker" in navigator)
@@ -156,13 +157,15 @@ useEffect(() => {
       return;
     }
 
+
     if (
       !("PushManager" in window)
     ) {
       return;
     }
 
-    // Ya aceptó anteriormente.
+
+    // Ya aceptó.
     if (
       localStorage.getItem(
         ACEPTADO
@@ -171,8 +174,8 @@ useEffect(() => {
       return;
     }
 
-    // El usuario bloqueó notificaciones
-    // desde el sistema/navegador.
+
+    // Bloqueó las notificaciones.
     if (
       Notification.permission ===
       "denied"
@@ -180,8 +183,10 @@ useEffect(() => {
       return;
     }
 
+
     const ahora =
       Date.now();
+
 
     const primera =
       Number(
@@ -190,9 +195,11 @@ useEffect(() => {
         ) || 0
       );
 
-    // Primera apertura de la App instalada:
-    // guardar fecha y no mostrar invitación.
+
+    // Primera apertura:
+    // guardar fecha y salir.
     if (!primera) {
+
       localStorage.setItem(
         PRIMERA_APERTURA,
         String(ahora)
@@ -201,15 +208,17 @@ useEffect(() => {
       return;
     }
 
-    // Esperar 24 horas reales.
+
+    // Esperar 24 horas.
     if (
       ahora - primera < UN_DIA
     ) {
       return;
     }
 
+
     // Si eligió "Ahora no",
-    // esperar siete días.
+    // esperar 7 días.
     const pospuestoHasta =
       Number(
         localStorage.getItem(
@@ -217,13 +226,16 @@ useEffect(() => {
         ) || 0
       );
 
+
     if (
       ahora < pospuestoHasta
     ) {
       return;
     }
 
+
     setVisible(true);
+
   }, []);
 
 
@@ -232,14 +244,19 @@ useEffect(() => {
   // ==========================================================
 
   const aceptar = async () => {
+
     if (procesando) return;
 
+
     setProcesando(true);
+
 
     const resultado =
       await suscribirPushShopper();
 
+
     if (resultado.ok) {
+
       localStorage.setItem(
         ACEPTADO,
         "1"
@@ -252,6 +269,7 @@ useEffect(() => {
       setVisible(false);
     }
 
+
     setProcesando(false);
   };
 
@@ -261,10 +279,12 @@ useEffect(() => {
   // ==========================================================
 
   const ahoraNo = () => {
+
     localStorage.setItem(
       POSPUESTO_HASTA,
       String(
-        Date.now() + SIETE_DIAS
+        Date.now() +
+        SIETE_DIAS
       )
     );
 
@@ -281,6 +301,7 @@ useEffect(() => {
 
   return (
     <div style={styles.fondo}>
+
       <div style={styles.tarjeta}>
 
         <p style={styles.pregunta}>
@@ -310,6 +331,7 @@ useEffect(() => {
         </button>
 
       </div>
+
     </div>
   );
 }
@@ -320,6 +342,7 @@ useEffect(() => {
 // ============================================================
 
 const styles = {
+
   fondo: {
     position: "fixed",
     inset: 0,
@@ -332,6 +355,7 @@ const styles = {
     padding: 22,
     boxSizing: "border-box"
   },
+
 
   tarjeta: {
     width: "100%",
@@ -348,6 +372,7 @@ const styles = {
       "system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
   },
 
+
   pregunta: {
     margin: "0 0 24px",
     color: "#222",
@@ -355,6 +380,7 @@ const styles = {
     lineHeight: 1.4,
     fontWeight: 700
   },
+
 
   si: {
     width: "100%",
@@ -368,6 +394,7 @@ const styles = {
     cursor: "pointer",
     marginBottom: 10
   },
+
 
   no: {
     width: "100%",
