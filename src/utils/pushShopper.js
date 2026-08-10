@@ -538,3 +538,66 @@ export async function renovarPushShopperPrueba() {
     };
   }
 }
+
+// ============================================================
+// 🧪 DIAGNÓSTICO TEMPORAL — IDENTIFICAR SUSCRIPCIÓN ACTUAL
+// ============================================================
+
+export async function identificarSuscripcionPushShopper() {
+  try {
+    const registration =
+      await navigator.serviceWorker.ready;
+
+    const subscription =
+      await registration.pushManager.getSubscription();
+
+    if (!subscription) {
+      return {
+        ok: false,
+        motivo: "sin-suscripcion"
+      };
+    }
+
+    const json =
+      subscription.toJSON();
+
+    const texto =
+      [
+        json.endpoint || "",
+        json.keys?.p256dh || "",
+        json.keys?.auth || ""
+      ].join("|");
+
+    const datos =
+      new TextEncoder().encode(texto);
+
+    const hash =
+      await crypto.subtle.digest(
+        "SHA-256",
+        datos
+      );
+
+    const huella =
+      Array.from(
+        new Uint8Array(hash)
+      )
+        .map((byte) =>
+          byte
+            .toString(16)
+            .padStart(2, "0")
+        )
+        .join("")
+        .slice(0, 16);
+
+    return {
+      ok: true,
+      huella
+    };
+
+  } catch (error) {
+    return {
+      ok: false,
+      motivo: "error"
+    };
+  }
+}

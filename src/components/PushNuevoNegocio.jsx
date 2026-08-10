@@ -7,7 +7,8 @@ import React, { useEffect, useState } from "react";
 
 import {
   suscribirPushShopper,
-  sincronizarPushShopper
+  sincronizarPushShopper,
+  identificarSuscripcionPushShopper
 } from "../utils/pushShopper";
 
 
@@ -90,6 +91,31 @@ export default function PushNuevoNegocio() {
     sincronizar();
 
   }, []);
+
+  useEffect(() => {
+  const diagnosticar = async () => {
+    const parametros =
+      new URLSearchParams(
+        window.location.search
+      );
+
+    if (
+      parametros.get("diagPush") !== "1"
+    ) {
+      return;
+    }
+
+    const resultado =
+      await identificarSuscripcionPushShopper();
+
+    alert(
+      "HUELLA PUSH ACTUAL\n" +
+      JSON.stringify(resultado)
+    );
+  };
+
+  diagnosticar();
+}, []);
 
 
   // ==========================================================
