@@ -1,15 +1,10 @@
 // ============================================================
-// 🔔 PushNuevoNegocio.jsx — Invitación única Shopper Digital
+// 🔔 PushNuevoNegocio.jsx — Invitación Push Shopper Digital
+// PRODUCCIÓN LIMPIA
 // ============================================================
 
 import React, { useEffect, useState } from "react";
-
-import {
-  suscribirPushShopper,
-  probarNotificacionLocalShopper,
-  verificarVapidSuscripcionShopper,
-  obtenerHuellaSuscripcionShopper
-} from "../utils/pushShopper";
+import { suscribirPushShopper } from "../utils/pushShopper";
 
 const PRIMERA_APERTURA =
   "SHOPPER_PUSH_PRIMERA_APERTURA";
@@ -19,9 +14,6 @@ const POSPUESTO_HASTA =
 
 const ACEPTADO =
   "SHOPPER_PUSH_ACEPTADO";
-
-const PRUEBA_LOCAL =
-  "SHOPPER_PUSH_PRUEBA_LOCAL_V2";
 
 const UN_DIA =
   24 * 60 * 60 * 1000;
@@ -57,189 +49,6 @@ export default function PushNuevoNegocio() {
 
 
   // ==========================================================
-  // 🧪 DIAGNÓSTICO GENERAL TEMPORAL
-  // ==========================================================
-
-  useEffect(() => {
-    alert(
-      "DIAG PUSH\n" +
-      "standalone: " +
-      estaInstalada() +
-      "\n" +
-      "notification: " +
-      (
-        ("Notification" in window)
-          ? Notification.permission
-          : "sin API"
-      ) +
-      "\n" +
-      "serviceWorker: " +
-      ("serviceWorker" in navigator) +
-      "\n" +
-      "pushManager: " +
-      ("PushManager" in window) +
-      "\n" +
-      "aceptado: " +
-      localStorage.getItem(ACEPTADO)
-    );
-  }, []);
-
-  useEffect(() => {
-  const verificar = async () => {
-    const resultado =
-      await verificarVapidSuscripcionShopper();
-
-    alert(
-      "VAPID SUSCRIPCIÓN\n" +
-      JSON.stringify(resultado)
-    );
-  };
-
-  verificar();
-}, []);
-
-
-  // ==========================================================
-  // 🧪 PRUEBA LOCAL TEMPORAL
-  // ==========================================================
-
-  useEffect(() => {
-    const probar = async () => {
-      if (!estaInstalada()) return;
-
-      if (
-        !("Notification" in window)
-      ) return;
-
-      if (
-        !("serviceWorker" in navigator)
-      ) return;
-
-      if (
-        Notification.permission !==
-        "granted"
-      ) return;
-
-      if (
-        localStorage.getItem(
-          PRUEBA_LOCAL
-        ) === "1"
-      ) {
-        return;
-      }
-
-      const resultado =
-        await probarNotificacionLocalShopper();
-
-      alert(
-        "Prueba Push local: " +
-        JSON.stringify(resultado)
-      );
-
-      console.log(
-        "🧪 Resultado prueba local Push:",
-        resultado
-      );
-
-      if (resultado.ok) {
-        localStorage.setItem(
-          PRUEBA_LOCAL,
-          "1"
-        );
-      }
-    };
-
-    probar();
-  }, []);
-
-  useEffect(() => {
-  const verificarHuella = async () => {
-    const resultado =
-      await obtenerHuellaSuscripcionShopper();
-
-    alert(
-      "HUELLA PUSH XIAOMI\n" +
-      JSON.stringify(resultado)
-    );
-  };
-
-  verificarHuella();
-}, []);
-
-
-  // ==========================================================
-  // 🧪 CAJA NEGRA — RECEPCIÓN PUSH REMOTO
-  // ==========================================================
-
-  useEffect(() => {
-    const consultarCajaNegra =
-      async () => {
-        if (
-          !("serviceWorker" in navigator)
-        ) {
-          alert(
-            "CAJA NEGRA PUSH\n" +
-            "Service Worker no disponible"
-          );
-
-          return;
-        }
-
-        try {
-          const registration =
-            await navigator.serviceWorker.ready;
-
-          if (!registration.active) {
-            alert(
-              "CAJA NEGRA PUSH\n" +
-              "Service Worker no activo"
-            );
-
-            return;
-          }
-
-          const canal =
-            new MessageChannel();
-
-          canal.port1.onmessage =
-            (event) => {
-              alert(
-                "CAJA NEGRA PUSH\n" +
-                JSON.stringify(
-                  event.data?.diagnostico ||
-                  {
-                    recibido: false
-                  }
-                )
-              );
-            };
-
-          registration.active.postMessage(
-            {
-              type:
-                "SHOPPER_PEDIR_DIAGNOSTICO_PUSH"
-            },
-            [canal.port2]
-          );
-
-        } catch (error) {
-          alert(
-            "CAJA NEGRA PUSH\n" +
-            "Error consultando diagnóstico"
-          );
-
-          console.error(
-            "Error caja negra Push:",
-            error
-          );
-        }
-      };
-
-    consultarCajaNegra();
-  }, []);
-
-
-  // ==========================================================
   // 🔔 LÓGICA REAL DE INVITACIÓN — 24 HORAS
   // ==========================================================
 
@@ -248,16 +57,23 @@ export default function PushNuevoNegocio() {
 
     if (
       !("Notification" in window)
-    ) return;
+    ) {
+      return;
+    }
 
     if (
       !("serviceWorker" in navigator)
-    ) return;
+    ) {
+      return;
+    }
 
     if (
       !("PushManager" in window)
-    ) return;
+    ) {
+      return;
+    }
 
+    // Ya aceptó anteriormente.
     if (
       localStorage.getItem(
         ACEPTADO
@@ -266,6 +82,8 @@ export default function PushNuevoNegocio() {
       return;
     }
 
+    // El usuario bloqueó notificaciones
+    // desde el sistema/navegador.
     if (
       Notification.permission ===
       "denied"
@@ -283,8 +101,8 @@ export default function PushNuevoNegocio() {
         ) || 0
       );
 
-    // Primera apertura:
-    // solo guardar fecha.
+    // Primera apertura de la App instalada:
+    // guardar fecha y no mostrar invitación.
     if (!primera) {
       localStorage.setItem(
         PRIMERA_APERTURA,
@@ -302,7 +120,7 @@ export default function PushNuevoNegocio() {
     }
 
     // Si eligió "Ahora no",
-    // esperar 7 días.
+    // esperar siete días.
     const pospuestoHasta =
       Number(
         localStorage.getItem(
