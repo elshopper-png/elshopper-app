@@ -367,3 +367,72 @@ export async function verificarVapidSuscripcionShopper() {
     };
   }
 }
+
+// ============================================================
+// 🧪 Huella de la suscripción Push actual
+// ============================================================
+
+async function crearHuella(texto) {
+  const datos =
+    new TextEncoder().encode(texto);
+
+  const hash =
+    await crypto.subtle.digest(
+      "SHA-256",
+      datos
+    );
+
+  return Array.from(
+    new Uint8Array(hash)
+  )
+    .map(byte =>
+      byte.toString(16).padStart(2, "0")
+    )
+    .join("")
+    .slice(0, 16);
+}
+
+export async function obtenerHuellaSuscripcionShopper() {
+  try {
+    const registration =
+      await navigator.serviceWorker.ready;
+
+    const subscription =
+      await registration.pushManager.getSubscription();
+
+    if (!subscription) {
+      return {
+        ok: false,
+        motivo: "sin-suscripcion"
+      };
+    }
+
+    const json =
+      subscription.toJSON();
+
+    const texto =
+      [
+        json.endpoint || "",
+        json.keys?.p256dh || "",
+        json.keys?.auth || ""
+      ].join("|");
+
+    return {
+      ok: true,
+      huella:
+        await crearHuella(texto)
+    };
+
+  } catch (error) {
+    console.error(
+      "Error creando huella Push:",
+      error
+    );
+
+    return {
+      ok: false,
+      motivo: "error"
+    };
+  }
+}
+

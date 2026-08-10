@@ -7,7 +7,8 @@ import React, { useEffect, useState } from "react";
 import {
   suscribirPushShopper,
   probarNotificacionLocalShopper,
-  verificarVapidSuscripcionShopper
+  verificarVapidSuscripcionShopper,
+  obtenerHuellaSuscripcionShopper
 } from "../utils/pushShopper";
 
 const PRIMERA_APERTURA =
@@ -150,6 +151,20 @@ export default function PushNuevoNegocio() {
 
     probar();
   }, []);
+
+  useEffect(() => {
+  const verificarHuella = async () => {
+    const resultado =
+      await obtenerHuellaSuscripcionShopper();
+
+    alert(
+      "HUELLA PUSH XIAOMI\n" +
+      JSON.stringify(resultado)
+    );
+  };
+
+  verificarHuella();
+}, []);
 
 
   // ==========================================================
