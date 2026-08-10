@@ -6,7 +6,8 @@ import React, { useEffect, useState } from "react";
 
 import {
   suscribirPushShopper,
-  probarNotificacionLocalShopper
+  probarNotificacionLocalShopper,
+  verificarVapidSuscripcionShopper
 } from "../utils/pushShopper";
 
 const PRIMERA_APERTURA =
@@ -81,6 +82,20 @@ export default function PushNuevoNegocio() {
       localStorage.getItem(ACEPTADO)
     );
   }, []);
+
+  useEffect(() => {
+  const verificar = async () => {
+    const resultado =
+      await verificarVapidSuscripcionShopper();
+
+    alert(
+      "VAPID SUSCRIPCIÓN\n" +
+      JSON.stringify(resultado)
+    );
+  };
+
+  verificar();
+}, []);
 
 
   // ==========================================================

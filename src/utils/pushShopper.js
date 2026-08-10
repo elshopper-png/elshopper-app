@@ -292,3 +292,78 @@ export async function probarNotificacionLocalShopper() {
     };
   }
 }
+
+// ============================================================
+// 🧪 Verificar VAPID de la suscripción existente
+// ============================================================
+
+export async function verificarVapidSuscripcionShopper() {
+  try {
+    if (!("serviceWorker" in navigator)) {
+      return {
+        ok: false,
+        motivo: "sin-service-worker"
+      };
+    }
+
+    const registration =
+      await navigator.serviceWorker.ready;
+
+    const subscription =
+      await registration.pushManager.getSubscription();
+
+    if (!subscription) {
+      return {
+        ok: false,
+        motivo: "sin-suscripcion"
+      };
+    }
+
+    const claveSuscripcion =
+      subscription.options?.applicationServerKey;
+
+    if (!claveSuscripcion) {
+      return {
+        ok: false,
+        motivo: "suscripcion-sin-vapid"
+      };
+    }
+
+    const claveActual =
+      urlBase64ToUint8Array(
+        VAPID_PUBLIC_KEY
+      );
+
+    const guardada =
+      new Uint8Array(
+        claveSuscripcion
+      );
+
+    const coincide =
+      claveActual.length === guardada.length &&
+      claveActual.every(
+        (valor, indice) =>
+          valor === guardada[indice]
+      );
+
+    return {
+      ok: true,
+      coincide,
+      longitudActual:
+        claveActual.length,
+      longitudSuscripcion:
+        guardada.length
+    };
+
+  } catch (error) {
+    console.error(
+      "Error verificando VAPID de suscripción:",
+      error
+    );
+
+    return {
+      ok: false,
+      motivo: "error"
+    };
+  }
+}
