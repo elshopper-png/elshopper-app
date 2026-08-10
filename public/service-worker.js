@@ -200,114 +200,67 @@ async function obtenerMensajePushActivo() {
 
 
 // ============================================================
-// 🔔 PUSH REMOTO
-// ------------------------------------------------------------
-// El Push llega VACÍO.
-// Al despertar, consultamos el mensaje vigente en Supabase.
+// 🔔 PUSH REMOTO — PRUEBA FINAL DE TRÁNSITO
 // ============================================================
 
 self.addEventListener("push", (event) => {
-
   event.waitUntil(
     (async () => {
+      // ------------------------------------------------------
+      // 1. PRUEBA INMEDIATA
+      // Si aparece, sabemos que este Service Worker recibió
+      // físicamente el Push vacío.
+      // ------------------------------------------------------
+
+      await self.registration.showNotification(
+        "El Shopper Digital",
+        {
+          body: "Señal Push recibida. Consultando novedad...",
+          icon: "/icons/pwa/192.png",
+          badge: "/icons/pwa/app-icon-96.png",
+          tag: "shopper-prueba-transito",
+          renotify: true,
+          data: {
+            url: "/"
+          }
+        }
+      );
+
+      // ------------------------------------------------------
+      // 2. CONSULTAR MENSAJE REAL EN SUPABASE
+      // ------------------------------------------------------
 
       try {
-
         const aviso =
           await obtenerMensajePushActivo();
 
-
-        // ----------------------------------------------------
-        // Si por alguna razón todavía no existe mensaje,
-        // no dejamos fallar silenciosamente el Push.
-        // ----------------------------------------------------
-
         if (!aviso) {
-          await self.registration.showNotification(
-            "El Shopper Digital",
-            {
-              body:
-                "Tenemos novedades para ti en El Shopper Digital.",
-
-              icon:
-                "/icons/pwa/192.png",
-
-              badge:
-                "/icons/pwa/app-icon-96.png",
-
-              data: {
-                url: "/"
-              }
-            }
-          );
-
           return;
         }
 
-
-        // ----------------------------------------------------
-        // NOTIFICACIÓN REAL
-        // ----------------------------------------------------
-
         await self.registration.showNotification(
-          aviso.titulo ||
-            "El Shopper Digital",
-
+          aviso.titulo || "El Shopper Digital",
           {
             body:
               aviso.mensaje ||
-              "Un nuevo negocio se incorporó a El Shopper Digital.",
-
-            icon:
-              "/icons/pwa/192.png",
-
-            badge:
-              "/icons/pwa/app-icon-96.png",
-
-            tag:
-              "shopper-nuevo-negocio",
-
-            renotify:
-              true,
-
-            data: {
-              url:
-                aviso.url || "/"
-            }
-          }
-        );
-
-
-      } catch (error) {
-
-        console.error(
-          "Error procesando Push Shopper:",
-          error
-        );
-
-
-        // ----------------------------------------------------
-        // FALLBACK
-        // Si Supabase estuviera momentáneamente inaccesible,
-        // el usuario recibe una notificación válida.
-        // ----------------------------------------------------
-
-        await self.registration.showNotification(
-          "El Shopper Digital",
-          {
-            body:
               "Tenemos novedades para ti en El Shopper Digital.",
 
-            icon:
-              "/icons/pwa/192.png",
+            icon: "/icons/pwa/192.png",
+            badge: "/icons/pwa/app-icon-96.png",
 
-            badge:
-              "/icons/pwa/app-icon-96.png",
+            tag: "shopper-nuevo-negocio",
+            renotify: true,
 
             data: {
-              url: "/"
+              url: aviso.url || "/"
             }
           }
+        );
+
+      } catch (error) {
+        console.error(
+          "Error consultando mensaje Push:",
+          error
         );
       }
     })()
