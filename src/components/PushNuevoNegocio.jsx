@@ -4,7 +4,10 @@
 // ============================================================
 
 import React, { useEffect, useState } from "react";
-import { suscribirPushShopper } from "../utils/pushShopper";
+import {
+  suscribirPushShopper,
+  sincronizarPushShopper
+} from "../utils/pushShopper";
 
 const PRIMERA_APERTURA =
   "SHOPPER_PUSH_PRIMERA_APERTURA";
@@ -46,6 +49,39 @@ export default function PushNuevoNegocio() {
 
   const [procesando, setProcesando] =
     useState(false);
+
+    // ==========================================================
+// 🔄 SINCRONIZACIÓN SILENCIOSA UNIVERSAL
+// ==========================================================
+
+useEffect(() => {
+  const sincronizar = async () => {
+    if (!estaInstalada()) return;
+
+    if (
+      !("Notification" in window)
+    ) {
+      return;
+    }
+
+    if (
+      Notification.permission !==
+      "granted"
+    ) {
+      return;
+    }
+
+    const resultado =
+      await sincronizarPushShopper();
+
+    console.log(
+      "🔄 Sincronización Push:",
+      resultado
+    );
+  };
+
+  sincronizar();
+}, []);
 
 
   // ==========================================================
