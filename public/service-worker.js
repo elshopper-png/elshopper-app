@@ -1,9 +1,9 @@
 // ============================================================
 // 🛡 Service Worker OMEGA-5 — El Shopper Digital
-// 🔔 PUSH MÍNIMO UNIVERSAL
+// PUSH DIAGNÓSTICO — PRUEBA CERO
 // ============================================================
 
-const CACHE_VERSION = "o25-v6-push-min";
+const CACHE_VERSION = "o25-v4-pushdiag";
 const STATIC_CACHE = `static-${CACHE_VERSION}`;
 
 const ASSETS_TO_PRECACHE = [
@@ -36,20 +36,19 @@ self.addEventListener("install", (event) => {
 
 self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches
-      .keys()
-      .then((keys) =>
-        Promise.all(
-          keys
-            .filter(
-              (key) =>
-                key !== STATIC_CACHE
-            )
-            .map((key) =>
-              caches.delete(key)
-            )
-        )
+    caches.keys().then((keys) =>
+      Promise.all(
+        keys
+          .filter(
+            (key) =>
+              key !== STATIC_CACHE &&
+              key !== "shopper-push-diagnostico"
+          )
+          .map((oldKey) =>
+            caches.delete(oldKey)
+          )
       )
+    )
   );
 
   self.clients.claim();
@@ -57,7 +56,7 @@ self.addEventListener("activate", (event) => {
 
 
 // ============================================================
-// FETCH — NETWORK FIRST
+// FETCH — Network First OMEGA-5
 // ============================================================
 
 self.addEventListener("fetch", (event) => {
@@ -65,20 +64,13 @@ self.addEventListener("fetch", (event) => {
 
   if (req.method !== "GET") return;
 
-  const url =
-    new URL(req.url);
+  const url = new URL(req.url);
 
-  if (
-    url.origin !==
-    self.location.origin
-  ) {
-    return;
-  }
+  if (url.origin !== self.location.origin) return;
 
   event.respondWith(
     fetch(req)
       .then((res) => {
-
         if (
           res.ok &&
           req.url.includes("/static/")
@@ -95,8 +87,8 @@ self.addEventListener("fetch", (event) => {
 
         return res;
       })
-      .catch(() =>
-        caches
+      .catch(() => {
+        return caches
           .match(req)
           .then((cached) => {
 
@@ -117,28 +109,104 @@ self.addEventListener("fetch", (event) => {
                 }
               )
             );
-          })
-      )
+          });
+      })
   );
 });
 
 
 // ============================================================
-// 🔔 PUSH — NOTIFICACIÓN DIRECTA
-// ------------------------------------------------------------
-// No depende de React.
-// No depende de Supabase.
-// No necesita que Shopper esté abierta.
+// 🧪 GUARDAR DIAGNÓSTICO DE PUSH
+// ============================================================
+
+async function guardarDiagnosticoPush(datos) {
+
+  const cache =
+    await caches.open(
+      "shopper-push-diagnostico"
+    );
+
+  const respuesta =
+    new Response(
+      JSON.stringify(datos),
+      {
+        headers: {
+          "Content-Type":
+            "application/json"
+        }
+      }
+    );
+
+  await cache.put(
+    "/shopper_push_diag",
+    respuesta
+  );
+}
+
+
+// ============================================================
+// 🔔 PUSH REMOTO
 // ============================================================
 
 self.addEventListener("push", (event) => {
 
+  const recibidoEn =
+    new Date().toISOString();
+
+  let textoCrudo = "";
+  let data = {};
+
+
+  try {
+
+    textoCrudo =
+      event.data
+        ? event.data.text()
+        : "";
+
+    data =
+      textoCrudo
+        ? JSON.parse(textoCrudo)
+        : {};
+
+  } catch (error) {
+
+    console.warn(
+      "Push recibido sin JSON válido:",
+      error
+    );
+
+    data = {};
+  }
+
+
   const titulo =
+    data.titulo ||
     "El Shopper Digital";
 
+
+  const mensaje =
+    data.mensaje ||
+    "Push remoto recibido correctamente.";
+
+
+  const destino =
+    data.url || "/";
+
+
+  const diagnostico = {
+    recibido: true,
+    recibidoEn,
+    tieneDatos:
+      Boolean(event.data),
+    textoCrudo
+  };
+
+
   const opciones = {
+
     body:
-      "Tenemos una nueva novedad para ti en El Shopper Digital.",
+      mensaje,
 
     icon:
       "/icons/pwa/192.png",
@@ -147,23 +215,123 @@ self.addEventListener("push", (event) => {
       "/icons/pwa/app-icon-96.png",
 
     tag:
-      "shopper-push",
+      "shopper-nuevo-negocio",
 
     renotify:
       true,
 
     data: {
-      url: "/"
+      url:
+        destino
     }
   };
 
 
   event.waitUntil(
-    self.registration
-      .showNotification(
-        titulo,
-        opciones
+    Promise.all([
+
+      guardarDiagnosticoPush(
+        diagnostico
+      ),
+
+      self.registration
+        .showNotification(
+          titulo,
+          opciones
+        ),
+
+      self.clients
+        .matchAll({
+          type: "window",
+          includeUncontrolled: true
+        })
+        .then((clientes) => {
+
+          clientes.forEach(
+            (cliente) => {
+
+              cliente.postMessage({
+                type:
+                  "SHOPPER_PUSH_RECIBIDO",
+
+                diagnostico
+              });
+
+            }
+          );
+        })
+
+    ])
+  );
+});
+
+
+// ============================================================
+// 📡 CONSULTAR DIAGNÓSTICO DESDE CRA
+// ============================================================
+
+self.addEventListener("message", (event) => {
+
+  if (
+    !event.data ||
+    event.data.type !==
+      "SHOPPER_PEDIR_DIAGNOSTICO_PUSH"
+  ) {
+    return;
+  }
+
+
+  event.waitUntil(
+
+    caches
+      .open(
+        "shopper-push-diagnostico"
       )
+
+      .then((cache) =>
+        cache.match(
+          "/shopper_push_diag"
+        )
+      )
+
+      .then(async (respuesta) => {
+
+        const diagnostico =
+          respuesta
+            ? await respuesta.json()
+            : {
+                recibido: false
+              };
+
+
+        const mensaje = {
+          type:
+            "SHOPPER_DIAGNOSTICO_PUSH",
+
+          diagnostico
+        };
+
+
+        if (
+          event.ports &&
+          event.ports[0]
+        ) {
+          event.ports[0]
+            .postMessage(
+              mensaje
+            );
+
+          return;
+        }
+
+
+        if (event.source) {
+          event.source
+            .postMessage(
+              mensaje
+            );
+        }
+      })
   );
 });
 
@@ -178,17 +346,20 @@ self.addEventListener(
 
     event.notification.close();
 
+
     const destino =
       event.notification?.data?.url ||
       "/";
 
 
     event.waitUntil(
+
       self.clients
         .matchAll({
           type: "window",
           includeUncontrolled: true
         })
+
         .then((clientes) => {
 
           for (
@@ -220,7 +391,9 @@ self.addEventListener(
             self.clients.openWindow
           ) {
             return self.clients
-              .openWindow(destino);
+              .openWindow(
+                destino
+              );
           }
 
 
