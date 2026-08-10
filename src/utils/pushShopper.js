@@ -540,11 +540,18 @@ export async function renovarPushShopperPrueba() {
 }
 
 // ============================================================
-// 🧪 DIAGNÓSTICO TEMPORAL — IDENTIFICAR SUSCRIPCIÓN ACTUAL
+// 🧪 DIAGNÓSTICO TEMPORAL — SUSCRIPCIÓN + CAJA NEGRA PUSH
 // ============================================================
 
 export async function identificarSuscripcionPushShopper() {
   try {
+    if (!("serviceWorker" in navigator)) {
+      return {
+        ok: false,
+        motivo: "sin-service-worker"
+      };
+    }
+
     const registration =
       await navigator.serviceWorker.ready;
 
@@ -557,6 +564,10 @@ export async function identificarSuscripcionPushShopper() {
         motivo: "sin-suscripcion"
       };
     }
+
+    // ========================================================
+    // HUELLA DE LA SUSCRIPCIÓN
+    // ========================================================
 
     const json =
       subscription.toJSON();
@@ -589,12 +600,74 @@ export async function identificarSuscripcionPushShopper() {
         .join("")
         .slice(0, 16);
 
+
+    // ========================================================
+    // LEER CAJA NEGRA DEL SERVICE WORKER
+    // ========================================================
+
+    const diagnosticoPush =
+      await new Promise((resolve) => {
+
+        if (!registration.active) {
+          resolve({
+            recibido: false,
+            motivo:
+              "service-worker-no-activo"
+          });
+
+          return;
+        }
+
+        const canal =
+          new MessageChannel();
+
+        const timeout =
+          setTimeout(() => {
+            resolve({
+              recibido: false,
+              motivo: "sin-respuesta"
+            });
+          }, 3000);
+
+
+        canal.port1.onmessage =
+          (event) => {
+
+            clearTimeout(timeout);
+
+            resolve(
+              event.data?.diagnostico ||
+              {
+                recibido: false
+              }
+            );
+          };
+
+
+        registration.active.postMessage(
+          {
+            type:
+              "SHOPPER_PEDIR_DIAGNOSTICO_PUSH"
+          },
+          [canal.port2]
+        );
+      });
+
+
     return {
       ok: true,
-      huella
+      huella,
+      diagnosticoPush
     };
 
+
   } catch (error) {
+
+    console.error(
+      "Error diagnóstico Push:",
+      error
+    );
+
     return {
       ok: false,
       motivo: "error"
