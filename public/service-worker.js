@@ -1,34 +1,10 @@
 // ============================================================
 // 🛡 Service Worker OMEGA-5 — El Shopper Digital
-// 🔔 PUSH PRODUCCIÓN — Mensaje vía Supabase
+// 🔔 PUSH MÍNIMO UNIVERSAL
 // ============================================================
 
-const CACHE_VERSION = "o25-v5-push-final";
+const CACHE_VERSION = "o25-v6-push-min";
 const STATIC_CACHE = `static-${CACHE_VERSION}`;
-
-
-// ============================================================
-// CONFIGURACIÓN PÚBLICA SUPABASE
-// ============================================================
-
-const SUPABASE_URL =
-  "https://qaslnhtzmquqcuktdkdd.supabase.co";
-
-// PEGAR AQUÍ la misma Publishable Key de Supabase
-// que ya utiliza src/utils/pushShopper.js.
-// Empieza con: sb_publishable_...
-//
-// IMPORTANTE:
-// Esta es PUBLICABLE, no Service Role,
-// no Secret Key y no VAPID Private Key.
-
-const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_n0zbjKrmY2bTtKFW_TsPzw_k6AGz9-N";
-
-
-// ============================================================
-// PRECACHE MÍNIMO
-// ============================================================
 
 const ASSETS_TO_PRECACHE = [
   "/manifest.json",
@@ -69,8 +45,8 @@ self.addEventListener("activate", (event) => {
               (key) =>
                 key !== STATIC_CACHE
             )
-            .map((oldKey) =>
-              caches.delete(oldKey)
+            .map((key) =>
+              caches.delete(key)
             )
         )
       )
@@ -81,25 +57,28 @@ self.addEventListener("activate", (event) => {
 
 
 // ============================================================
-// FETCH — Network First OMEGA-5
+// FETCH — NETWORK FIRST
 // ============================================================
 
 self.addEventListener("fetch", (event) => {
   const req = event.request;
 
-  // No manejar POST / PUT / etc.
   if (req.method !== "GET") return;
 
-  const url = new URL(req.url);
+  const url =
+    new URL(req.url);
 
-  // No interceptar Supabase ni otros recursos externos.
-  if (url.origin !== self.location.origin) return;
+  if (
+    url.origin !==
+    self.location.origin
+  ) {
+    return;
+  }
 
   event.respondWith(
     fetch(req)
       .then((res) => {
 
-        // Cachear únicamente assets estáticos.
         if (
           res.ok &&
           req.url.includes("/static/")
@@ -121,7 +100,9 @@ self.addEventListener("fetch", (event) => {
           .match(req)
           .then((cached) => {
 
-            if (req.mode === "navigate") {
+            if (
+              req.mode === "navigate"
+            ) {
               return caches.match(
                 "/index.html"
               );
@@ -143,127 +124,46 @@ self.addEventListener("fetch", (event) => {
 
 
 // ============================================================
-// 🔎 OBTENER MENSAJE PUSH ACTIVO DESDE SUPABASE
-// ============================================================
-
-async function obtenerMensajePushActivo() {
-
-  const endpoint =
-    `${SUPABASE_URL}/rest/v1/shop_push_mensajes` +
-    `?select=titulo,mensaje,url,created_at` +
-    `&activo=eq.true` +
-    `&order=created_at.desc` +
-    `&limit=1`;
-
-
-  const respuesta =
-    await fetch(
-      endpoint,
-      {
-        method: "GET",
-
-        headers: {
-          apikey:
-            SUPABASE_PUBLISHABLE_KEY,
-
-          Accept:
-            "application/json"
-        },
-
-        // Evitar reutilizar una respuesta anterior.
-        cache: "no-store"
-      }
-    );
-
-
-  if (!respuesta.ok) {
-    throw new Error(
-      `Supabase Push respondió ${respuesta.status}`
-    );
-  }
-
-
-  const datos =
-    await respuesta.json();
-
-
-  if (
-    !Array.isArray(datos) ||
-    datos.length === 0
-  ) {
-    return null;
-  }
-
-
-  return datos[0];
-}
-
-
-// ============================================================
-// 🔔 PUSH REMOTO — PRUEBA FINAL DE TRÁNSITO
+// 🔔 PUSH — NOTIFICACIÓN DIRECTA
+// ------------------------------------------------------------
+// No depende de React.
+// No depende de Supabase.
+// No necesita que Shopper esté abierta.
 // ============================================================
 
 self.addEventListener("push", (event) => {
+
+  const titulo =
+    "El Shopper Digital";
+
+  const opciones = {
+    body:
+      "Tenemos una nueva novedad para ti en El Shopper Digital.",
+
+    icon:
+      "/icons/pwa/192.png",
+
+    badge:
+      "/icons/pwa/app-icon-96.png",
+
+    tag:
+      "shopper-push",
+
+    renotify:
+      true,
+
+    data: {
+      url: "/"
+    }
+  };
+
+
   event.waitUntil(
-    (async () => {
-      // ------------------------------------------------------
-      // 1. PRUEBA INMEDIATA
-      // Si aparece, sabemos que este Service Worker recibió
-      // físicamente el Push vacío.
-      // ------------------------------------------------------
-
-      await self.registration.showNotification(
-        "El Shopper Digital",
-        {
-          body: "Señal Push recibida. Consultando novedad...",
-          icon: "/icons/pwa/192.png",
-          badge: "/icons/pwa/app-icon-96.png",
-          tag: "shopper-prueba-transito",
-          renotify: true,
-          data: {
-            url: "/"
-          }
-        }
-      );
-
-      // ------------------------------------------------------
-      // 2. CONSULTAR MENSAJE REAL EN SUPABASE
-      // ------------------------------------------------------
-
-      try {
-        const aviso =
-          await obtenerMensajePushActivo();
-
-        if (!aviso) {
-          return;
-        }
-
-        await self.registration.showNotification(
-          aviso.titulo || "El Shopper Digital",
-          {
-            body:
-              aviso.mensaje ||
-              "Tenemos novedades para ti en El Shopper Digital.",
-
-            icon: "/icons/pwa/192.png",
-            badge: "/icons/pwa/app-icon-96.png",
-
-            tag: "shopper-nuevo-negocio",
-            renotify: true,
-
-            data: {
-              url: aviso.url || "/"
-            }
-          }
-        );
-
-      } catch (error) {
-        console.error(
-          "Error consultando mensaje Push:",
-          error
-        );
-      }
-    })()
+    self.registration
+      .showNotification(
+        titulo,
+        opciones
+      )
   );
 });
 
@@ -278,7 +178,6 @@ self.addEventListener(
 
     event.notification.close();
 
-
     const destino =
       event.notification?.data?.url ||
       "/";
@@ -292,12 +191,10 @@ self.addEventListener(
         })
         .then((clientes) => {
 
-          // --------------------------------------------------
-          // Si Shopper ya está abierta:
-          // navegar al destino y darle foco.
-          // --------------------------------------------------
-
-          for (const cliente of clientes) {
+          for (
+            const cliente
+            of clientes
+          ) {
 
             if (
               "focus" in cliente &&
@@ -306,7 +203,9 @@ self.addEventListener(
               )
             ) {
 
-              if ("navigate" in cliente) {
+              if (
+                "navigate" in cliente
+              ) {
                 cliente.navigate(
                   destino
                 );
@@ -317,15 +216,11 @@ self.addEventListener(
           }
 
 
-          // --------------------------------------------------
-          // Si Shopper está cerrada:
-          // abrir directamente el destino.
-          // --------------------------------------------------
-
-          if (self.clients.openWindow) {
-            return self.clients.openWindow(
-              destino
-            );
+          if (
+            self.clients.openWindow
+          ) {
+            return self.clients
+              .openWindow(destino);
           }
 
 
