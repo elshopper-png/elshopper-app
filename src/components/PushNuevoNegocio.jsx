@@ -119,24 +119,30 @@ useEffect(() => {
   // ==========================================================
 
   useEffect(() => {
-    if (!estaInstalada()) return;
-    // ==========================================================
-// 🧪 MODO LABORATORIO
-// Permite probar el consentimiento sin esperar 24 horas.
-// Solo funciona con ?pruebaPush=1
-// ==========================================================
+  // ========================================================
+  // 🧪 MODO LABORATORIO
+  // Funciona también desde navegador normal.
+  // Solo se activa expresamente con ?pruebaPush=1
+  // ========================================================
 
-const parametros =
-  new URLSearchParams(
-    window.location.search
-  );
+  const parametros =
+    new URLSearchParams(
+      window.location.search
+    );
 
-if (
-  parametros.get("pruebaPush") === "1"
-) {
-  setVisible(true);
-  return;
-}
+  if (
+    parametros.get("pruebaPush") === "1"
+  ) {
+    setVisible(true);
+    return;
+  }
+
+  // ========================================================
+  // PRODUCCIÓN NORMAL
+  // Aquí sí exigimos PWA instalada.
+  // ========================================================
+
+  if (!estaInstalada()) return;
 
     if (
       !("Notification" in window)
