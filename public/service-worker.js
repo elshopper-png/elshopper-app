@@ -1,10 +1,14 @@
 // ============================================================
 // 🛡 Service Worker OMEGA-5 — El Shopper Digital
-// PUSH DIAGNÓSTICO — PRUEBA CERO
+// 🔔 PUSH PRODUCCIÓN
 // ============================================================
 
-const CACHE_VERSION = "o25-v4-pushdiag";
-const STATIC_CACHE = `static-${CACHE_VERSION}`;
+const CACHE_VERSION =
+  "o25-v7-push-produccion";
+
+const STATIC_CACHE =
+  `static-${CACHE_VERSION}`;
+
 
 const ASSETS_TO_PRECACHE = [
   "/manifest.json",
@@ -17,323 +21,299 @@ const ASSETS_TO_PRECACHE = [
 // INSTALL
 // ============================================================
 
-self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches
-      .open(STATIC_CACHE)
-      .then((cache) =>
-        cache.addAll(ASSETS_TO_PRECACHE)
-      )
-  );
+self.addEventListener(
+  "install",
+  (event) => {
 
-  self.skipWaiting();
-});
+    event.waitUntil(
+      caches
+        .open(STATIC_CACHE)
+        .then((cache) =>
+          cache.addAll(
+            ASSETS_TO_PRECACHE
+          )
+        )
+    );
+
+    self.skipWaiting();
+  }
+);
 
 
 // ============================================================
 // ACTIVATE
 // ============================================================
 
-self.addEventListener("activate", (event) => {
-  event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(
-        keys
-          .filter(
-            (key) =>
-              key !== STATIC_CACHE &&
-              key !== "shopper-push-diagnostico"
-          )
-          .map((oldKey) =>
-            caches.delete(oldKey)
-          )
-      )
-    )
-  );
+self.addEventListener(
+  "activate",
+  (event) => {
 
-  self.clients.claim();
-});
+    event.waitUntil(
 
+      caches
+        .keys()
+        .then((keys) =>
+          Promise.all(
 
-// ============================================================
-// FETCH — Network First OMEGA-5
-// ============================================================
-
-self.addEventListener("fetch", (event) => {
-  const req = event.request;
-
-  if (req.method !== "GET") return;
-
-  const url = new URL(req.url);
-
-  if (url.origin !== self.location.origin) return;
-
-  event.respondWith(
-    fetch(req)
-      .then((res) => {
-        if (
-          res.ok &&
-          req.url.includes("/static/")
-        ) {
-          caches
-            .open(STATIC_CACHE)
-            .then((cache) =>
-              cache.put(
-                req,
-                res.clone()
+            keys
+              .filter(
+                (key) =>
+                  key !== STATIC_CACHE
               )
-            );
-        }
+              .map(
+                (oldKey) =>
+                  caches.delete(oldKey)
+              )
 
-        return res;
-      })
-      .catch(() => {
-        return caches
-          .match(req)
-          .then((cached) => {
+          )
+        )
 
-            if (
-              req.mode === "navigate"
-            ) {
-              return caches.match(
-                "/index.html"
+    );
+
+    self.clients.claim();
+  }
+);
+
+
+// ============================================================
+// FETCH — NETWORK FIRST
+// ============================================================
+
+self.addEventListener(
+  "fetch",
+  (event) => {
+
+    const req =
+      event.request;
+
+
+    if (
+      req.method !== "GET"
+    ) {
+      return;
+    }
+
+
+    const url =
+      new URL(req.url);
+
+
+    if (
+      url.origin !==
+      self.location.origin
+    ) {
+      return;
+    }
+
+
+    event.respondWith(
+
+      fetch(req)
+
+        .then((res) => {
+
+          if (
+            res.ok &&
+            req.url.includes(
+              "/static/"
+            )
+          ) {
+
+            caches
+              .open(STATIC_CACHE)
+              .then(
+                (cache) =>
+                  cache.put(
+                    req,
+                    res.clone()
+                  )
               );
-            }
-
-            return (
-              cached ||
-              new Response(
-                "Offline",
-                {
-                  status: 503
-                }
-              )
-            );
-          });
-      })
-  );
-});
+          }
 
 
-// ============================================================
-// 🧪 GUARDAR DIAGNÓSTICO DE PUSH
-// ============================================================
+          return res;
+        })
 
-async function guardarDiagnosticoPush(datos) {
 
-  const cache =
-    await caches.open(
-      "shopper-push-diagnostico"
+        .catch(() =>
+
+          caches
+            .match(req)
+            .then((cached) => {
+
+              if (
+                req.mode ===
+                "navigate"
+              ) {
+
+                return caches.match(
+                  "/index.html"
+                );
+              }
+
+
+              return (
+                cached ||
+                new Response(
+                  "Offline",
+                  {
+                    status: 503
+                  }
+                )
+              );
+
+            })
+
+        )
+
     );
-
-  const respuesta =
-    new Response(
-      JSON.stringify(datos),
-      {
-        headers: {
-          "Content-Type":
-            "application/json"
-        }
-      }
-    );
-
-  await cache.put(
-    "/shopper_push_diag",
-    respuesta
-  );
-}
+  }
+);
 
 
 // ============================================================
 // 🔔 PUSH REMOTO
 // ============================================================
 
-self.addEventListener("push", (event) => {
+self.addEventListener(
+  "push",
+  (event) => {
 
-  const recibidoEn =
-    new Date().toISOString();
-
-  let textoCrudo = "";
-  let data = {};
+    let data = {};
 
 
-  try {
+    try {
 
-    textoCrudo =
-      event.data
-        ? event.data.text()
-        : "";
+      data =
+        event.data
+          ? event.data.json()
+          : {};
 
-    data =
-      textoCrudo
-        ? JSON.parse(textoCrudo)
-        : {};
+    } catch (error) {
 
-  } catch (error) {
+      console.warn(
+        "Push recibido sin JSON válido:",
+        error
+      );
 
-    console.warn(
-      "Push recibido sin JSON válido:",
-      error
-    );
-
-    data = {};
-  }
-
-
-  const titulo =
-    data.titulo ||
-    "El Shopper Digital";
-
-
-  const mensaje =
-    data.mensaje ||
-    "Push remoto recibido correctamente.";
-
-
-  const destino =
-    data.url || "/";
-
-
-  const diagnostico = {
-    recibido: true,
-    recibidoEn,
-    tieneDatos:
-      Boolean(event.data),
-    textoCrudo
-  };
-
-
-  const opciones = {
-
-    body:
-      mensaje,
-
-    icon:
-      "/icons/pwa/192.png",
-
-    badge:
-      "/icons/pwa/app-icon-96.png",
-
-    tag:
-      "shopper-nuevo-negocio",
-
-    renotify:
-      true,
-
-    data: {
-      url:
-        destino
+      data = {};
     }
-  };
 
 
-  event.waitUntil(
-    Promise.all([
-
-      guardarDiagnosticoPush(
-        diagnostico
-      ),
-
-      self.registration
-        .showNotification(
-          titulo,
-          opciones
-        ),
-
-      self.clients
-        .matchAll({
-          type: "window",
-          includeUncontrolled: true
-        })
-        .then((clientes) => {
-
-          clientes.forEach(
-            (cliente) => {
-
-              cliente.postMessage({
-                type:
-                  "SHOPPER_PUSH_RECIBIDO",
-
-                diagnostico
-              });
-
-            }
-          );
-        })
-
-    ])
-  );
-});
+    const titulo =
+      data.titulo ||
+      "El Shopper Digital";
 
 
-// ============================================================
-// 📡 CONSULTAR DIAGNÓSTICO DESDE CRA
-// ============================================================
-
-self.addEventListener("message", (event) => {
-
-  if (
-    !event.data ||
-    event.data.type !==
-      "SHOPPER_PEDIR_DIAGNOSTICO_PUSH"
-  ) {
-    return;
-  }
+    const mensaje =
+      data.mensaje ||
+      "Tenemos una novedad para ti en El Shopper Digital.";
 
 
-  event.waitUntil(
-
-    caches
-      .open(
-        "shopper-push-diagnostico"
-      )
-
-      .then((cache) =>
-        cache.match(
-          "/shopper_push_diag"
-        )
-      )
-
-      .then(async (respuesta) => {
-
-        const diagnostico =
-          respuesta
-            ? await respuesta.json()
-            : {
-                recibido: false
-              };
+    const destino =
+      data.url || "/";
 
 
-        const mensaje = {
-          type:
-            "SHOPPER_DIAGNOSTICO_PUSH",
+    event.waitUntil(
+      (async () => {
 
-          diagnostico
-        };
+        // ====================================================
+        // BUSCAR SHOPPER ABIERTA
+        // ====================================================
+
+        const clientes =
+          await self.clients.matchAll({
+            type: "window",
+            includeUncontrolled: true
+          });
 
 
-        if (
-          event.ports &&
-          event.ports[0]
+        let shopperVisible =
+          false;
+
+
+        for (
+          const cliente
+          of clientes
         ) {
-          event.ports[0]
-            .postMessage(
-              mensaje
-            );
 
-          return;
+          if (
+            cliente.url.startsWith(
+              self.location.origin
+            ) &&
+            cliente.visibilityState ===
+              "visible"
+          ) {
+
+            shopperVisible =
+              true;
+
+
+            // -----------------------------------------------
+            // Shopper abierta:
+            // React podrá mostrar su propia ventana.
+            // -----------------------------------------------
+
+            cliente.postMessage({
+              type:
+                "SHOPPER_NUEVO_ANUNCIANTE",
+
+              titulo,
+              mensaje,
+              url:
+                destino
+            });
+          }
         }
 
 
-        if (event.source) {
-          event.source
-            .postMessage(
-              mensaje
+        // ====================================================
+        // SHOPPER CERRADA / NO VISIBLE
+        // Mostrar notificación del sistema.
+        // ====================================================
+
+        if (!shopperVisible) {
+
+          await self.registration
+            .showNotification(
+              titulo,
+              {
+                body:
+                  mensaje,
+
+                icon:
+                  "/icons/pwa/192.png",
+
+                badge:
+                  "/icons/pwa/app-icon-96.png",
+
+                // -------------------------------------------
+                // No usamos un tag fijo.
+                // Cada anunciante puede generar
+                // su propia notificación.
+                // -------------------------------------------
+
+                tag:
+                  `shopper-${Date.now()}`,
+
+                silent:
+                  false,
+
+                timestamp:
+                  Date.now(),
+
+                data: {
+                  url:
+                    destino
+                }
+              }
             );
         }
-      })
-  );
-});
+
+      })()
+    );
+  }
+);
 
 
 // ============================================================
@@ -348,7 +328,9 @@ self.addEventListener(
 
 
     const destino =
-      event.notification?.data?.url ||
+      event.notification
+        ?.data
+        ?.url ||
       "/";
 
 
@@ -360,45 +342,59 @@ self.addEventListener(
           includeUncontrolled: true
         })
 
-        .then((clientes) => {
+        .then(
+          async (clientes) => {
 
-          for (
-            const cliente
-            of clientes
-          ) {
-
-            if (
-              "focus" in cliente &&
-              cliente.url.startsWith(
-                self.location.origin
-              )
+            for (
+              const cliente
+              of clientes
             ) {
 
               if (
-                "navigate" in cliente
+                cliente.url.startsWith(
+                  self.location.origin
+                )
               ) {
-                cliente.navigate(
+
+                if (
+                  "navigate"
+                  in cliente
+                ) {
+
+                  await cliente
+                    .navigate(
+                      destino
+                    );
+                }
+
+
+                if (
+                  "focus"
+                  in cliente
+                ) {
+
+                  return cliente
+                    .focus();
+                }
+              }
+            }
+
+
+            if (
+              self.clients.openWindow
+            ) {
+
+              return self.clients
+                .openWindow(
                   destino
                 );
-              }
-
-              return cliente.focus();
             }
+
+
+            return null;
           }
+        )
 
-
-          if (
-            self.clients.openWindow
-          ) {
-            return self.clients
-              .openWindow(
-                destino
-              );
-          }
-
-
-          return null;
-        })
     );
   }
 );

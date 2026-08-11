@@ -54,6 +54,9 @@ export default function PushNuevoNegocio() {
   const [procesando, setProcesando] =
     useState(false);
 
+    const [nuevoAnunciante, setNuevoAnunciante] =
+  useState(null);
+
 
   // ==========================================================
   // 🔔 CONTROL UNIVERSAL DEL ESTADO PUSH
@@ -111,6 +114,62 @@ export default function PushNuevoNegocio() {
 
         return;
       }
+
+      // ==========================================================
+// 🔔 NUEVO ANUNCIANTE — SHOPPER ABIERTA
+// ==========================================================
+
+useEffect(() => {
+
+  if (
+    !("serviceWorker" in navigator)
+  ) {
+    return;
+  }
+
+  const recibirMensaje = (event) => {
+
+    if (
+      !event.data ||
+      event.data.type !==
+        "SHOPPER_NUEVO_ANUNCIANTE"
+    ) {
+      return;
+    }
+
+    setNuevoAnunciante({
+      titulo:
+        event.data.titulo ||
+        "El Shopper Digital",
+
+      mensaje:
+        event.data.mensaje ||
+        "Tenemos un nuevo anunciante.",
+
+      url:
+        event.data.url ||
+        "/"
+    });
+  };
+
+
+  navigator.serviceWorker
+    .addEventListener(
+      "message",
+      recibirMensaje
+    );
+
+
+  return () => {
+
+    navigator.serviceWorker
+      .removeEventListener(
+        "message",
+        recibirMensaje
+      );
+  };
+
+}, []);
 
 
       // ======================================================
@@ -305,6 +364,72 @@ export default function PushNuevoNegocio() {
 
     setVisible(false);
   };
+
+  if (nuevoAnunciante) {
+
+  const verAnunciante = () => {
+
+    const destino =
+      nuevoAnunciante.url || "/";
+
+    setNuevoAnunciante(null);
+
+    window.location.href =
+      destino;
+  };
+
+
+  const cerrarNuevoAnunciante = () => {
+
+    setNuevoAnunciante(null);
+  };
+
+
+  return (
+    <div style={styles.fondo}>
+
+      <div style={styles.tarjeta}>
+
+        <p style={styles.pregunta}>
+          {nuevoAnunciante.titulo}
+        </p>
+
+        <p
+          style={{
+            margin:
+              "0 0 22px",
+            color:
+              "#444",
+            fontSize:
+              17,
+            lineHeight:
+              1.45
+          }}
+        >
+          {nuevoAnunciante.mensaje}
+        </p>
+
+        <button
+          type="button"
+          style={styles.si}
+          onClick={verAnunciante}
+        >
+          Ver anunciante
+        </button>
+
+        <button
+          type="button"
+          style={styles.no}
+          onClick={cerrarNuevoAnunciante}
+        >
+          Cerrar
+        </button>
+
+      </div>
+
+    </div>
+  );
+}
 
 
   if (!visible) {
