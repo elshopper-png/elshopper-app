@@ -1,15 +1,13 @@
 // ============================================================
 // 🔔 PushNuevoNegocio.jsx — Invitación Push Shopper Digital
-// PRODUCCIÓN — SUSCRIPCIÓN REAL COMO FUENTE DE VERDAD
+// PRODUCCIÓN LIMPIA
 // ============================================================
 
 import React, { useEffect, useState } from "react";
 
 import {
   suscribirPushShopper,
-  sincronizarPushShopper,
-  identificarSuscripcionPushShopper,
-  probarNotificacionLocalShopper
+  sincronizarPushShopper
 } from "../utils/pushShopper";
 
 
@@ -56,105 +54,6 @@ export default function PushNuevoNegocio() {
   const [procesando, setProcesando] =
     useState(false);
 
-    // ==========================================================
-// 🧪 DIAGNÓSTICO TEMPORAL PUSH
-// Solo funciona con ?diagPush=1
-// ==========================================================
-
-useEffect(() => {
-
-  const diagnosticar = async () => {
-
-    const parametros =
-      new URLSearchParams(
-        window.location.search
-      );
-
-    if (
-      parametros.get("diagPush") !== "1"
-    ) {
-      return;
-    }
-
-    const resultado =
-      await identificarSuscripcionPushShopper();
-
-    alert(
-      "HUELLA PUSH ACTUAL\n" +
-      JSON.stringify(resultado)
-    );
-  };
-
-  diagnosticar();
-
-}, [])
-
-// ==========================================================
-// 🧪 PRUEBA LOCAL DE NOTIFICACIÓN
-// Solo funciona con ?diagLocal=1
-// ==========================================================
-
-useEffect(() => {
-
-  const probarLocal = async () => {
-
-    const parametros =
-      new URLSearchParams(
-        window.location.search
-      );
-
-    if (
-      parametros.get("diagLocal") !== "1"
-    ) {
-      return;
-    }
-
-    const resultado =
-      await probarNotificacionLocalShopper();
-
-    alert(
-      "NOTIFICACIÓN LOCAL\n" +
-      JSON.stringify(resultado)
-    );
-  };
-
-  probarLocal();
-
-}, []);
-
-// ==========================================================
-// 🧪 DIAGNÓSTICO TEMPORAL PUSH
-// Solo funciona con ?diagPush=1
-// ==========================================================
-
-useEffect(() => {
-
-  const diagnosticar = async () => {
-
-    const parametros =
-      new URLSearchParams(
-        window.location.search
-      );
-
-    if (
-      parametros.get("diagPush") !== "1"
-    ) {
-      return;
-    }
-
-    const resultado =
-      await identificarSuscripcionPushShopper();
-
-    alert(
-      "HUELLA PUSH ACTUAL\n" +
-      JSON.stringify(resultado)
-    );
-  };
-
-  diagnosticar();
-
-}, []);
-
 
   // ==========================================================
   // 🔔 CONTROL UNIVERSAL DEL ESTADO PUSH
@@ -167,19 +66,13 @@ useEffect(() => {
 
     const comprobarPush = async () => {
 
-      // ------------------------------------------------------
-      // Solo PWA instalada
-      // ------------------------------------------------------
-
+      // Solo PWA instalada.
       if (!estaInstalada()) {
         return;
       }
 
 
-      // ------------------------------------------------------
-      // Comprobar capacidades
-      // ------------------------------------------------------
-
+      // Comprobar capacidades.
       if (
         !("Notification" in window) ||
         !("serviceWorker" in navigator) ||
@@ -189,11 +82,8 @@ useEffect(() => {
       }
 
 
-      // ------------------------------------------------------
       // Si el usuario bloqueó las notificaciones,
       // no insistimos.
-      // ------------------------------------------------------
-
       if (
         Notification.permission ===
         "denied"
@@ -202,10 +92,7 @@ useEffect(() => {
       }
 
 
-      // ------------------------------------------------------
-      // Esperar Service Worker activo
-      // ------------------------------------------------------
-
+      // Esperar Service Worker activo.
       let registration;
 
       try {
@@ -226,10 +113,10 @@ useEffect(() => {
       }
 
 
-      // ------------------------------------------------------
+      // ======================================================
       // FUENTE DE VERDAD:
-      // comprobar PushSubscription REAL.
-      // ------------------------------------------------------
+      // PushSubscription REAL.
+      // ======================================================
 
       let subscription;
 
@@ -257,22 +144,20 @@ useEffect(() => {
 
 
       // ======================================================
-      // CASO 1:
-      // Existe una suscripción real.
-      // No mostramos ninguna invitación.
+      // EXISTE SUSCRIPCIÓN REAL
       // ======================================================
 
       if (subscription) {
 
-        // Reparar estado local si hiciera falta.
         localStorage.setItem(
           ACEPTADO,
           "1"
         );
 
-        // Volver a sincronizarla con Supabase.
+
         const resultado =
           await sincronizarPushShopper();
+
 
         console.log(
           "🔄 Push vigente sincronizado:",
@@ -284,21 +169,13 @@ useEffect(() => {
 
 
       // ======================================================
-      // CASO 2:
-      // NO existe PushSubscription.
-      //
-      // Aunque localStorage diga ACEPTADO=1,
-      // ya NO lo consideramos suscrito.
+      // NO EXISTE SUSCRIPCIÓN REAL
       // ======================================================
 
       localStorage.removeItem(
         ACEPTADO
       );
 
-
-      // ------------------------------------------------------
-      // Comprobar antigüedad de instalación/apertura
-      // ------------------------------------------------------
 
       const ahora =
         Date.now();
@@ -313,7 +190,7 @@ useEffect(() => {
 
 
       // Primera apertura:
-      // registrar momento y no molestar.
+      // guardar momento y no mostrar todavía.
       if (!primera) {
 
         localStorage.setItem(
@@ -325,10 +202,7 @@ useEffect(() => {
       }
 
 
-      // ------------------------------------------------------
-      // Esperar 24 horas reales
-      // ------------------------------------------------------
-
+      // Esperar 24 horas.
       if (
         ahora - primera < UN_DIA
       ) {
@@ -336,11 +210,7 @@ useEffect(() => {
       }
 
 
-      // ------------------------------------------------------
-      // Si eligió "Ahora no",
-      // respetar los siete días.
-      // ------------------------------------------------------
-
+      // Respetar "Ahora no".
       const pospuestoHasta =
         Number(
           localStorage.getItem(
@@ -356,13 +226,7 @@ useEffect(() => {
       }
 
 
-      // ======================================================
-      // No existe suscripción real,
-      // pasaron 24 horas
-      // y no está pospuesto:
-      // mostrar nuestra invitación.
-      // ======================================================
-
+      // Mostrar invitación real.
       if (!cancelado) {
         setVisible(true);
       }
@@ -405,12 +269,6 @@ useEffect(() => {
 
     if (resultado.ok) {
 
-      // ------------------------------------------------------
-      // Solo marcamos ACEPTADO después de que
-      // suscribirPushShopper confirmó una suscripción real
-      // y la guardó en Supabase.
-      // ------------------------------------------------------
-
       localStorage.setItem(
         ACEPTADO,
         "1"
@@ -448,10 +306,6 @@ useEffect(() => {
     setVisible(false);
   };
 
-
-  // ==========================================================
-  // SIN INVITACIÓN
-  // ==========================================================
 
   if (!visible) {
     return null;
