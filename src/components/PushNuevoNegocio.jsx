@@ -127,7 +127,10 @@ useEffect(() => {
     return;
   }
 
-  const recibirMensaje = (event) => {
+  const recibirMensaje = (event) => { alert(
+  "MENSAJE SW → REACT: " +
+  JSON.stringify(event.data)
+);
 
     if (
       !event.data ||
