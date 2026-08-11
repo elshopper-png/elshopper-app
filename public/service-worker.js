@@ -238,12 +238,14 @@ self.addEventListener(
         ) {
 
           if (
-            cliente.url.startsWith(
-              self.location.origin
-            ) &&
-            cliente.visibilityState ===
-              "visible"
-          ) {
+  cliente.url.startsWith(
+    self.location.origin
+  ) &&
+  (
+    cliente.focused === true ||
+    cliente.visibilityState === "visible"
+  )
+) {
 
             shopperVisible =
               true;
