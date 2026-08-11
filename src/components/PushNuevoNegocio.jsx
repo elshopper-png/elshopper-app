@@ -1,14 +1,13 @@
 // ============================================================
 // 🔔 PushNuevoNegocio.jsx — Invitación Push Shopper Digital
-// PRODUCCIÓN + MODO LABORATORIO LIMPIO
+// PRODUCCIÓN — SUSCRIPCIÓN REAL COMO FUENTE DE VERDAD
 // ============================================================
 
 import React, { useEffect, useState } from "react";
 
 import {
   suscribirPushShopper,
-  sincronizarPushShopper,
-  identificarSuscripcionPushShopper
+  sincronizarPushShopper
 } from "../utils/pushShopper";
 
 
@@ -57,210 +56,224 @@ export default function PushNuevoNegocio() {
 
 
   // ==========================================================
-  // 🔄 SINCRONIZACIÓN SILENCIOSA UNIVERSAL
+  // 🔔 CONTROL UNIVERSAL DEL ESTADO PUSH
   // ==========================================================
 
   useEffect(() => {
 
-    const sincronizar = async () => {
+    let cancelado = false;
 
-      if (!estaInstalada()) return;
 
-      if (
-        !("Notification" in window)
-      ) {
+    const comprobarPush = async () => {
+
+      // ------------------------------------------------------
+      // Solo PWA instalada
+      // ------------------------------------------------------
+
+      if (!estaInstalada()) {
         return;
       }
 
-      if (
-        Notification.permission !==
-        "granted"
-      ) {
-        return;
-      }
 
-      const resultado =
-        await sincronizarPushShopper();
-
-      console.log(
-        "🔄 Sincronización Push:",
-        resultado
-      );
-    };
-
-    sincronizar();
-
-  }, []);
-
-  useEffect(() => {
-  const diagnosticar = async () => {
-    const parametros =
-      new URLSearchParams(
-        window.location.search
-      );
-
-    if (
-      parametros.get("diagPush") !== "1"
-    ) {
-      return;
-    }
-
-    const resultado =
-      await identificarSuscripcionPushShopper();
-
-    alert(
-      "HUELLA PUSH ACTUAL\n" +
-      JSON.stringify(resultado)
-    );
-  };
-
-  diagnosticar();
-}, []);
-
-
-  // ==========================================================
-  // 🔔 INVITACIÓN PUSH
-  // Producción: después de 24 horas.
-  // Laboratorio: ?pruebaPush=1 muestra la misma invitación.
-  // ==========================================================
-
-  useEffect(() => {
-
-    // --------------------------------------------------------
-    // MODO LABORATORIO
-    // --------------------------------------------------------
-
-    const parametros =
-      new URLSearchParams(
-        window.location.search
-      );
-
-    if (
-      parametros.get("pruebaPush") === "1"
-    ) {
-
-      // Comprobar capacidades mínimas antes de mostrar.
-      if (
-        !("Notification" in window)
-      ) {
-        return;
-      }
+      // ------------------------------------------------------
+      // Comprobar capacidades
+      // ------------------------------------------------------
 
       if (
-        !("serviceWorker" in navigator)
-      ) {
-        return;
-      }
-
-      if (
+        !("Notification" in window) ||
+        !("serviceWorker" in navigator) ||
         !("PushManager" in window)
       ) {
         return;
       }
 
-      setVisible(true);
-      return;
-    }
+
+      // ------------------------------------------------------
+      // Si el usuario bloqueó las notificaciones,
+      // no insistimos.
+      // ------------------------------------------------------
+
+      if (
+        Notification.permission ===
+        "denied"
+      ) {
+        return;
+      }
 
 
-    // --------------------------------------------------------
-    // PRODUCCIÓN NORMAL
-    // --------------------------------------------------------
+      // ------------------------------------------------------
+      // Esperar Service Worker activo
+      // ------------------------------------------------------
 
-    if (!estaInstalada()) return;
+      let registration;
 
+      try {
 
-    if (
-      !("Notification" in window)
-    ) {
-      return;
-    }
+        registration =
+          await navigator
+            .serviceWorker
+            .ready;
 
+      } catch (error) {
 
-    if (
-      !("serviceWorker" in navigator)
-    ) {
-      return;
-    }
+        console.error(
+          "❌ No se pudo obtener Service Worker:",
+          error
+        );
 
-
-    if (
-      !("PushManager" in window)
-    ) {
-      return;
-    }
+        return;
+      }
 
 
-    // Ya aceptó.
-    if (
-      localStorage.getItem(
+      // ------------------------------------------------------
+      // FUENTE DE VERDAD:
+      // comprobar PushSubscription REAL.
+      // ------------------------------------------------------
+
+      let subscription;
+
+      try {
+
+        subscription =
+          await registration
+            .pushManager
+            .getSubscription();
+
+      } catch (error) {
+
+        console.error(
+          "❌ No se pudo comprobar PushSubscription:",
+          error
+        );
+
+        return;
+      }
+
+
+      if (cancelado) {
+        return;
+      }
+
+
+      // ======================================================
+      // CASO 1:
+      // Existe una suscripción real.
+      // No mostramos ninguna invitación.
+      // ======================================================
+
+      if (subscription) {
+
+        // Reparar estado local si hiciera falta.
+        localStorage.setItem(
+          ACEPTADO,
+          "1"
+        );
+
+        // Volver a sincronizarla con Supabase.
+        const resultado =
+          await sincronizarPushShopper();
+
+        console.log(
+          "🔄 Push vigente sincronizado:",
+          resultado
+        );
+
+        return;
+      }
+
+
+      // ======================================================
+      // CASO 2:
+      // NO existe PushSubscription.
+      //
+      // Aunque localStorage diga ACEPTADO=1,
+      // ya NO lo consideramos suscrito.
+      // ======================================================
+
+      localStorage.removeItem(
         ACEPTADO
-      ) === "1"
-    ) {
-      return;
-    }
-
-
-    // Bloqueó las notificaciones.
-    if (
-      Notification.permission ===
-      "denied"
-    ) {
-      return;
-    }
-
-
-    const ahora =
-      Date.now();
-
-
-    const primera =
-      Number(
-        localStorage.getItem(
-          PRIMERA_APERTURA
-        ) || 0
       );
 
 
-    // Primera apertura:
-    // guardar fecha y salir.
-    if (!primera) {
+      // ------------------------------------------------------
+      // Comprobar antigüedad de instalación/apertura
+      // ------------------------------------------------------
 
-      localStorage.setItem(
-        PRIMERA_APERTURA,
-        String(ahora)
-      );
-
-      return;
-    }
+      const ahora =
+        Date.now();
 
 
-    // Esperar 24 horas.
-    if (
-      ahora - primera < UN_DIA
-    ) {
-      return;
-    }
+      const primera =
+        Number(
+          localStorage.getItem(
+            PRIMERA_APERTURA
+          ) || 0
+        );
 
 
-    // Si eligió "Ahora no",
-    // esperar 7 días.
-    const pospuestoHasta =
-      Number(
-        localStorage.getItem(
-          POSPUESTO_HASTA
-        ) || 0
-      );
+      // Primera apertura:
+      // registrar momento y no molestar.
+      if (!primera) {
+
+        localStorage.setItem(
+          PRIMERA_APERTURA,
+          String(ahora)
+        );
+
+        return;
+      }
 
 
-    if (
-      ahora < pospuestoHasta
-    ) {
-      return;
-    }
+      // ------------------------------------------------------
+      // Esperar 24 horas reales
+      // ------------------------------------------------------
+
+      if (
+        ahora - primera < UN_DIA
+      ) {
+        return;
+      }
 
 
-    setVisible(true);
+      // ------------------------------------------------------
+      // Si eligió "Ahora no",
+      // respetar los siete días.
+      // ------------------------------------------------------
+
+      const pospuestoHasta =
+        Number(
+          localStorage.getItem(
+            POSPUESTO_HASTA
+          ) || 0
+        );
+
+
+      if (
+        ahora < pospuestoHasta
+      ) {
+        return;
+      }
+
+
+      // ======================================================
+      // No existe suscripción real,
+      // pasaron 24 horas
+      // y no está pospuesto:
+      // mostrar nuestra invitación.
+      // ======================================================
+
+      if (!cancelado) {
+        setVisible(true);
+      }
+    };
+
+
+    comprobarPush();
+
+
+    return () => {
+      cancelado = true;
+    };
 
   }, []);
 
@@ -271,7 +284,9 @@ export default function PushNuevoNegocio() {
 
   const aceptar = async () => {
 
-    if (procesando) return;
+    if (procesando) {
+      return;
+    }
 
 
     setProcesando(true);
@@ -281,16 +296,30 @@ export default function PushNuevoNegocio() {
       await suscribirPushShopper();
 
 
+    console.log(
+      "🔔 Resultado suscripción Push:",
+      resultado
+    );
+
+
     if (resultado.ok) {
+
+      // ------------------------------------------------------
+      // Solo marcamos ACEPTADO después de que
+      // suscribirPushShopper confirmó una suscripción real
+      // y la guardó en Supabase.
+      // ------------------------------------------------------
 
       localStorage.setItem(
         ACEPTADO,
         "1"
       );
 
+
       localStorage.removeItem(
         POSPUESTO_HASTA
       );
+
 
       setVisible(false);
     }
@@ -314,11 +343,18 @@ export default function PushNuevoNegocio() {
       )
     );
 
+
     setVisible(false);
   };
 
 
-  if (!visible) return null;
+  // ==========================================================
+  // SIN INVITACIÓN
+  // ==========================================================
+
+  if (!visible) {
+    return null;
+  }
 
 
   // ==========================================================
