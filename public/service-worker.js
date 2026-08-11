@@ -4,7 +4,7 @@
 // ============================================================
 
 const CACHE_VERSION =
-  "o25-v7-push-produccion";
+  "o25-v8-push-dual";
 
 const STATIC_CACHE =
   `static-${CACHE_VERSION}`;
@@ -222,14 +222,77 @@ self.addEventListener(
         // ====================================================
 
         const clientes =
-          await self.clients.matchAll({
-            type: "window",
-            includeUncontrolled: true
-          });
+  await self.clients.matchAll({
+    type: "window",
+    includeUncontrolled: true
+  });
 
 
-        let shopperVisible =
-          false;
+// ====================================================
+// 1. AVISAR SIEMPRE A SHOPPER SI ESTÁ ABIERTA
+// ----------------------------------------------------
+// No dependemos de focused ni visibilityState.
+// Si existe una ventana de Shopper, React recibe
+// el mensaje y muestra nuestra tarjeta interna.
+// ====================================================
+
+for (const cliente of clientes) {
+
+  if (
+    cliente.url.startsWith(
+      self.location.origin
+    )
+  ) {
+
+    cliente.postMessage({
+      type:
+        "SHOPPER_NUEVO_ANUNCIANTE",
+
+      titulo,
+      mensaje,
+
+      url:
+        destino
+    });
+  }
+}
+
+
+// ====================================================
+// 2. MOSTRAR SIEMPRE NOTIFICACIÓN DEL SISTEMA
+// ----------------------------------------------------
+// Funciona con Shopper abierta o cerrada.
+// Android decide sonido, badge, bandeja y heads-up.
+// ====================================================
+
+await self.registration
+  .showNotification(
+    titulo,
+    {
+      body:
+        mensaje,
+
+      icon:
+        "/icons/pwa/192.png",
+
+      badge:
+        "/icons/pwa/app-icon-96.png",
+
+      tag:
+        `shopper-${Date.now()}`,
+
+      silent:
+        false,
+
+      timestamp:
+        Date.now(),
+
+      data: {
+        url:
+          destino
+      }
+    }
+  );
 
 
         for (
