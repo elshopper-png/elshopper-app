@@ -319,15 +319,33 @@ await self.registration
             // React podrá mostrar su propia ventana.
             // -----------------------------------------------
 
-            cliente.postMessage({
-              type:
-                "SHOPPER_NUEVO_ANUNCIANTE",
+            try {
 
-              titulo,
-              mensaje,
-              url:
-                destino
-            });
+  const canalShopper =
+    new BroadcastChannel(
+      "shopper-push-interno"
+    );
+
+  canalShopper.postMessage({
+    type:
+      "SHOPPER_NUEVO_ANUNCIANTE",
+
+    titulo,
+    mensaje,
+
+    url:
+      destino
+  });
+
+  canalShopper.close();
+
+} catch (error) {
+
+  console.warn(
+    "No se pudo enviar aviso interno:",
+    error
+  );
+}
           }
         }
 
