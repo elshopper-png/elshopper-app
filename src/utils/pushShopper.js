@@ -674,3 +674,90 @@ export async function identificarSuscripcionPushShopper() {
     };
   }
 }
+
+// ============================================================
+// 🧪 PRUEBA LOCAL DE NOTIFICACIÓN
+// No usa FCM.
+// No usa Supabase.
+// No usa Push remoto.
+// ============================================================
+
+export async function probarNotificacionLocalShopper() {
+  try {
+
+    if (
+      !("Notification" in window)
+    ) {
+      return {
+        ok: false,
+        motivo: "sin-notification-api"
+      };
+    }
+
+    if (
+      Notification.permission !== "granted"
+    ) {
+      return {
+        ok: false,
+        motivo: "permiso-no-concedido",
+        permiso: Notification.permission
+      };
+    }
+
+    if (
+      !("serviceWorker" in navigator)
+    ) {
+      return {
+        ok: false,
+        motivo: "sin-service-worker"
+      };
+    }
+
+    const registration =
+      await navigator.serviceWorker.ready;
+
+    await registration.showNotification(
+      "El Shopper Digital",
+      {
+        body:
+          "Prueba local de notificación Shopper.",
+
+        icon:
+          "/icons/pwa/192.png",
+
+        badge:
+          "/icons/pwa/app-icon-96.png",
+
+        tag:
+          "shopper-prueba-local",
+
+        renotify:
+          true,
+
+        data: {
+          url: "/"
+        }
+      }
+    );
+
+    return {
+      ok: true,
+      mostrada: true
+    };
+
+  } catch (error) {
+
+    console.error(
+      "❌ Error prueba local:",
+      error
+    );
+
+    return {
+      ok: false,
+      motivo: "error",
+      mensaje:
+        error?.message ||
+        String(error)
+    };
+  }
+}

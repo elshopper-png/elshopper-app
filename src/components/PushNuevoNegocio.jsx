@@ -8,7 +8,8 @@ import React, { useEffect, useState } from "react";
 import {
   suscribirPushShopper,
   sincronizarPushShopper,
-  identificarSuscripcionPushShopper
+  identificarSuscripcionPushShopper,
+  probarNotificacionLocalShopper
 } from "../utils/pushShopper";
 
 
@@ -87,6 +88,40 @@ useEffect(() => {
   diagnosticar();
 
 }, [])
+
+// ==========================================================
+// 🧪 PRUEBA LOCAL DE NOTIFICACIÓN
+// Solo funciona con ?diagLocal=1
+// ==========================================================
+
+useEffect(() => {
+
+  const probarLocal = async () => {
+
+    const parametros =
+      new URLSearchParams(
+        window.location.search
+      );
+
+    if (
+      parametros.get("diagLocal") !== "1"
+    ) {
+      return;
+    }
+
+    const resultado =
+      await probarNotificacionLocalShopper();
+
+    alert(
+      "NOTIFICACIÓN LOCAL\n" +
+      JSON.stringify(resultado)
+    );
+  };
+
+  probarLocal();
+
+}, []);
+
 // ==========================================================
 // 🧪 DIAGNÓSTICO TEMPORAL PUSH
 // Solo funciona con ?diagPush=1
