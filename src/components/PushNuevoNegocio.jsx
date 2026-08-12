@@ -14,7 +14,6 @@ const PRIMERA_APERTURA = "SHOPPER_PUSH_PRIMERA_APERTURA";
 const POSPUESTO_HASTA = "SHOPPER_PUSH_POSPUESTO_HASTA";
 const ACEPTADO = "SHOPPER_PUSH_ACEPTADO";
 
-const UN_DIA = 24 * 60 * 60 * 1000;
 const SIETE_DIAS = 7 * 24 * 60 * 60 * 1000;
 
 function estaInstalada() {
@@ -91,9 +90,6 @@ export default function PushNuevoNegocio() {
         return;
       }
 
-      if (ahora - primera < UN_DIA) {
-        return;
-      }
 
       const pospuestoHasta = Number(
         localStorage.getItem(POSPUESTO_HASTA) || 0
