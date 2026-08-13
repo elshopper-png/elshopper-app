@@ -6,6 +6,8 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import ReactGA from "react-ga4";
 
+import NotificarNuevoAnunciante from "./components/NotificarNuevoAnunciante";
+
 import HomeBase from "./core/HomeBase.jsx";
 import TarjetasPage from "./fase_2/core/TarjetasPage.jsx";
 import AtlashVisor from "./AtlashVisor.jsx";
@@ -13,6 +15,7 @@ import EnlacePage from "./core/EnlacePage.jsx";
 
 import PWABanner from "./components/PWABanner";
 import PushNuevoNegocio from "./components/PushNuevoNegocio";
+
 
 // ============================================================
 // 📊 Tracker automático de rutas GA4
@@ -31,6 +34,7 @@ function AnalyticsTracker() {
 
   return null;
 }
+
 
 // ============================================================
 // 🚀 Router principal
@@ -53,13 +57,19 @@ export default function AppRouter() {
 
         {/* 🔥 Visor ATLASH */}
         <Route path="/atlash/:slug" element={<AtlashVisor />} />
+
+        {/* 🔐 Administración — Push nuevo anunciante */}
+        <Route
+          path="/admin/notificar-nuevo"
+          element={<NotificarNuevoAnunciante />}
+        />
       </Routes>
 
       {/* 📲 Banner PWA global */}
       <PWABanner />
 
       {/* 🔔 Aviso de nuevos anunciantes */}
-<PushNuevoNegocio />
+      <PushNuevoNegocio />
     </>
   );
 }
