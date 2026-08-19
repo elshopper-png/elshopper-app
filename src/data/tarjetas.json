@@ -336,6 +336,10 @@
     ]
   },
 
+
+
+  
+
   {
     "giroSlug": "veterinarias-petshop",
     "giro": "Veterinarias & Pet Shop",
@@ -364,6 +368,13 @@
     ]
   },
 
+  {
+  "nombre": "Inmobiliaria Acosta",
+  "descripcion": "Proyecto residencial Parque COOPIP.",
+  "imagen": "/fase_2/tarjetas/inmobiliarias/card3.png",
+  "slug": "inmobiliaria_acosta",
+  "whatsapp": "51962025355"
+},
   {
     "giroSlug": "construccion-acabados",
     "giro": "Construcción & Acabados",
