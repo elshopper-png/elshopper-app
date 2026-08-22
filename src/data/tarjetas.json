@@ -377,16 +377,23 @@
 
   
   {
-    "giroSlug": "construccion-acabados",
-    "giro": "Construcción & Acabados",
-    "tarjetas": [
-      {
-        "nombre": "Elevarq Arquitectura e Inmobiliaria",
-        "descripcion": "Arquitectura personalizada, supervisión, ampliaciones y diseño eficiente.",
-        "imagen": "/fase_2/tarjetas/construccion-acabados/card.png",
-        "slug": "elevarq",
-        "whatsapp": ""
-      }
-    ]
-  }
+  "giroSlug": "construccion-acabados",
+  "giro": "Construcción & Acabados",
+  "tarjetas": [
+    {
+      "nombre": "Elevarq Arquitectura e Inmobiliaria",
+      "descripcion": "Arquitectura personalizada, supervisión, ampliaciones y diseño eficiente.",
+      "imagen": "/fase_2/tarjetas/construccion-acabados/card.png",
+      "slug": "elevarq",
+      "whatsapp": ""
+    },
+    {
+      "nombre": "JS",
+      "descripcion": "Mantenimiento, instalaciones eléctricas, sistemas de seguridad, redes y obras civiles.",
+      "imagen": "/fase_2/tarjetas/construccion-acabados/card1.png",
+      "slug": "js_instalaciones",
+      "whatsapp": ""
+    }
+  ]
+}
 ]
