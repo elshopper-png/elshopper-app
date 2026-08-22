@@ -1,6 +1,6 @@
 [
   { "nombre": "Belleza & SPA", "emoji": "💅", "color": "#FF006E", "slug": "belleza-spa" },
-  { "nombre": "Construcción & Acabados", "emoji": "🏗️", "color": "#7A3E1D", "slug": "construccion-acabados" },
+  { "nombre": "Construcción & Mantenimiento", "emoji": "🏗️", "color": "#7A3E1D", "slug": "construccion-acabados" },
   { "nombre": "Educación", "emoji": "🎓", "color": "#00B4D8", "slug": "educacion" },
   { "nombre": "Fiestas & Eventos", "emoji": "🎉", "color": "#FF70A6", "slug": "fiestas-eventos" },
   { "nombre": "Fitness & Deportes", "emoji": "💪", "color": "#F77F00", "slug": "fitness-deportes" },
