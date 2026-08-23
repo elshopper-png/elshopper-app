@@ -48,7 +48,13 @@ export default function HomeBase() {
             )}
 
             <span className="category-emoji">{cat.emoji}</span>
-            <span className="category-name">{cat.nombre}</span>
+            <span
+  className={`category-name ${
+    cat.slug === "construccion-acabados" ? "category-name-compact" : ""
+  }`}
+>
+  {cat.nombre}
+</span>
           </Link>
         ))}
       </div>
