@@ -284,7 +284,15 @@
       "imagen": "/fase_2/tarjetas/salud-integral/card2.png",
       "slug": "renova",
       "whatsapp": "51993490886"
-    }
+    },
+
+    {
+  "nombre": "Clínica Cori",
+  "descripcion": "Especialistas en fertilidad, reproducción asistida, diagnóstico y tratamientos personalizados.",
+  "imagen": "/fase_2/tarjetas/salud-integral/card4.png",
+  "slug": "cori",
+  "whatsapp": "51979636580"
+}
   ]
 },
   {
