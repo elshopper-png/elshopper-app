@@ -370,19 +370,18 @@
   },
 
   {
-    "giroSlug": "fiestas-eventos",
-    "giro": "Fiestas & Eventos",
-    "tarjetas": [
-      {
-        "nombre": "Decoraciones San Francisco",
-        "descripcion": "Cortinas, tapicería y ambientación profesional para eventos.",
-        "imagen": "/fase_2/tarjetas/fiestas-eventos/card.png",
-        "slug": "decoraciones-san-francisco",
-        "whatsapp": ""
-      }
-    ]
-  },
-
+  "giroSlug": "fiestas-eventos",
+  "giro": "Fiestas & Eventos",
+  "tarjetas": [
+    {
+      "nombre": "Happy Park",
+      "descripcion": "Cumpleaños y fiestas infantiles con instalaciones y juegos para una celebración inolvidable.",
+      "imagen": "/fase_2/tarjetas/fiestas-eventos/card.png",
+      "slug": "happy_park",
+      "whatsapp": "51902991519"
+    }
+  ]
+},
   
   {
   "giroSlug": "construccion-acabados",
