@@ -462,15 +462,15 @@ body {
   }
 
   .category-icon-zone {
-    height: 42px;
-    flex-basis: 42px;
-    margin-bottom: 5px;
-  }
+  height: 54px;
+  flex-basis: 54px;
+  margin-bottom: 3px;
+}
 
-  .category-icon {
-    width: 40px;
-    height: 40px;
-  }
+.category-icon {
+  width: 52px;
+  height: 52px;
+}
 
   .category-name {
     font-size: 1.15rem;
