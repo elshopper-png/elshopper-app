@@ -1,18 +1,98 @@
 [
-  { "nombre": "Belleza & SPA", "emoji": "💅", "color": "#FF006E", "slug": "belleza-spa" },
-  { "nombre": "Construcción & Mantenimiento", "emoji": "🏗️", "color": "#7A3E1D", "slug": "construccion-acabados" },
-  { "nombre": "Educación", "emoji": "🎓", "color": "#00B4D8", "slug": "educacion" },
-  { "nombre": "Fiestas & Eventos", "emoji": "🎉", "color": "#FF70A6", "slug": "fiestas-eventos" },
-  { "nombre": "Fitness & Deportes", "emoji": "💪", "color": "#F77F00", "slug": "fitness-deportes" },
-  { "nombre": "Gastronomía & Snacks", "emoji": "🍔", "color": "#FFB703", "slug": "gastronomia-snacks" },
-  { "nombre": "Hogar & Servicios", "emoji": "🏡", "color": "#0096C7", "slug": "hogar-servicios" },
-  { "nombre": "Informática & Reparación", "emoji": "💻", "color": "#219EBC", "slug": "informatica-reparacion" },
-  { "nombre": "Inmobiliarias", "emoji": "🏢", "color": "#6D597A", "slug": "inmobiliarias" },
-  { "nombre": "Marketing & Imprenta", "emoji": "📢", "color": "#8338EC", "slug": "marketing-imprenta" },
-  { "nombre": "Moda & Joyería", "emoji": "👗", "color": "#FF006E", "slug": "moda-joyeria" },
-  { "nombre": "Muebles & Decoraciones", "emoji": "🛋️", "color": "#9B5DE5", "slug": "muebles-decoraciones" },
-  { "nombre": "Salud Integral", "emoji": "⚕️", "color": "#7209B7", "slug": "salud-integral" },
-  { "nombre": "Servicio Técnico", "emoji": "🛠️", "color": "#4361EE", "slug": "servicio-tecnico" },
-  { "nombre": "Servicios Profesionales", "emoji": "👔", "color": "#3A86FF", "slug": "servicios-profesionales" },
-  { "nombre": "Veterinarias & Pet Shop", "emoji": "🐾", "color": "#F3722C", "slug": "veterinarias-petshop" }
+  {
+    "nombre": "Belleza & SPA",
+    "icono": "/icons/giros/belleza-spa.png",
+    "color": "#FF006E",
+    "slug": "belleza-spa"
+  },
+  {
+    "nombre": "Construcción & Mantenimiento",
+    "icono": "/icons/giros/construccion-mantenimiento.png",
+    "color": "#7A3E1D",
+    "slug": "construccion-acabados"
+  },
+  {
+    "nombre": "Educación",
+    "icono": "/icons/giros/educacion.png",
+    "color": "#00B4D8",
+    "slug": "educacion"
+  },
+  {
+    "nombre": "Fiestas & Eventos",
+    "icono": "/icons/giros/fiestas-eventos.png",
+    "color": "#FF70A6",
+    "slug": "fiestas-eventos"
+  },
+  {
+    "nombre": "Fitness & Deportes",
+    "icono": "/icons/giros/fitness-deportes.png",
+    "color": "#F77F00",
+    "slug": "fitness-deportes"
+  },
+  {
+    "nombre": "Gastronomía & Snacks",
+    "icono": "/icons/giros/gastronomia-snacks.png",
+    "color": "#FFB703",
+    "slug": "gastronomia-snacks"
+  },
+  {
+    "nombre": "Hogar & Servicios",
+    "icono": "/icons/giros/hogar-servicios.png",
+    "color": "#0096C7",
+    "slug": "hogar-servicios"
+  },
+  {
+    "nombre": "Informática & Reparación",
+    "icono": "/icons/giros/informatica-reparacion.png",
+    "color": "#219EBC",
+    "slug": "informatica-reparacion"
+  },
+  {
+    "nombre": "Inmobiliarias",
+    "icono": "/icons/giros/inmobiliarias.png",
+    "color": "#6D597A",
+    "slug": "inmobiliarias"
+  },
+  {
+    "nombre": "Marketing & Imprenta",
+    "icono": "/icons/giros/marketing-imprenta.png",
+    "color": "#8338EC",
+    "slug": "marketing-imprenta"
+  },
+  {
+    "nombre": "Moda & Joyería",
+    "icono": "/icons/giros/moda-joyeria.png",
+    "color": "#FF006E",
+    "slug": "moda-joyeria"
+  },
+  {
+    "nombre": "Muebles & Decoraciones",
+    "icono": "/icons/giros/muebles-decoraciones.png",
+    "color": "#9B5DE5",
+    "slug": "muebles-decoraciones"
+  },
+  {
+    "nombre": "Salud Integral",
+    "icono": "/icons/giros/salud-integral.png",
+    "color": "#7209B7",
+    "slug": "salud-integral"
+  },
+  {
+    "nombre": "Servicio Técnico",
+    "icono": "/icons/giros/servicio-tecnico.png",
+    "color": "#4361EE",
+    "slug": "servicio-tecnico"
+  },
+  {
+    "nombre": "Servicios Profesionales",
+    "icono": "/icons/giros/servicios-profesionales.png",
+    "color": "#3A86FF",
+    "slug": "servicios-profesionales"
+  },
+  {
+    "nombre": "Veterinarias & Pet Shop",
+    "icono": "/icons/giros/veterinarias-petshop.png",
+    "color": "#F3722C",
+    "slug": "veterinarias-petshop"
+  }
 ]

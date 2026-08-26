@@ -47,14 +47,19 @@ export default function HomeBase() {
               <span className="o25-contometro">{conteo[cat.slug]}</span>
             )}
 
-            <span className="category-emoji">{cat.emoji}</span>
-            <span
-  className={`category-name ${
-    cat.slug === "construccion-acabados" ? "category-name-compact" : ""
-  }`}
->
+            <span className="category-icon-zone">
+  <img
+    src={cat.icono}
+    alt=""
+    className="category-icon"
+    aria-hidden="true"
+  />
+</span>
+
+<span className="category-name">
   {cat.nombre}
 </span>
+
           </Link>
         ))}
       </div>
