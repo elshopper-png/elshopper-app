@@ -462,14 +462,14 @@ body {
   }
 
   .category-icon-zone {
-  height: 70px;
-  flex-basis: 70px;
-  margin-bottom: 0;
+  height: 82px;
+  flex-basis: 82px;
+  margin-bottom: -4px;
 }
 
 .category-icon {
-  width: 70px;
-  height: 70px;
+  width: 82px;
+  height: 82px;
 }
 
   .category-name {
