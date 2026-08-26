@@ -464,7 +464,7 @@ body {
   .category-icon-zone {
   height: 82px;
   flex-basis: 82px;
-  margin-bottom: -4px;
+  margin-bottom: 3px;
 }
 
 .category-icon {
