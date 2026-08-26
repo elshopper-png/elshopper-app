@@ -457,19 +457,19 @@ body {
 /* Ajuste específico para teléfonos */
 @media (max-width: 480px) {
   .category-button {
-    height: 138px;
-    padding: 10px 7px 9px;
+    height: 156px;
+    padding: 8px 7px;
   }
 
   .category-icon-zone {
-  height: 54px;
-  flex-basis: 54px;
-  margin-bottom: 3px;
+  height: 70px;
+  flex-basis: 70px;
+  margin-bottom: 0;
 }
 
 .category-icon {
-  width: 52px;
-  height: 52px;
+  width: 70px;
+  height: 70px;
 }
 
   .category-name {
