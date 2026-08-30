@@ -44,6 +44,13 @@
       "imagen": "/fase_2/tarjetas/servicios-profesionales/card1.png",
       "slug": "abogado_garcia",
       "whatsapp": "51968389428"
+    },
+    {
+      "nombre": "Abogada Marianela León Gavidia",
+      "descripcion": "Especialista en Derecho Civil, Administrativo, Familiar, Penal y Laboral.",
+      "imagen": "/fase_2/tarjetas/servicios-profesionales/card2.png",
+      "slug": "abogada_leon",
+      "whatsapp": "51993969103"
     }
   ]
 },
