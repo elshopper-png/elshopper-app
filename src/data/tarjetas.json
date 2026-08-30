@@ -363,18 +363,25 @@
   
 
   {
-    "giroSlug": "veterinarias-petshop",
-    "giro": "Veterinarias & Pet Shop",
-    "tarjetas": [
-      {
-        "nombre": "Zona Mascota",
-        "descripcion": "Cuidado integral para tu mascota: dermatología, cirugía, laboratorio, ecografías y más.",
-        "imagen": "/fase_2/tarjetas/veterinarias-petshop/card.png",
-        "slug": "mascota",
-        "whatsapp": ""
-      }
-    ]
-  },
+  "giroSlug": "veterinarias-petshop",
+  "giro": "Mascotas & Afines",
+  "tarjetas": [
+    {
+      "nombre": "Mr. Bush — Recoge Popó",
+      "descripcion": "Recoge las heces de tu mascota de forma rápida, práctica e higiénica, sin tocarlas ni sentirlas.",
+      "imagen": "/fase_2/tarjetas/veterinarias-petshop/card1.png",
+      "slug": "bush",
+      "whatsapp": "51993490886"
+    },
+    {
+      "nombre": "Zona Mascota",
+      "descripcion": "Cuidado integral para tu mascota: dermatología, cirugía, laboratorio, ecografía y más.",
+      "imagen": "/fase_2/tarjetas/veterinarias-petshop/card.png",
+      "slug": "mascota",
+      "whatsapp": ""
+    }
+  ]
+},
 
   {
   "giroSlug": "fiestas-eventos",
