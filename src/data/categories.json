@@ -60,6 +60,12 @@
     "slug": "marketing-imprenta"
   },
   {
+    "nombre": "Mascotas & Afines",
+    "icono": "/icons/giros/veterinarias-petshop.png",
+    "color": "#F3722C",
+    "slug": "veterinarias-petshop"
+  },
+  {
     "nombre": "Moda & Joyería",
     "icono": "/icons/giros/moda-joyeria.png",
     "color": "#FF006E",
@@ -88,11 +94,5 @@
     "icono": "/icons/giros/servicios-profesionales.png",
     "color": "#3A86FF",
     "slug": "servicios-profesionales"
-  },
-  {
-    "nombre": "Mascotas & Afines",
-    "icono": "/icons/giros/veterinarias-petshop.png",
-    "color": "#F3722C",
-    "slug": "veterinarias-petshop"
   }
 ]
