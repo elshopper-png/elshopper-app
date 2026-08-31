@@ -380,6 +380,15 @@
       "slug": "mascota",
       "whatsapp": ""
     }
+
+    ,
+{
+  "nombre": "Animal Planet",
+  "descripcion": "Veterinaria, emergencias, consultas, cirugías, peluquería, vacunas, desparasitación y análisis clínicos.",
+  "imagen": "/fase_2/tarjetas/veterinarias-petshop/card2.png",
+  "slug": "animal_planet",
+  "whatsapp": ""
+}
   ]
 },
 
