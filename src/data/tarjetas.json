@@ -136,7 +136,15 @@
       "imagen": "/fase_2/tarjetas/fitness-deportes/card1.png",
       "slug": "apupal",
       "whatsapp": "51949918460"
-    }
+    },
+
+    {
+  "nombre": "Legendary Gym",
+  "descripcion": "Club fitness especializado en entrenamiento de alta intensidad — Los Olivos.",
+  "imagen": "/fase_2/tarjetas/fitness-deportes/card3.png",
+  "slug": "legendary-gym",
+  "whatsapp": "51936033392"
+}
   ]
 },
 
