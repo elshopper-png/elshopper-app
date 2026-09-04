@@ -417,6 +417,13 @@
       "imagen": "/fase_2/tarjetas/fiestas-eventos/card.png",
       "slug": "happy_park",
       "whatsapp": "51902991519"
+    },
+    {
+      "nombre": "Eventos Victoria",
+      "descripcion": "Salones y espacios para bodas, cumpleaños, aniversarios y eventos especiales.",
+      "imagen": "/fase_2/tarjetas/fiestas-eventos/card1.png",
+      "slug": "eventos-victoria",
+      "whatsapp": "51980689892"
     }
   ]
 },
