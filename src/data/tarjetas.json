@@ -124,6 +124,13 @@
       "whatsapp": ""
     },
     {
+      "nombre": "Europa Gym",
+      "descripcion": "Gimnasio, pesas y entrenamiento físico — Los Olivos.",
+      "imagen": "/fase_2/tarjetas/fitness-deportes/card2.png",
+      "slug": "europa_gimnasio",
+      "whatsapp": "51986107299"
+    },
+    {
       "nombre": "apupal",
       "descripcion": "Cursos y talleres deportivos para niños y jóvenes.",
       "imagen": "/fase_2/tarjetas/fitness-deportes/card1.png",
