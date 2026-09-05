@@ -1,17 +1,24 @@
 [
   {
-    "giroSlug": "belleza-spa",
-    "giro": "Belleza & SPA",
-    "tarjetas": [
-      {
-        "nombre": "Centro de Medicina Regenerativa y Estética Integral",
-        "descripcion": "Dra. María del Socorro Burga Dios — Médico Cirujano Especialista en Medicina Regenerativa y Estética Integral.",
-        "imagen": "/fase_2/tarjetas/belleza-spa/card.png",
-        "slug": "burga",
-        "whatsapp": "51991405449"
-      }
-    ]
-  },
+  "giroSlug": "belleza-spa",
+  "giro": "Belleza & SPA",
+  "tarjetas": [
+    {
+      "nombre": "Gilvonio Estudio de Belleza",
+      "descripcion": "Belleza natural y cuidado integral con productos orgánicos para el cabello y la piel.",
+      "imagen": "/fase_2/tarjetas/belleza-spa/card1.png",
+      "slug": "gilvonio-belleza",
+      "whatsapp": "51923185254"
+    },
+    {
+      "nombre": "Centro de Medicina Regenerativa y Estética Integral",
+      "descripcion": "Dra. María del Socorro Burga Dios — Médico Cirujano Especialista en Medicina Regenerativa y Estética Integral.",
+      "imagen": "/fase_2/tarjetas/belleza-spa/card.png",
+      "slug": "burga",
+      "whatsapp": "51991405449"
+    }
+  ]
+},
 
   {
     "giroSlug": "gastronomia-snacks",
