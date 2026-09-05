@@ -16,6 +16,13 @@
       "imagen": "/fase_2/tarjetas/belleza-spa/card.png",
       "slug": "burga",
       "whatsapp": "51991405449"
+    },
+    {
+      "nombre": "Vanlé Salón",
+      "descripcion": "Expertos en cabello y belleza. Renueva tu look y disfruta una experiencia de cuidado pensada para ti.",
+      "imagen": "/fase_2/tarjetas/belleza-spa/card2.png",
+      "slug": "vanle-salon",
+      "whatsapp": "51970964522"
     }
   ]
 },
