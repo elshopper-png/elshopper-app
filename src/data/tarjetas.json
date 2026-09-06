@@ -23,6 +23,13 @@
       "imagen": "/fase_2/tarjetas/belleza-spa/card2.png",
       "slug": "vanle-salon",
       "whatsapp": "51970964522"
+    },
+    {
+      "nombre": "MaYu Spa",
+      "descripcion": "Tratamientos faciales, corporales y post-operatorios para el cuidado integral de tu piel y cuerpo.",
+      "imagen": "/fase_2/tarjetas/belleza-spa/card3.png",
+      "slug": "mayu-spa",
+      "whatsapp": "51922132053"
     }
   ]
 },
