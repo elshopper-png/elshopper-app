@@ -35,18 +35,25 @@
 },
 
   {
-    "giroSlug": "gastronomia-snacks",
-    "giro": "Gastronomía & Snacks",
-    "tarjetas": [
-      {
-        "nombre": "El Rancho Restaurante",
-        "descripcion": "Caldo de gallina, pescados fritos y platos criollos.",
-        "imagen": "/fase_2/tarjetas/gastronomia-snacks/card.png",
-        "slug": "el-rancho",
-        "whatsapp": ""
-      }
-    ]
-  },
+  "giroSlug": "gastronomia-snacks",
+  "giro": "Gastronomía & Snacks",
+  "tarjetas": [
+    {
+      "nombre": "El Rancho Restaurante",
+      "descripcion": "Caldo de gallina, pescados fritos y platos criollos.",
+      "imagen": "/fase_2/tarjetas/gastronomia-snacks/card.png",
+      "slug": "el-rancho",
+      "whatsapp": ""
+    },
+    {
+      "nombre": "El Fogón Campero",
+      "descripcion": "Pollos a la brasa, parrilladas y sabores para disfrutar en familia.",
+      "imagen": "/fase_2/tarjetas/gastronomia-snacks/card1.png",
+      "slug": "fogon-campero",
+      "whatsapp": "51965935701"
+    }
+  ]
+},
 
  {
   "giroSlug": "servicios-profesionales",
@@ -455,7 +462,7 @@
     }
   ]
 },
-  
+
   {
   "giroSlug": "construccion-acabados",
   "giro": "Construcción & Mantenimiento",
