@@ -445,6 +445,13 @@
       "imagen": "/fase_2/tarjetas/fiestas-eventos/card1.png",
       "slug": "eventos-victoria",
       "whatsapp": "51980689892"
+    },
+    {
+      "nombre": "Sueño Real Eventos",
+      "descripcion": "Salón para bodas, aniversarios y celebraciones especiales en Los Olivos.",
+      "imagen": "/fase_2/tarjetas/fiestas-eventos/card2.png",
+      "slug": "sueno-real",
+      "whatsapp": "51950436277"
     }
   ]
 },
