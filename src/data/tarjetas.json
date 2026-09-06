@@ -34,7 +34,7 @@
   ]
 },
 
-  {
+ {
   "giroSlug": "gastronomia-snacks",
   "giro": "Gastronomía & Snacks",
   "tarjetas": [
@@ -51,6 +51,13 @@
       "imagen": "/fase_2/tarjetas/gastronomia-snacks/card1.png",
       "slug": "fogon-campero",
       "whatsapp": "51965935701"
+    },
+    {
+      "nombre": "Burger Lovers",
+      "descripcion": "Hamburguesas artesanales, pan propio, carne Angus y sabores hechos para verdaderos burger lovers.",
+      "imagen": "/fase_2/tarjetas/gastronomia-snacks/card2.png",
+      "slug": "burger-lovers",
+      "whatsapp": "51977444414"
     }
   ]
 },
