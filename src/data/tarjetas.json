@@ -466,6 +466,13 @@
       "imagen": "/fase_2/tarjetas/construccion-acabados/card1.png",
       "slug": "js_instalaciones",
       "whatsapp": ""
+    },
+    {
+      "nombre": "Metálicas Paredes Perú",
+      "descripcion": "Estructuras metálicas, puertas automáticas, acero inoxidable, vidrios y aluminios.",
+      "imagen": "/fase_2/tarjetas/construccion-acabados/card2.png",
+      "slug": "metalicas-paredes",
+      "whatsapp": "51946091550"
     }
   ]
 }
