@@ -30,10 +30,16 @@
       "imagen": "/fase_2/tarjetas/belleza-spa/card3.png",
       "slug": "mayu-spa",
       "whatsapp": "51922132053"
+    },
+    {
+      "nombre": "Soleil Beauty Spa",
+      "descripcion": "Uñas, pestañas, cejas y tratamientos faciales para realzar tu belleza y disfrutar un momento para ti.",
+      "imagen": "/fase_2/tarjetas/belleza-spa/card4.png",
+      "slug": "soleil-beauty",
+      "whatsapp": "51933153549"
     }
   ]
 },
-
  {
   "giroSlug": "gastronomia-snacks",
   "giro": "Gastronomía & Snacks",
