@@ -253,18 +253,25 @@
   },
 
   {
-    "giroSlug": "informatica-reparacion",
-    "giro": "Informática & Reparación",
-    "tarjetas": [
-      {
-        "nombre": "Alfredo — Técnico en Computación",
-        "descripcion": "Reparación, mantenimiento y soporte de computadoras y laptops.",
-        "imagen": "/fase_2/tarjetas/informatica-reparacion/card.png",
-        "slug": "alfredo",
-        "whatsapp": "51972077437"
-      }
-    ]
-  },
+  "giroSlug": "informatica-reparacion",
+  "giro": "Informática & Reparación",
+  "tarjetas": [
+    {
+      "nombre": "Alfredo — Técnico en Computación",
+      "descripcion": "Reparación, mantenimiento y soporte de computadoras y laptops.",
+      "imagen": "/fase_2/tarjetas/informatica-reparacion/card.png",
+      "slug": "alfredo",
+      "whatsapp": "51972077437"
+    },
+    {
+      "nombre": "Compuservice",
+      "descripcion": "Reparación y mantenimiento de computadoras, instalación de programas, formateo y recuperación de datos.",
+      "imagen": "/fase_2/tarjetas/informatica-reparacion/card1.png",
+      "slug": "compuservice",
+      "whatsapp": "51966740882"
+    }
+  ]
+},
 
   {
     "giroSlug": "marketing-imprenta",
