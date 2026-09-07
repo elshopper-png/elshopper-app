@@ -274,18 +274,25 @@
 },
 
   {
-    "giroSlug": "marketing-imprenta",
-    "giro": "Marketing & Imprenta",
-    "tarjetas": [
-      {
-        "nombre": "El Shopper de Los Olivos",
-        "descripcion": "Publicidad gráfica y digital con resultados comprobados.",
-        "imagen": "/fase_2/tarjetas/marketing-imprenta/card.png",
-        "slug": "imprenta",
-        "whatsapp": ""
-      }
-    ]
-  },
+  "giroSlug": "marketing-imprenta",
+  "giro": "Marketing & Publicidad",
+  "tarjetas": [
+    {
+      "nombre": "El Shopper de Los Olivos",
+      "descripcion": "Publicidad gráfica y digital con resultados comprobados.",
+      "imagen": "/fase_2/tarjetas/marketing-imprenta/card.png",
+      "slug": "imprenta",
+      "whatsapp": ""
+    },
+    {
+      "nombre": "Grafcolor",
+      "descripcion": "Gigantografías, impresión a gran formato, banners, viniles, merchandising y soluciones publicitarias.",
+      "imagen": "/fase_2/tarjetas/marketing-imprenta/card1.png",
+      "slug": "grafcolor",
+      "whatsapp": "51944723727"
+    }
+  ]
+},
 
   {
     "giroSlug": "moda-joyeria",
