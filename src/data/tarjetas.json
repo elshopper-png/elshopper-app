@@ -238,19 +238,6 @@
   ]
 },
 
-  {
-    "giroSlug": "construccion-ferreteria",
-    "giro": "Construcción & Ferretería",
-    "tarjetas": [
-      {
-        "nombre": "Ferretería San Martín",
-        "descripcion": "Materiales, herramientas y asesoría técnica para tus proyectos.",
-        "imagen": "/fase_2/tarjetas/construccion-ferreteria/card.png",
-        "slug": "ferreteria-san-martin",
-        "whatsapp": ""
-      }
-    ]
-  },
 
   {
   "giroSlug": "informatica-reparacion",
@@ -295,18 +282,25 @@
 },
 
   {
-    "giroSlug": "moda-joyeria",
-    "giro": "Moda & Joyería",
-    "tarjetas": [
-      {
-        "nombre": "Kuya Jewelry",
-        "descripcion": "Joyas en plata 950 hechas a mano, inspiradas en la identidad peruana.",
-        "imagen": "/fase_2/tarjetas/moda-joyeria/card.png",
-        "slug": "kuya",
-        "whatsapp": "51923049845"
-      }
-    ]
-  },
+  "giroSlug": "moda-joyeria",
+  "giro": "Moda & Accesorios",
+  "tarjetas": [
+    {
+      "nombre": "Kuya Jewelry",
+      "descripcion": "Joyas en plata 950 hechas a mano, inspiradas en la identidad peruana.",
+      "imagen": "/fase_2/tarjetas/moda-joyeria/card.png",
+      "slug": "kuya",
+      "whatsapp": "51923049845"
+    },
+    {
+      "nombre": "Calzados Marinelly",
+      "descripcion": "Calzado para cada ocasión: zapatillas, botas y modelos de vestir elaborados por manos peruanas.",
+      "imagen": "/fase_2/tarjetas/moda-joyeria/card1.png",
+      "slug": "marinelly",
+      "whatsapp": "51965833743"
+    }
+  ]
+},
 
   {
   "giroSlug": "muebles-decoraciones",
