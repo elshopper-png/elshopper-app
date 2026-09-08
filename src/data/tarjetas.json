@@ -365,6 +365,14 @@
     },
 
     {
+  "nombre": "ACSA Dent",
+  "descripcion": "Odontología integral para cuidar, renovar y transformar tu sonrisa.",
+  "imagen": "/fase_2/tarjetas/salud-integral/card5.png",
+  "slug": "acsadent",
+  "whatsapp": "51910049118"
+},
+
+    {
   "nombre": "Clínica Cori",
   "descripcion": "Especialistas en fertilidad, reproducción asistida, diagnóstico y tratamientos personalizados.",
   "imagen": "/fase_2/tarjetas/salud-integral/card4.png",
