@@ -319,6 +319,13 @@
       "imagen": "/fase_2/tarjetas/muebles-decoraciones/card1.png",
       "slug": "san-francisco",
       "whatsapp": "51998511716"
+    },
+    {
+      "nombre": "Cortinas Lichita",
+      "descripcion": "Confección e instalación de cortinas, almohadas, cojines y forros de sillas para hogar y oficina.",
+      "imagen": "/fase_2/tarjetas/muebles-decoraciones/card2.png",
+      "slug": "cortinas-lichita",
+      "whatsapp": "51932757828"
     }
   ]
 },
