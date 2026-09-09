@@ -114,6 +114,15 @@
       "slug": "providencia",
       "whatsapp": ""
     },
+
+    {
+  "nombre": "Profesor Jorge Velásquez",
+  "descripcion": "Clases de guitarra, bajo eléctrico, quena y flauta traversa para niños, jóvenes y adultos.",
+  "imagen": "/fase_2/tarjetas/educacion/card7.png",
+  "slug": "caruso",
+  "whatsapp": "51977735224"
+},
+
     {
       "nombre": "Colegio Martín Adán",
       "descripcion": "Inicial – Primaria – Secundaria",
