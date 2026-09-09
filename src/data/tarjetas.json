@@ -92,6 +92,13 @@
       "imagen": "/fase_2/tarjetas/servicios-profesionales/card2.png",
       "slug": "abogada_leon",
       "whatsapp": "51993969103"
+    },
+    {
+      "nombre": "Servicios Inmobiliarios",
+      "descripcion": "Gestión administrativa, tributaria y contable para inmuebles y juntas de propietarios.",
+      "imagen": "/fase_2/tarjetas/servicios-profesionales/card3.png",
+      "slug": "servicios-inmobiliarios",
+      "whatsapp": "51997118777"
     }
   ]
 },
