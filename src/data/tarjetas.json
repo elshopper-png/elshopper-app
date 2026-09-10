@@ -293,9 +293,17 @@
       "imagen": "/fase_2/tarjetas/marketing-imprenta/card1.png",
       "slug": "grafcolor",
       "whatsapp": "51944723727"
+    },
+    {
+      "nombre": "Sinergia",
+      "descripcion": "Marketing digital, videos profesionales, diseño de flyers y estrategia para redes sociales.",
+      "imagen": "/fase_2/tarjetas/marketing-imprenta/card2.png",
+      "slug": "sinergia",
+      "whatsapp": "51971193302"
     }
   ]
 },
+
 
   {
   "giroSlug": "moda-joyeria",
