@@ -477,4 +477,15 @@ body {
     line-height: 1.1;
     font-weight: 800;
   }
+
+  /* CTA experimental portada */
+.cta-pregunta {
+  display: inline-block;
+  color: #e60000;
+  font-size: 1.35em;
+  font-style: italic;
+  font-weight: 900;
+  transform: rotate(-1deg);
+  margin-bottom: 4px;
+}
 }
