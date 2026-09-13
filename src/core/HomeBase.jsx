@@ -27,10 +27,10 @@ export default function HomeBase() {
         <img src="/portada/logo.png" alt="El Shopper Logo" />
         <h1>EL SHOPPER DIGITAL</h1>
         <p className="lema">
-          En Lima Norte tenemos los <br />
-          <strong>mejores productos y servicios...</strong> <br />
-          <strong>¡a un CLIC de distancia!</strong>
-        </p>
+  <strong>¿QUÉ ESTÁS BUSCANDO HOY?</strong>
+  <br />
+  Elige una categoría y encuentra negocios y servicios en Lima Norte 👇
+</p>
       </header>
 
       {/* 🔘 Botones de categorías */}
