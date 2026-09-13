@@ -454,31 +454,7 @@ body {
   z-index: 3;
 }
 
-/* Ajuste específico para teléfonos */
-@media (max-width: 480px) {
-  .category-button {
-    height: 156px;
-    padding: 8px 7px;
-  }
-
-  .category-icon-zone {
-  height: 82px;
-  flex-basis: 82px;
-  margin-bottom: 3px;
-}
-
-.category-icon {
-  width: 82px;
-  height: 82px;
-}
-
-  .category-name {
-    font-size: 1.15rem;
-    line-height: 1.1;
-    font-weight: 800;
-  }
-
-  /* CTA experimental portada */
+/* CTA experimental portada */
 .cta-pregunta {
   display: inline-block;
   color: #e60000;
@@ -488,4 +464,28 @@ body {
   transform: rotate(-1deg);
   margin-bottom: 4px;
 }
+
+/* Ajuste específico para teléfonos */
+@media (max-width: 480px) {
+  .category-button {
+    height: 156px;
+    padding: 8px 7px;
+  }
+
+  .category-icon-zone {
+    height: 82px;
+    flex-basis: 82px;
+    margin-bottom: 3px;
+  }
+
+  .category-icon {
+    width: 82px;
+    height: 82px;
+  }
+
+  .category-name {
+    font-size: 1.15rem;
+    line-height: 1.1;
+    font-weight: 800;
+  }
 }
