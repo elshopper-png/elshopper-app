@@ -9,6 +9,7 @@ import CATEGORIES from "../data/categories.json";
 
 // 👉 Contómetro real O25
 import { contarAnunciantesPorGiro } from "../utils/contometro";
+import { registrarCategoria } from "../utils/categoriaTracker";
 
 import MusicToggle from "../components/MusicToggle";
 
@@ -37,11 +38,12 @@ export default function HomeBase() {
       <div className="category-grid">
         {CATEGORIES.map((cat) => (
           <Link
-            key={cat.slug}
-            to={`/tarjetas/${cat.slug}`}
-            className="category-button"
-            style={{ backgroundColor: cat.color }}
-          >
+  key={cat.slug}
+  to={`/tarjetas/${cat.slug}`}
+  className="category-button"
+  style={{ backgroundColor: cat.color }}
+  onClick={() => registrarCategoria(cat.nombre, cat.slug)}
+>
             {/* 🟦 CONTÓMETRO REAL O25 */}
             {conteo[cat.slug] > 0 && (
               <span className="o25-contometro">{conteo[cat.slug]}</span>
