@@ -8,7 +8,7 @@ import "../styles/pwa-banner.css";
 
 export default function PWABannerAndroid() {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
-const [visible, setVisible] = useState(true);
+const [visible, setVisible] = useState(false);
   useEffect(() => {
     const handler = (e) => {
       e.preventDefault();

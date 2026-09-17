@@ -31,7 +31,7 @@ function isStandalone() {
 export default function PWABanner() {
   // 🔒 Solo Android, nunca iOS
 // PRUEBA UX TEMPORAL
-// if (!isAndroid()) return null;
+if (!isAndroid()) return null;
   // Si ya está instalada, no mostrar nada
   if (isStandalone()) return null;
 
