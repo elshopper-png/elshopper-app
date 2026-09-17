@@ -1,23 +1,110 @@
+/* ============================================================
+   📲 PWA BANNER — El Shopper Digital
+   Centrado responsive
+   ============================================================ */
+
 .pwa-banner {
   position: fixed;
-  bottom: 0;
   left: 0;
   right: 0;
-  background: #c3002f;
-  color: #fff;
-  padding: 14px;
+  bottom: 20px;
+
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+
+  padding: 0 16px;
   z-index: 999999;
-  font-size: 16px;
+
+  pointer-events: none;
 }
 
-.pwa-banner button {
-  margin-left: 8px;
-  padding: 8px 14px;
+.pwa-banner-content {
+  position: relative;
+
+  width: 100%;
+  max-width: 420px;
+
+  box-sizing: border-box;
+  padding: 20px 22px;
+
+  background: #c3002f;
+  color: #fff;
+
+  border-radius: 16px;
+
+  text-align: center;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.28);
+
+  pointer-events: auto;
+}
+
+.pwa-title {
+  margin: 0 30px 6px;
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.pwa-subtitle {
+  margin: 0 0 16px;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.pwa-install-btn {
+  padding: 10px 20px;
+
   background: #fff;
   color: #c3002f;
+
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
+
+  font-size: 15px;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+.pwa-close-btn {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+
+  width: 32px;
+  height: 32px;
+  padding: 0;
+
+  background: transparent;
+  color: #fff;
+
+  border: none;
+
+  font-size: 20px;
+  line-height: 32px;
+
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .pwa-banner {
+    bottom: 14px;
+    padding: 0 12px;
+  }
+
+  .pwa-banner-content {
+    max-width: 360px;
+    padding: 18px 18px;
+  }
+
+  .pwa-title {
+    font-size: 19px;
+  }
+
+  .pwa-subtitle {
+    font-size: 14px;
+  }
 }
