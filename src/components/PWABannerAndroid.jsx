@@ -5,10 +5,12 @@
 
 import React, { useEffect, useState } from "react";
 import "../styles/pwa-banner.css";
+import { registrarInstalacion } from "../utils/installTracker";
 
 export default function PWABannerAndroid() {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
-const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(false);
+
   useEffect(() => {
     const handler = (e) => {
       e.preventDefault();
@@ -16,10 +18,17 @@ const [visible, setVisible] = useState(false);
       setVisible(true);
     };
 
+    const handleAppInstalled = () => {
+      console.log("✔ Evento appinstalled detectado");
+      registrarInstalacion();
+    };
+
     window.addEventListener("beforeinstallprompt", handler);
+    window.addEventListener("appinstalled", handleAppInstalled);
 
     return () => {
       window.removeEventListener("beforeinstallprompt", handler);
+      window.removeEventListener("appinstalled", handleAppInstalled);
     };
   }, []);
 
@@ -44,13 +53,18 @@ const [visible, setVisible] = useState(false);
     <div className="pwa-banner">
       <div className="pwa-banner-content">
         <h3 className="pwa-title">Instala El Shopper Digital</h3>
-        <p className="pwa-subtitle">Acceso rápido y directo desde tu pantalla</p>
+        <p className="pwa-subtitle">
+          Acceso rápido y directo desde tu pantalla
+        </p>
 
         <button className="pwa-install-btn" onClick={instalar}>
           Instalar ahora
         </button>
 
-        <button className="pwa-close-btn" onClick={() => setVisible(false)}>
+        <button
+          className="pwa-close-btn"
+          onClick={() => setVisible(false)}
+        >
           ✕
         </button>
       </div>
