@@ -5,7 +5,6 @@
 
 import React, { useEffect, useState } from "react";
 import "../styles/pwa-banner.css";
-import { registrarInstalacion } from "../utils/installTracker";
 
 export default function PWABannerAndroid() {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
@@ -18,17 +17,10 @@ export default function PWABannerAndroid() {
       setVisible(true);
     };
 
-    const handleAppInstalled = () => {
-      console.log("✔ Evento appinstalled detectado");
-      registrarInstalacion();
-    };
-
     window.addEventListener("beforeinstallprompt", handler);
-    window.addEventListener("appinstalled", handleAppInstalled);
 
     return () => {
       window.removeEventListener("beforeinstallprompt", handler);
-      window.removeEventListener("appinstalled", handleAppInstalled);
     };
   }, []);
 

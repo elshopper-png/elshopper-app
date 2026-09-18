@@ -11,6 +11,8 @@ import AppRouter from "./AppRouter.jsx";
 import "./styles/base.css";
 import "./styles/tarjetas.css";
 
+import { registrarInstalacion } from "./utils/installTracker";
+
 // ============================================================
 // 📊 Google Analytics 4 — El Shopper Digital
 // ============================================================
@@ -18,6 +20,8 @@ ReactGA.initialize("G-JBVY7WQM1J");
 
 // ============================================================
 // 📲 Tracking instalación PWA
+// Un único listener global:
+// GA4 + registro de instalación en Supabase
 // ============================================================
 window.addEventListener("appinstalled", () => {
   ReactGA.event({
@@ -25,6 +29,10 @@ window.addEventListener("appinstalled", () => {
     action: "Installed",
     label: "El Shopper Digital",
   });
+
+  console.log("✔ Evento global appinstalled detectado");
+
+  registrarInstalacion();
 });
 
 // ============================================================
