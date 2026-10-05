@@ -3,7 +3,7 @@
 // Muestra AVISO VIVO + CTA Descarga AL FINAL
 // ============================================================
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import tarjetasData from "../data/tarjetas.json";
 
@@ -25,6 +25,16 @@ console.log("🔎 SEO PILOTO:", {
   descripcion: anunciante?.descripcion,
   giro,
 });
+
+useEffect(() => {
+  if (!anunciante?.nombre) return;
+
+  document.title = `${anunciante.nombre} | ${giro} | El Shopper`;
+
+  return () => {
+    document.title = "El Shopper Digital";
+  };
+}, [anunciante?.nombre, giro]);
 
   return (
     <div
