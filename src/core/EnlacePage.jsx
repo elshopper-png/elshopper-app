@@ -83,10 +83,43 @@ export default function EnlacePage() {
     // Asigna la URL pública oficial del anunciante
     canonical.setAttribute("href", canonicalURL);
 
+        // ============================================================
+    // DATOS ESTRUCTURADOS JSON-LD — SCHEMA.ORG
+    // ============================================================
+    let schemaScript = null;
+
+    if (anunciante?.seo?.tipo) {
+      const schemaData = {
+        "@context": "https://schema.org",
+        "@type": anunciante.seo.tipo,
+        name: anunciante.nombre,
+        description: anunciante.seo.descripcion,
+        url: canonicalURL,
+        telephone: anunciante.whatsapp
+          ? `+${anunciante.whatsapp}`
+          : undefined,
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: anunciante.seo.direccion,
+          addressLocality: anunciante.seo.distrito,
+          addressRegion: anunciante.seo.provincia,
+          addressCountry: anunciante.seo.pais,
+        },
+      };
+
+      schemaScript = document.createElement("script");
+      schemaScript.type = "application/ld+json";
+      schemaScript.id = "shopper-schema-anunciante";
+      schemaScript.textContent = JSON.stringify(schemaData);
+
+      document.head.appendChild(schemaScript);
+    }
+
     // ============================================================
     // RESTAURAR VALORES GENERALES AL ABANDONAR ESTA PÁGINA
     // ============================================================
     return () => {
+            schemaScript?.remove();
       document.title = "El Shopper Digital";
 
       if (metaDescription) {
@@ -110,6 +143,7 @@ export default function EnlacePage() {
   }, [
     anunciante?.nombre,
     anunciante?.seo?.descripcion,
+        anunciante?.seo?.tipo,
     giro,
     slug
   ]);
