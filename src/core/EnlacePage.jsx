@@ -5,10 +5,26 @@
 
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import tarjetasData from "../data/tarjetas.json";
 
 export default function EnlacePage() {
   const { slug } = useParams();
   const navigate = useNavigate();
+  const categoria = tarjetasData.find((grupo) =>
+  grupo.tarjetas?.some((tarjeta) => tarjeta.slug === slug)
+);
+
+const anunciante = categoria?.tarjetas?.find(
+  (tarjeta) => tarjeta.slug === slug
+);
+
+const giro = categoria?.giro || "";
+console.log("🔎 SEO PILOTO:", {
+  slug,
+  nombre: anunciante?.nombre,
+  descripcion: anunciante?.descripcion,
+  giro,
+});
 
   return (
     <div
