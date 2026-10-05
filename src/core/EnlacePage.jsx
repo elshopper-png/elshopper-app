@@ -183,16 +183,7 @@ export default function EnlacePage() {
               : ""}
           </div>
 
-          <p
-            style={{
-              margin: "0",
-              fontSize: "14px",
-              lineHeight: "1.55",
-              color: "#444",
-            }}
-          >
-            {anunciante.seo.descripcion}
-          </p>
+        
         </section>
       )}
 
