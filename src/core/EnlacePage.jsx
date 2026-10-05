@@ -146,6 +146,56 @@ export default function EnlacePage() {
         />
       </div>
 
+            {/* ============================================================
+         🔎 FICHA PÚBLICA SEO / GEO DEL ANUNCIANTE
+         Visible para usuarios y rastreable por buscadores
+         ============================================================ */}
+      {anunciante?.seo && (
+        <section
+          style={{
+            padding: "18px 18px 16px",
+            textAlign: "left",
+            backgroundColor: "#fff",
+          }}
+        >
+          <h1
+            style={{
+              margin: "0 0 6px",
+              fontSize: "20px",
+              lineHeight: "1.25",
+              color: "#222",
+            }}
+          >
+            {anunciante.nombre}
+          </h1>
+
+          <div
+            style={{
+              marginBottom: "10px",
+              fontSize: "14px",
+              fontWeight: "600",
+              color: "#555",
+            }}
+          >
+            {giro}
+            {anunciante.seo.distrito
+              ? ` · ${anunciante.seo.distrito}`
+              : ""}
+          </div>
+
+          <p
+            style={{
+              margin: "0",
+              fontSize: "14px",
+              lineHeight: "1.55",
+              color: "#444",
+            }}
+          >
+            {anunciante.seo.descripcion}
+          </p>
+        </section>
+      )}
+
       {/* ============================================================
          🔴 CTA GLOBAL — DESCARGA EL SHOPPER DIGITAL
          (SIEMPRE AL FINAL DEL AVISO VIVO)
