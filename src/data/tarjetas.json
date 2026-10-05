@@ -359,12 +359,19 @@
   "giro": "Salud Integral",
   "tarjetas": [
     {
-      "nombre": "Dr. Saúl Garrido",
-      "descripcion": "Médico del Pueblo – Atención médica integral y de confianza.",
-      "imagen": "/fase_2/tarjetas/salud-integral/card.png",
-      "slug": "saul-garrido",
-      "whatsapp": "519992806969"
-    },
+  "nombre": "Dr. Saúl Garrido",
+  "descripcion": "Médico del Pueblo - Atención médica integral y de confianza.",
+  "imagen": "/fase_2/tarjetas/salud-integral/card.png",
+  "slug": "saul-garrido",
+  "whatsapp": "51999286969",
+  "seo": {
+    "descripcion": "Atención médica en consultorio para niños, adultos y adultos mayores. Nebulizaciones, análisis clínicos, cirugía menor, certificados e informes.",
+    "direccion": "C. Las Tunas 410",
+    "distrito": "San Martín de Porres",
+    "provincia": "Lima",
+    "pais": "Perú"
+  }
+},
 
     {
   "nombre": "Fisioterapia Aarón",

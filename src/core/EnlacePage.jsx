@@ -10,31 +10,65 @@ import tarjetasData from "../data/tarjetas.json";
 export default function EnlacePage() {
   const { slug } = useParams();
   const navigate = useNavigate();
+
+  // ============================================================
+  // 🔎 IDENTIDAD DEL ANUNCIANTE
+  // Busca la tarjeta correspondiente al slug actual
+  // ============================================================
   const categoria = tarjetasData.find((grupo) =>
-  grupo.tarjetas?.some((tarjeta) => tarjeta.slug === slug)
-);
+    grupo.tarjetas?.some((tarjeta) => tarjeta.slug === slug)
+  );
 
-const anunciante = categoria?.tarjetas?.find(
-  (tarjeta) => tarjeta.slug === slug
-);
+  const anunciante = categoria?.tarjetas?.find(
+    (tarjeta) => tarjeta.slug === slug
+  );
 
-const giro = categoria?.giro || "";
-console.log("🔎 SEO PILOTO:", {
-  slug,
-  nombre: anunciante?.nombre,
-  descripcion: anunciante?.descripcion,
-  giro,
-});
+  const giro = categoria?.giro || "";
 
-useEffect(() => {
-  if (!anunciante?.nombre) return;
+  // ============================================================
+  // 🔎 SEO DINÁMICO DEL ENLACE PÚBLICO
+  // Título: datos generales del anunciante
+  // Descripción: SOLO bloque seo.descripcion
+  // ============================================================
+  useEffect(() => {
+    if (!anunciante?.nombre) return;
 
-  document.title = `${anunciante.nombre} | ${giro} | El Shopper`;
+    // Título SEO
+    document.title = `${anunciante.nombre} | ${giro} | El Shopper`;
 
-  return () => {
-    document.title = "El Shopper Digital";
-  };
-}, [anunciante?.nombre, giro]);
+    // Meta description existente en public/index.html
+    const metaDescription = document.querySelector(
+      'meta[name="description"]'
+    );
+
+    const descripcionOriginal =
+      metaDescription?.getAttribute("content") || "";
+
+    // Solo modifica la descripción si el anunciante
+    // posee la nueva estructura SEO
+    if (metaDescription && anunciante?.seo?.descripcion) {
+      metaDescription.setAttribute(
+        "content",
+        `${anunciante.nombre} — ${anunciante.seo.descripcion} Encuéntralo en El Shopper Digital.`
+      );
+    }
+
+    // Restaurar valores generales al abandonar esta página
+    return () => {
+      document.title = "El Shopper Digital";
+
+      if (metaDescription) {
+        metaDescription.setAttribute(
+          "content",
+          descripcionOriginal
+        );
+      }
+    };
+  }, [
+    anunciante?.nombre,
+    anunciante?.seo?.descripcion,
+    giro
+  ]);
 
   return (
     <div
@@ -88,6 +122,7 @@ useEffect(() => {
           }}
         >
           Descarga El Shopper Digital
+
           <div
             style={{
               fontSize: "13px",
