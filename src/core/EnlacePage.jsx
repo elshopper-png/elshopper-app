@@ -29,14 +29,19 @@ export default function EnlacePage() {
   // 🔎 SEO DINÁMICO DEL ENLACE PÚBLICO
   // Título: datos generales del anunciante
   // Descripción: SOLO bloque seo.descripcion
+  // Canonical: URL pública oficial /enlace/<slug>
   // ============================================================
   useEffect(() => {
     if (!anunciante?.nombre) return;
 
-    // Título SEO
+    // ============================================================
+    // TÍTULO SEO
+    // ============================================================
     document.title = `${anunciante.nombre} | ${giro} | El Shopper`;
 
-    // Meta description existente en public/index.html
+    // ============================================================
+    // META DESCRIPTION SEO
+    // ============================================================
     const metaDescription = document.querySelector(
       'meta[name="description"]'
     );
@@ -53,7 +58,34 @@ export default function EnlacePage() {
       );
     }
 
-    // Restaurar valores generales al abandonar esta página
+    // ============================================================
+    // CANONICAL — URL PÚBLICA OFICIAL DEL ANUNCIANTE
+    // ============================================================
+    const canonicalURL =
+      `https://elshopper-pwa.vercel.app/enlace/${slug}`;
+
+    let canonical = document.querySelector(
+      'link[rel="canonical"]'
+    );
+
+    const canonicalExistia = Boolean(canonical);
+
+    const canonicalOriginal =
+      canonical?.getAttribute("href") || "";
+
+    // Si no existe canonical, lo crea
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.setAttribute("rel", "canonical");
+      document.head.appendChild(canonical);
+    }
+
+    // Asigna la URL pública oficial del anunciante
+    canonical.setAttribute("href", canonicalURL);
+
+    // ============================================================
+    // RESTAURAR VALORES GENERALES AL ABANDONAR ESTA PÁGINA
+    // ============================================================
     return () => {
       document.title = "El Shopper Digital";
 
@@ -63,11 +95,23 @@ export default function EnlacePage() {
           descripcionOriginal
         );
       }
+
+      if (canonical) {
+        if (canonicalExistia) {
+          canonical.setAttribute(
+            "href",
+            canonicalOriginal
+          );
+        } else {
+          canonical.remove();
+        }
+      }
     };
   }, [
     anunciante?.nombre,
     anunciante?.seo?.descripcion,
-    giro
+    giro,
+    slug
   ]);
 
   return (
