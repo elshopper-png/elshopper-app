@@ -140,10 +140,15 @@ export default function EnlacePage() {
         }
       }
     };
-  }, [
+    }, [
     anunciante?.nombre,
+    anunciante?.whatsapp,
+    anunciante?.seo?.tipo,
     anunciante?.seo?.descripcion,
-        anunciante?.seo?.tipo,
+    anunciante?.seo?.direccion,
+    anunciante?.seo?.distrito,
+    anunciante?.seo?.provincia,
+    anunciante?.seo?.pais,
     giro,
     slug
   ]);
