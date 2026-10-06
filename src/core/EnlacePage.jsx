@@ -95,7 +95,10 @@ export default function EnlacePage() {
         name: anunciante.nombre,
         description: anunciante.seo.descripcion,
         url: canonicalURL,
-        telephone: anunciante.whatsapp
+image: anunciante.imagen
+  ? `https://elshopper-pwa.vercel.app${anunciante.imagen}`
+  : undefined,
+telephone: anunciante.whatsapp
           ? `+${anunciante.whatsapp}`
           : undefined,
         address: {
