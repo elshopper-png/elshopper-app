@@ -145,6 +145,7 @@ telephone: anunciante.whatsapp
     };
     }, [
     anunciante?.nombre,
+    anunciante.imagen,
     anunciante?.whatsapp,
     anunciante?.seo?.tipo,
     anunciante?.seo?.descripcion,
